@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sv:node sv:name="text-block" xmlns:sv="http://www.jcp.org/jcr/sv/1.0">
+  <sv:property sv:name="jcr:primaryType" sv:type="Name">
+    <sv:value>hippo:handle</sv:value>
+  </sv:property>
+  <sv:property sv:multiple="true" sv:name="jcr:mixinTypes" sv:type="Name">
+    <sv:value>mix:referenceable</sv:value>
+    <sv:value>hippo:translated</sv:value>
+  </sv:property>
+  <sv:property sv:name="jcr:uuid" sv:type="String">
+    <sv:value>55dd235f-de7c-4a81-a3f3-97d5518c797c</sv:value>
+  </sv:property>
+  <sv:node sv:name="hippo:translation">
+    <sv:property sv:name="jcr:primaryType" sv:type="Name">
+      <sv:value>hippo:translation</sv:value>
+    </sv:property>
+    <sv:property sv:name="hippo:language" sv:type="String">
+      <sv:value/>
+    </sv:property>
+    <sv:property sv:name="hippo:message" sv:type="String">
+      <sv:value>Text Block 1</sv:value>
+    </sv:property>
+  </sv:node>
+  <sv:node sv:name="text-block">
+    <sv:property sv:name="jcr:primaryType" sv:type="Name">
+      <sv:value>myhippoproject:textblock</sv:value>
+    </sv:property>
+    <sv:property sv:multiple="true" sv:name="jcr:mixinTypes" sv:type="Name">
+      <sv:value>mix:referenceable</sv:value>
+    </sv:property>
+    <sv:property sv:name="jcr:uuid" sv:type="String">
+      <sv:value>cdde378e-8da0-4318-86da-d9b4a0d5798c</sv:value>
+    </sv:property>
+    <sv:property sv:multiple="true" sv:name="hippo:availability" sv:type="String"/>
+    <sv:property sv:name="hippo:related___pathreference" sv:type="String"/>
+    <sv:property sv:name="hippostd:state" sv:type="String">
+      <sv:value>draft</sv:value>
+    </sv:property>
+    <sv:property sv:name="hippostd:stateSummary" sv:type="String">
+      <sv:value>live</sv:value>
+    </sv:property>
+    <sv:property sv:name="hippostdpubwf:createdBy" sv:type="String">
+      <sv:value>admin</sv:value>
+    </sv:property>
+    <sv:property sv:name="hippostdpubwf:creationDate" sv:type="Date">
+      <sv:value>2014-06-20T14:25:54.704+02:00</sv:value>
+    </sv:property>
+    <sv:property sv:name="hippostdpubwf:lastModificationDate" sv:type="Date">
+      <sv:value>2014-06-20T14:25:54.756+02:00</sv:value>
+    </sv:property>
+    <sv:property sv:name="hippostdpubwf:lastModifiedBy" sv:type="String">
+      <sv:value>admin</sv:value>
+    </sv:property>
+    <sv:property sv:name="hippotranslation:id" sv:type="String">
+      <sv:value>0187de9d-da7c-4862-990e-b5f7be9875d5</sv:value>
+    </sv:property>
+    <sv:property sv:name="hippotranslation:locale" sv:type="String">
+      <sv:value>en</sv:value>
+    </sv:property>
+    <sv:property sv:name="myhippoproject:title" sv:type="String">
+      <sv:value>Tttle 1</sv:value>
+    </sv:property>
+    <sv:node sv:name="myhippoproject:description">
+      <sv:property sv:name="jcr:primaryType" sv:type="Name">
+        <sv:value>hippostd:html</sv:value>
+      </sv:property>
+      <sv:property sv:name="hippostd:content" sv:type="String">
+        <sv:value>&lt;p&gt;Description 1&lt;/p&gt;</sv:value>
+      </sv:property>
+    </sv:node>
+  </sv:node>
+</sv:node>
+

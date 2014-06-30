@@ -61,6 +61,8 @@ The following files should be modified to include the new plugin:
 ```
 $ cd essentials
 $ mvn clean install
+or, until the tests are fixed:
+$ mvn clean install -DskipTests=true
 ```
 
 ####Build and run your hippo project (myhippoproject)

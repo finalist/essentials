@@ -69,6 +69,7 @@
     <module>ecm-tagging-plugin</module>
     <module>selection-plugin</module>
     <module>textblock-plugin</module>
+    <module>addfield-plugin</module>
   </modules>
   <dependencyManagement>
 

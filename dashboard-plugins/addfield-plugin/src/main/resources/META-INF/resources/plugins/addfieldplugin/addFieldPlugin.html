@@ -1,0 +1,47 @@
+<div class="panel panel-default" ng-controller="addfieldpluginCtrl">
+    <div class="panel-heading">addfieldplugin</div>
+    <div class="panel-body">
+        <form novalidate name="addfieldpluginForm">
+            <div class="form-group">
+                <label>addfieldplugin</label>
+            </div>
+        </form>
+        <form novalidate name="documentsForm">
+            <div ng-show="documentTypes.length">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Document</th>
+                        <th>Field name</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-form="documentsForm">
+                        <td>
+                            <select class=" chosen-select pull-right" name="documentType"
+                                    style="width:120px;margin-left: 20px;"
+                                    ng-model="selectedDocumentType"
+                                    ng-selected="selectedDocumentType"
+                                    required
+                                    ng-options="doc.name for doc in documentTypes">
+                                <option value=""></option>
+                            </select>
+                        </td>
+                        <td><input ng-model="fieldName" ng-required="true" ng-disabled="documentType == 'basedocument'"/></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </form>
+    </div>
+    <div class="panel-footer">
+        <div class="input-group">
+              <span class="input-group-btn">
+                <button ng-disabled="!addfieldpluginForm.$valid" class="btn btn-primary pull-right" type="submit" ng-click="addField()">Run addfieldplugin</button>
+              </span>
+        </div>
+    </div>
+</div>
+
+

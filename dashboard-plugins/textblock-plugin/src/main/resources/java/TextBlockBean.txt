@@ -20,8 +20,8 @@ import org.hippoecm.hst.content.beans.Node;
 import org.hippoecm.hst.content.beans.standard.HippoHtml;
 import org.onehippo.cms7.essentials.dashboard.annotations.HippoEssentialsGenerated;
 
-@HippoEssentialsGenerated(internalName = "{{namespace}}:simpletextblock")
-@Node(jcrType = "{{namespace}}:simpletextblock")
+@HippoEssentialsGenerated(internalName = "{{namespace}}:textblock")
+@Node(jcrType = "{{namespace}}:textblock")
 public class TextBlockBean extends BaseDocument {
 
     @HippoEssentialsGenerated(internalName = "{{namespace}}:title")

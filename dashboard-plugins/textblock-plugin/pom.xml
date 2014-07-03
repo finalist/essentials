@@ -11,7 +11,7 @@
 
   <properties>
     <servlet-api.version>2.5</servlet-api.version>
-    <essentials.version>1.01.02-SNAPSHOT</essentials.version>
+    <essentials.version>1.01.03-SNAPSHOT</essentials.version>
     <junit.version>4.11</junit.version>
     <spring-test.version>3.2.6.RELEASE</spring-test.version>
 

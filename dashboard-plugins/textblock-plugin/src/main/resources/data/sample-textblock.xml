@@ -23,7 +23,7 @@
   </sv:node>
   <sv:node sv:name="text-block">
     <sv:property sv:name="jcr:primaryType" sv:type="Name">
-      <sv:value>myhippoproject:textblock</sv:value>
+      <sv:value>{{namespace}}:textblock</sv:value>
     </sv:property>
     <sv:property sv:multiple="true" sv:name="jcr:mixinTypes" sv:type="Name">
       <sv:value>mix:referenceable</sv:value>
@@ -57,10 +57,10 @@
     <sv:property sv:name="hippotranslation:locale" sv:type="String">
       <sv:value>en</sv:value>
     </sv:property>
-    <sv:property sv:name="myhippoproject:title" sv:type="String">
+    <sv:property sv:name="{{namespace}}:title" sv:type="String">
       <sv:value>Tttle 1</sv:value>
     </sv:property>
-    <sv:node sv:name="myhippoproject:description">
+    <sv:node sv:name="{{namespace}}:description">
       <sv:property sv:name="jcr:primaryType" sv:type="Name">
         <sv:value>hippostd:html</sv:value>
       </sv:property>

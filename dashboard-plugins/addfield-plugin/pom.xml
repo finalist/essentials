@@ -2,7 +2,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-   <name>Hippo Essentials Add Field Plugin</name>
+  <parent>
+    <groupId>org.onehippo.cms7.essentials</groupId>
+    <artifactId>hippo-dashboard-plugins</artifactId>
+    <version>1.01.03-SNAPSHOT</version>
+  </parent>
+
+  <name>Hippo Essentials Add Field Plugin</name>
   <description>Adds a text field to an existing content type</description>
   <groupId>com.finalist.essentials</groupId>
   <artifactId>hippo-addfield-plugin</artifactId>

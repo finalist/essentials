@@ -1,0 +1,30 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="hst" uri="http://www.hippoecm.org/jsp/hst/core"%>
+<%@ taglib prefix="tag" tagdir="/WEB-INF/tags"%>
+
+<%@ attribute name="item" type="{{beansPackage}}.EmployeeBean"
+	rtexprvalue="true" required="true"%>
+
+<li>
+	 <c:if test="${not empty item.image}">
+	    <img src="<hst:link hippobean='${item.image}' />"
+	         alt="${item.contactFullName}" title="${item.contactFullName}" width="99" height="99" />
+	 </c:if>
+	 <div>
+	     <b>${item.contactFullName}</b>
+         <p>${item.titles}</p>
+	     <p>${item.function}</p>
+         <p>${item.department}</p>
+         <ul>
+	        <c:if test="${not empty item.phoneNumber}">
+              <li><c:out value="${item.phoneNumber}"/></li>
+           </c:if>
+           <c:if test="${not empty item.email}">
+               <li><c:out value="${item.email}"/></li>
+	       </c:if>
+	    </ul>
+	 </div>
+ </li>
+
+

@@ -1,0 +1,59 @@
+package {{componentsPackage}};
+
+import org.apache.commons.lang.StringUtils;
+import org.example.beans.Employee;
+import org.example.beans.EmployeeBean;
+import org.hippoecm.hst.content.beans.query.HstQuery;
+import org.hippoecm.hst.content.beans.query.HstQueryResult;
+import org.hippoecm.hst.content.beans.query.exceptions.QueryException;
+import org.hippoecm.hst.content.beans.query.filter.Filter;
+import org.hippoecm.hst.content.beans.standard.HippoBean;
+import org.hippoecm.hst.core.component.HstComponentException;
+import org.hippoecm.hst.core.component.HstRequest;
+import org.hippoecm.hst.core.component.HstResponse;
+import org.hippoecm.hst.core.request.HstRequestContext;
+import org.hippoecm.hst.core.request.ResolvedSiteMapItem;
+import org.onehippo.cms7.essentials.components.CommonComponent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class EmployeesComponent extends CommonComponent {
+    private static final String DEPARMENT_PARAM = "afdeling";
+    private static final Logger LOG = LoggerFactory.getLogger(EmployeesComponent.class);
+    private static final int QUERY_LIMIT = 50;
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
+        super.doBeforeRender(request, response);
+        final HstRequestContext ctx = request.getRequestContext();
+        HippoBean currentBean = ctx.getContentBean();
+        if (currentBean == null) {
+            ResolvedSiteMapItem resolvedSiteMapItem = request.getRequestContext().getResolvedSiteMapItem();
+            LOG.warn("Content bean not found; please check the relative content path for sitemap item: {}. Relative content path: {}.",
+                    resolvedSiteMapItem.getHstSiteMapItem().getId(),
+                    resolvedSiteMapItem.getRelativeContentPath());
+            return;
+        }
+        HstQuery hstQuery;
+
+        try {
+            hstQuery = ctx.getQueryManager().createQuery(currentBean, EmployeeBean.class);
+            hstQuery.setLimit(QUERY_LIMIT);
+            hstQuery.addOrderByAscending(Employee.FAMILY_NAME);
+            String department = getPublicRequestParameter(request, DEPARMENT_PARAM);
+
+            if (StringUtils.isNotEmpty(department)) {
+                Filter departmentFilter = hstQuery.createFilter();
+                departmentFilter.addEqualTo(Employee.DEPARTMENT, department);
+                hstQuery.setFilter(departmentFilter);
+            }
+
+            HstQueryResult queryResult = hstQuery.execute();
+            request.setAttribute("employees", queryResult.getHippoBeans());
+
+        } catch (QueryException e) {
+            LOG.error("Failed to retrieve employees", e);
+        }
+    }
+}

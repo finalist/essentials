@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <sv:node sv:name="employees.overview"  xmlns:sv="http://www.jcp.org/jcr/sv/1.0">
+    <sv:property sv:name="jcr:primaryType" sv:type="Name">
+      <sv:value>hst:component</sv:value>
+    </sv:property>
+    <sv:property sv:name="hst:referencecomponent" sv:type="String">
+      <sv:value>hst:abstractpages/base</sv:value>
+    </sv:property>
+    <sv:node sv:name="main">
+      <sv:property sv:name="jcr:primaryType" sv:type="Name">
+        <sv:value>hst:component</sv:value>
+      </sv:property>
+      <sv:property sv:name="hst:template" sv:type="String">
+        <sv:value>employees.overview.main</sv:value>
+      </sv:property>
+      <sv:node sv:name="content">
+        <sv:property sv:name="jcr:primaryType" sv:type="Name">
+          <sv:value>hst:component</sv:value>
+        </sv:property>
+        <sv:property sv:name="hst:parameternames" sv:type="String" sv:multiple="true">
+          <sv:value>docType</sv:value>
+          <sv:value>pageSize</sv:value>
+          <sv:value>sortBy</sv:value>
+          <sv:value>sortOrder</sv:value>
+          <sv:value>fromDateField</sv:value>
+          <sv:value>toDateField</sv:value>
+          <sv:value>facet.location</sv:value>
+          <sv:value>searchBoxText</sv:value>
+        </sv:property>
+        <sv:property sv:name="hst:parametervalues" sv:type="String" sv:multiple="true">
+          <sv:value>{{namespace}}:medewerker</sv:value>
+          <sv:value>15</sv:value>
+          <sv:value>{{namespace}}:achternaam</sv:value>
+          <sv:value>ascending</sv:value>
+          <sv:value>hippostdpubwf:creationDate</sv:value>
+          <sv:value>hippostdpubwf:creationDate</sv:value>
+          <sv:value>contacten/contactfacetten</sv:value>
+          <sv:value>Zoeken in medewerkers</sv:value>
+        </sv:property>
+        <sv:property sv:name="hst:referencecomponent" sv:type="String">
+          <sv:value>hst:components/employees</sv:value>
+        </sv:property>
+        <sv:property sv:name="hst:template" sv:type="String">
+          <sv:value>employees.overview.main.content</sv:value>
+        </sv:property>
+      </sv:node>
+    </sv:node>
+  </sv:node>

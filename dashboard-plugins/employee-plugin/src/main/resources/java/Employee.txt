@@ -1,0 +1,34 @@
+package {{beansPackage}};
+
+public final class Employee {
+
+    public static final String NAMESPACE = "{{namespace}}";
+    public static final String NAMESPACE_PREFIX = NAMESPACE + ":";
+
+    private Employee() {
+    }
+
+    public static final String JCR_TYPE = NAMESPACE_PREFIX  + "medewerker";
+
+    public static final String BODY = NAMESPACE_PREFIX  + "inhoud";
+
+    public static final String FAMILY_NAME = NAMESPACE_PREFIX  + "achternaam";
+
+    public static final String PREPOSITION = NAMESPACE_PREFIX  + "tussenvoegsel";
+
+    public static final String GIVEN_NAME = NAMESPACE_PREFIX  + "roepnaam";
+
+    public static final String INITIALS = NAMESPACE_PREFIX  + "voorletters";
+
+    public static final String TITLES = NAMESPACE_PREFIX  + "titulatuur";
+
+    public static final String DEPARTMENT = NAMESPACE_PREFIX  + "afdeling";
+
+    public static final String PHONENUMBER = NAMESPACE_PREFIX  + "telefoon";
+
+    public static final String EMAIL = NAMESPACE_PREFIX  + "email";
+
+    public static final String IMAGE = NAMESPACE_PREFIX  + "afbeelding";
+
+    public static final String FUNCTION = NAMESPACE_PREFIX  + "functie";
+}

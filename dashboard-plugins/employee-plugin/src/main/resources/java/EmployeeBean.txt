@@ -1,0 +1,73 @@
+package {{beansPackage}};
+
+import org.hippoecm.hst.content.beans.Node;
+import org.hippoecm.hst.content.beans.standard.HippoGalleryImageSet;
+import org.onehippo.cms7.essentials.dashboard.annotations.HippoEssentialsGenerated;
+
+@Node(jcrType= Employee.JCR_TYPE)
+@HippoEssentialsGenerated(internalName = Employee.JCR_TYPE)
+public class EmployeeBean extends BaseDocument {
+
+    public String getFamilyName() {
+        return getProperty(Employee.FAMILY_NAME);
+    }
+
+    public String getPreposition() {
+        return getProperty(Employee.PREPOSITION);
+    }
+
+    public String getGivenName() {
+        return getProperty(Employee.GIVEN_NAME);
+    }
+
+    public String getTitles() {
+        return getProperty(Employee.TITLES);
+    }
+
+    public String getInitials() {
+        return getProperty(Employee.INITIALS);
+    }
+
+    public String getDepartment() {
+        return getProperty(Employee.DEPARTMENT);
+    }
+
+    public String getPhoneNumber() {
+        return getProperty(Employee.PHONENUMBER);
+    }
+
+    public String getEmail() {
+        return getProperty(Employee.EMAIL);
+    }
+
+    public String getFunction() {
+        return getProperty(Employee.FUNCTION);
+    }
+
+    public HippoGalleryImageSet getImage() {
+        return getLinkedBean(Employee.IMAGE, HippoGalleryImageSet.class);
+    }
+
+
+    public String getContactFullName() {
+        StringBuffer sb = new StringBuffer();
+        if (getTitles() != null && !getTitles().trim().isEmpty()) {
+            sb.append(getTitles()).append(" ");
+        }
+
+        if (getGivenName() != null && !getGivenName().isEmpty()) {
+            sb.append(getGivenName()).append(" ");
+        } else if (getInitials() != null && !getInitials().isEmpty()) {
+            sb.append(getInitials()).append(" ");
+        }
+
+        if(getPreposition() != null && !getPreposition().trim().isEmpty()) {
+            sb.append(getPreposition()).append(" ");
+        }
+
+        sb.append(getFamilyName());
+
+        return sb.toString();
+    }
+
+}

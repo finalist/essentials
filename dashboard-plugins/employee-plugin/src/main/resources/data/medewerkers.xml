@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?><sv:node xmlns:sv="http://www.jcp.org/jcr/sv/1.0" sv:name="medewerkers">
+  <sv:property sv:name="jcr:primaryType" sv:type="Name">
+    <sv:value>hippostd:folder</sv:value>
+  </sv:property>
+  <sv:property sv:name="jcr:mixinTypes" sv:type="Name" sv:multiple="true">
+    <sv:value>hippotranslation:translated</sv:value>
+    <sv:value>mix:versionable</sv:value>
+  </sv:property>
+  <sv:property sv:name="jcr:uuid" sv:type="String">
+    <sv:value>5f453faf-f4e4-42ba-bfb5-7b56b161c910</sv:value>
+  </sv:property>
+  <sv:property sv:name="hippostd:foldertype" sv:type="String" sv:multiple="true">
+    <sv:value>new-translated-folder</sv:value>
+    <sv:value>new-document</sv:value>
+  </sv:property>
+  <sv:property sv:name="hippotranslation:id" sv:type="String">
+    <sv:value>4835cd47-7ae1-45dd-a413-f8b11750e15e</sv:value>
+  </sv:property>
+  <sv:property sv:name="hippotranslation:locale" sv:type="String">
+    <sv:value>en</sv:value>
+  </sv:property>
+  <sv:node sv:name="test-medewerker">
+    <sv:property sv:name="jcr:primaryType" sv:type="Name">
+      <sv:value>hippo:handle</sv:value>
+    </sv:property>
+    <sv:property sv:name="jcr:mixinTypes" sv:type="Name" sv:multiple="true">
+      <sv:value>mix:referenceable</sv:value>
+      <sv:value>hippo:translated</sv:value>
+    </sv:property>
+    <sv:property sv:name="jcr:uuid" sv:type="String">
+      <sv:value>c0f4a139-397f-44ca-98d0-bc1db67a57b7</sv:value>
+    </sv:property>
+    <sv:node sv:name="test-medewerker">
+      <sv:property sv:name="jcr:primaryType" sv:type="Name">
+        <sv:value>{{namespace}}:medewerker</sv:value>
+      </sv:property>
+      <sv:property sv:name="jcr:mixinTypes" sv:type="Name" sv:multiple="true">
+        <sv:value>mix:referenceable</sv:value>
+      </sv:property>
+      <sv:property sv:name="jcr:uuid" sv:type="String">
+        <sv:value>69129dc1-67ba-4804-8e9d-86961c786edc</sv:value>
+      </sv:property>
+      <sv:property sv:name="hippo:availability" sv:type="String" sv:multiple="true"/>
+      <sv:property sv:name="hippo:related___pathreference" sv:type="String">
+        <sv:value>medewerkers/test-medewerker/test-medewerker[2]</sv:value>
+        <sv:value>medewerkers/test-medewerker/test-medewerker[3]</sv:value>
+      </sv:property>
+      <sv:property sv:name="hippostd:state" sv:type="String">
+        <sv:value>draft</sv:value>
+      </sv:property>
+      <sv:property sv:name="hippostd:stateSummary" sv:type="String">
+        <sv:value>live</sv:value>
+      </sv:property>
+      <sv:property sv:name="hippostdpubwf:createdBy" sv:type="String">
+        <sv:value>admin</sv:value>
+      </sv:property>
+      <sv:property sv:name="hippostdpubwf:creationDate" sv:type="Date">
+        <sv:value>2014-07-03T12:01:24.752+02:00</sv:value>
+      </sv:property>
+      <sv:property sv:name="hippostdpubwf:lastModificationDate" sv:type="Date">
+        <sv:value>2014-07-03T12:01:25.612+02:00</sv:value>
+      </sv:property>
+      <sv:property sv:name="hippostdpubwf:lastModifiedBy" sv:type="String">
+        <sv:value>admin</sv:value>
+      </sv:property>
+      <sv:property sv:name="hippotranslation:id" sv:type="String">
+        <sv:value>56271437-76e8-40eb-9994-fe8b9886a683</sv:value>
+      </sv:property>
+      <sv:property sv:name="hippotranslation:locale" sv:type="String">
+        <sv:value>en</sv:value>
+      </sv:property>
+      <sv:property sv:name="{{namespace}}:achternaam" sv:type="String">
+        <sv:value>achternaam</sv:value>
+      </sv:property>
+      <sv:property sv:name="{{namespace}}:afdeling" sv:type="String">
+        <sv:value>Afdeling</sv:value>
+      </sv:property>
+      <sv:property sv:name="{{namespace}}:email" sv:type="String">
+        <sv:value>email@email.com</sv:value>
+      </sv:property>
+      <sv:property sv:name="{{namespace}}:functie" sv:type="String">
+        <sv:value>Functie</sv:value>
+      </sv:property>
+      <sv:property sv:name="{{namespace}}:inhoud" sv:type="String">
+        <sv:value>&lt;p&gt;Inhoud&lt;/p&gt;</sv:value>
+      </sv:property>
+      <sv:property sv:name="{{namespace}}:roepnaam" sv:type="String">
+        <sv:value>Roepnaam</sv:value>
+      </sv:property>
+      <sv:property sv:name="{{namespace}}:telefoon" sv:type="String">
+        <sv:value>0404444444</sv:value>
+      </sv:property>
+      <sv:property sv:name="{{namespace}}:titulatuur" sv:type="String">
+        <sv:value>Titulatuur</sv:value>
+      </sv:property>
+      <sv:property sv:name="{{namespace}}:tussenvoegsel" sv:type="String">
+        <sv:value>van de</sv:value>
+      </sv:property>
+      <sv:property sv:name="{{namespace}}:voorletters" sv:type="String">
+        <sv:value>V.</sv:value>
+      </sv:property>
+      <sv:node sv:name="hippotranslation:translations">
+        <sv:property sv:name="jcr:primaryType" sv:type="Name">
+          <sv:value>hippotranslation:translations</sv:value>
+        </sv:property>
+      </sv:node>
+      <sv:node sv:name="{{namespace}}:afbeelding">
+        <sv:property sv:name="jcr:primaryType" sv:type="Name">
+          <sv:value>hippogallerypicker:imagelink</sv:value>
+        </sv:property>
+        <sv:property sv:name="hippo:docbase" sv:type="String">
+          <sv:value>60beb700-8a75-4c89-9098-a496c72d38d6</sv:value>
+        </sv:property>
+        <sv:property sv:name="hippo:facets" sv:type="String" sv:multiple="true"/>
+        <sv:property sv:name="hippo:modes" sv:type="String" sv:multiple="true"/>
+        <sv:property sv:name="hippo:values" sv:type="String" sv:multiple="true"/>
+      </sv:node>
+    </sv:node>
+    <sv:node sv:name="hippo:translation">
+      <sv:property sv:name="jcr:primaryType" sv:type="Name">
+        <sv:value>hippo:translation</sv:value>
+      </sv:property>
+      <sv:property sv:name="hippo:language" sv:type="String">
+        <sv:value/>
+      </sv:property>
+      <sv:property sv:name="hippo:message" sv:type="String">
+        <sv:value>test medewerker</sv:value>
+      </sv:property>
+    </sv:node>
+    <sv:node sv:name="test-medewerker">
+      <sv:property sv:name="jcr:primaryType" sv:type="Name">
+        <sv:value>{{namespace}}:medewerker</sv:value>
+      </sv:property>
+      <sv:property sv:name="jcr:mixinTypes" sv:type="Name" sv:multiple="true">
+        <sv:value>mix:referenceable</sv:value>
+        <sv:value>mix:versionable</sv:value>
+      </sv:property>
+      <sv:property sv:name="jcr:uuid" sv:type="String">
+        <sv:value>48ffbb96-58cc-4808-9ffb-07ec9a971856</sv:value>
+      </sv:property>
+      <sv:property sv:name="hippo:availability" sv:type="String" sv:multiple="true">
+        <sv:value>preview</sv:value>
+      </sv:property>
+      <sv:property sv:name="hippo:related___pathreference" sv:type="String">
+        <sv:value>medewerkers/test-medewerker/test-medewerker[3]</sv:value>
+      </sv:property>
+      <sv:property sv:name="hippostd:state" sv:type="String">
+        <sv:value>unpublished</sv:value>
+      </sv:property>
+      <sv:property sv:name="hippostd:stateSummary" sv:type="String">
+        <sv:value>live</sv:value>
+      </sv:property>
+      <sv:property sv:name="hippostdpubwf:createdBy" sv:type="String">
+        <sv:value>admin</sv:value>
+      </sv:property>
+      <sv:property sv:name="hippostdpubwf:creationDate" sv:type="Date">
+        <sv:value>2014-07-03T12:01:24.752+02:00</sv:value>
+      </sv:property>
+      <sv:property sv:name="hippostdpubwf:lastModificationDate" sv:type="Date">
+        <sv:value>2014-07-03T12:02:15.183+02:00</sv:value>
+      </sv:property>
+      <sv:property sv:name="hippostdpubwf:lastModifiedBy" sv:type="String">
+        <sv:value>admin</sv:value>
+      </sv:property>
+      <sv:property sv:name="hippotranslation:id" sv:type="String">
+        <sv:value>56271437-76e8-40eb-9994-fe8b9886a683</sv:value>
+      </sv:property>
+      <sv:property sv:name="hippotranslation:locale" sv:type="String">
+        <sv:value>en</sv:value>
+      </sv:property>
+      <sv:property sv:name="{{namespace}}:achternaam" sv:type="String">
+        <sv:value>achternaam</sv:value>
+      </sv:property>
+      <sv:property sv:name="{{namespace}}:afdeling" sv:type="String">
+        <sv:value>Afdeling</sv:value>
+      </sv:property>
+      <sv:property sv:name="{{namespace}}:email" sv:type="String">
+        <sv:value>email@email.com</sv:value>
+      </sv:property>
+      <sv:property sv:name="{{namespace}}:functie" sv:type="String">
+        <sv:value>Functie</sv:value>
+      </sv:property>
+      <sv:property sv:name="{{namespace}}:inhoud" sv:type="String">
+        <sv:value>&lt;p&gt;Inhoud&lt;/p&gt;</sv:value>
+      </sv:property>
+      <sv:property sv:name="{{namespace}}:roepnaam" sv:type="String">
+        <sv:value>Roepnaam</sv:value>
+      </sv:property>
+      <sv:property sv:name="{{namespace}}:telefoon" sv:type="String">
+        <sv:value>0404444444</sv:value>
+      </sv:property>
+      <sv:property sv:name="{{namespace}}:titulatuur" sv:type="String">
+        <sv:value>Titulatuur</sv:value>
+      </sv:property>
+      <sv:property sv:name="{{namespace}}:tussenvoegsel" sv:type="String">
+        <sv:value>van de</sv:value>
+      </sv:property>
+      <sv:property sv:name="{{namespace}}:voorletters" sv:type="String">
+        <sv:value>V.</sv:value>
+      </sv:property>
+      <sv:node sv:name="hippotranslation:translations">
+        <sv:property sv:name="jcr:primaryType" sv:type="Name">
+          <sv:value>hippotranslation:translations</sv:value>
+        </sv:property>
+      </sv:node>
+      <sv:node sv:name="{{namespace}}:afbeelding">
+        <sv:property sv:name="jcr:primaryType" sv:type="Name">
+          <sv:value>hippogallerypicker:imagelink</sv:value>
+        </sv:property>
+        <sv:property sv:name="hippo:docbase" sv:type="String">
+          <sv:value>60beb700-8a75-4c89-9098-a496c72d38d6</sv:value>
+        </sv:property>
+        <sv:property sv:name="hippo:facets" sv:type="String" sv:multiple="true"/>
+        <sv:property sv:name="hippo:modes" sv:type="String" sv:multiple="true"/>
+        <sv:property sv:name="hippo:values" sv:type="String" sv:multiple="true"/>
+      </sv:node>
+    </sv:node>
+    <sv:node sv:name="test-medewerker">
+      <sv:property sv:name="jcr:primaryType" sv:type="Name">
+        <sv:value>{{namespace}}:medewerker</sv:value>
+      </sv:property>
+      <sv:property sv:name="jcr:mixinTypes" sv:type="Name" sv:multiple="true">
+        <sv:value>mix:referenceable</sv:value>
+      </sv:property>
+      <sv:property sv:name="jcr:uuid" sv:type="String">
+        <sv:value>78c31d1e-68ac-405e-8d6b-72755a9d4989</sv:value>
+      </sv:property>
+      <sv:property sv:name="hippo:availability" sv:type="String" sv:multiple="true">
+        <sv:value>live</sv:value>
+      </sv:property>
+      <sv:property sv:name="hippo:related___pathreference" sv:type="String">
+        <sv:value>medewerkers/test-medewerker/test-medewerker[2]</sv:value>
+      </sv:property>
+      <sv:property sv:name="hippostd:state" sv:type="String">
+        <sv:value>published</sv:value>
+      </sv:property>
+      <sv:property sv:name="hippostd:stateSummary" sv:type="String">
+        <sv:value>live</sv:value>
+      </sv:property>
+      <sv:property sv:name="hippostdpubwf:createdBy" sv:type="String">
+        <sv:value>admin</sv:value>
+      </sv:property>
+      <sv:property sv:name="hippostdpubwf:creationDate" sv:type="Date">
+        <sv:value>2014-07-03T12:01:24.752+02:00</sv:value>
+      </sv:property>
+      <sv:property sv:name="hippostdpubwf:lastModificationDate" sv:type="Date">
+        <sv:value>2014-07-03T12:02:15.183+02:00</sv:value>
+      </sv:property>
+      <sv:property sv:name="hippostdpubwf:lastModifiedBy" sv:type="String">
+        <sv:value>admin</sv:value>
+      </sv:property>
+      <sv:property sv:name="hippostdpubwf:publicationDate" sv:type="Date">
+        <sv:value>2014-07-03T12:02:17.687+02:00</sv:value>
+      </sv:property>
+      <sv:property sv:name="hippotranslation:id" sv:type="String">
+        <sv:value>56271437-76e8-40eb-9994-fe8b9886a683</sv:value>
+      </sv:property>
+      <sv:property sv:name="hippotranslation:locale" sv:type="String">
+        <sv:value>en</sv:value>
+      </sv:property>
+      <sv:property sv:name="{{namespace}}:achternaam" sv:type="String">
+        <sv:value>achternaam</sv:value>
+      </sv:property>
+      <sv:property sv:name="{{namespace}}:afdeling" sv:type="String">
+        <sv:value>Afdeling</sv:value>
+      </sv:property>
+      <sv:property sv:name="{{namespace}}:email" sv:type="String">
+        <sv:value>email@email.com</sv:value>
+      </sv:property>
+      <sv:property sv:name="{{namespace}}:functie" sv:type="String">
+        <sv:value>Functie</sv:value>
+      </sv:property>
+      <sv:property sv:name="{{namespace}}:inhoud" sv:type="String">
+        <sv:value>&lt;p&gt;Inhoud&lt;/p&gt;</sv:value>
+      </sv:property>
+      <sv:property sv:name="{{namespace}}:roepnaam" sv:type="String">
+        <sv:value>Roepnaam</sv:value>
+      </sv:property>
+      <sv:property sv:name="{{namespace}}:telefoon" sv:type="String">
+        <sv:value>0404444444</sv:value>
+      </sv:property>
+      <sv:property sv:name="{{namespace}}:titulatuur" sv:type="String">
+        <sv:value>Titulatuur</sv:value>
+      </sv:property>
+      <sv:property sv:name="{{namespace}}:tussenvoegsel" sv:type="String">
+        <sv:value>van de</sv:value>
+      </sv:property>
+      <sv:property sv:name="{{namespace}}:voorletters" sv:type="String">
+        <sv:value>V.</sv:value>
+      </sv:property>
+      <sv:node sv:name="hippotranslation:translations">
+        <sv:property sv:name="jcr:primaryType" sv:type="Name">
+          <sv:value>hippotranslation:translations</sv:value>
+        </sv:property>
+      </sv:node>
+      <sv:node sv:name="{{namespace}}:afbeelding">
+        <sv:property sv:name="jcr:primaryType" sv:type="Name">
+          <sv:value>hippogallerypicker:imagelink</sv:value>
+        </sv:property>
+        <sv:property sv:name="hippo:docbase" sv:type="String">
+          <sv:value>60beb700-8a75-4c89-9098-a496c72d38d6</sv:value>
+        </sv:property>
+        <sv:property sv:name="hippo:facets" sv:type="String" sv:multiple="true"/>
+        <sv:property sv:name="hippo:modes" sv:type="String" sv:multiple="true"/>
+        <sv:property sv:name="hippo:values" sv:type="String" sv:multiple="true"/>
+      </sv:node>
+    </sv:node>
+  </sv:node>
+</sv:node>

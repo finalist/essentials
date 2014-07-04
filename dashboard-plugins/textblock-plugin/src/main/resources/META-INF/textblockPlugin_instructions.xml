@@ -21,10 +21,15 @@
     <cnd documentType="textblock" superType="{{namespace}}:basedocument,hippostd:relaxed,hippotranslation:translated,hippostd:taggable"/>
     <xml action="copy" source="namespaces/textblock.xml" target="/hippo:namespaces/{{namespace}}"/>
     <file action="copy" source="java/TextBlockBean.txt" target="{{beansFolder}}/TextBlockBean.java"/>
-    <!-- folder doc queries-->
-    <xml action="copy" source="config/new-textblock-folder.xml" target="/hippo:configuration/hippo:queries/hippo:templates"/>
-    <xml action="copy" source="config/new-textblock-document.xml" target="/hippo:configuration/hippo:queries/hippo:templates"/>
+  </instructionSet>
+  <!-- SAMPLES GROUP-->
+  <instructionSet group="sampleData">
     <xml action="copy" source="data/sample-textblock.xml" target="/content/documents/{{namespace}}"/>
   </instructionSet>
 
+  <instructionSet>
+    <!-- folder doc queries-->
+    <xml action="copy" source="config/new-textblock-folder.xml" target="/hippo:configuration/hippo:queries/hippo:templates"/>
+    <xml action="copy" source="config/new-textblock-document.xml" target="/hippo:configuration/hippo:queries/hippo:templates"/>
+  </instructionSet>
 </instructions>

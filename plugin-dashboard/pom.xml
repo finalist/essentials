@@ -217,18 +217,18 @@
     <dependency>
       <groupId>com.finalist.essentials</groupId>
       <artifactId>hippo-textblock-plugin</artifactId>
-      <version>1.00.00-SNAPSHOT</version>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>com.finalist.essentials</groupId>
       <artifactId>hippo-addfield-plugin</artifactId>
-      <version>1.00.00-SNAPSHOT</version>
+      <version>${project.version}</version>
     </dependency>
-    <dependency>
+<!--   cati please fix in your commit <dependency>
       <groupId>com.finalist.essentials</groupId>
       <artifactId>hippo-employee-plugin</artifactId>
-      <version>1.00.00-SNAPSHOT</version>
-    </dependency>
+      <version>${project.version}</version>
+    </dependency>-->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>

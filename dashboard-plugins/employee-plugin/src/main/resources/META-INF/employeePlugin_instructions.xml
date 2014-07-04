@@ -26,8 +26,11 @@
     <!-- folder doc queries-->
     <xml action="copy" source="config/new-employee-folder.xml" target="/hippo:configuration/hippo:queries/hippo:templates"/>
     <xml action="copy" source="config/new-employee.xml" target="/hippo:configuration/hippo:queries/hippo:templates"/>
-    <xml action="copy" source="data/medewerkers.xml" target="/content/documents/{{namespace}}"/>
+  </instructionSet>
 
+  <!-- SAMPLES GROUP-->
+  <instructionSet group="sampleData">
+      <xml action="copy" source="data/medewerkers.xml" target="/content/documents/{{namespace}}"/>
   </instructionSet>
 
   <!-- HST CONFIG-->

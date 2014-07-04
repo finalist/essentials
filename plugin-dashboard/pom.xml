@@ -224,11 +224,11 @@
       <artifactId>hippo-addfield-plugin</artifactId>
       <version>${project.version}</version>
     </dependency>
-<!--   cati please fix in your commit <dependency>
+    <dependency>
       <groupId>com.finalist.essentials</groupId>
       <artifactId>hippo-employee-plugin</artifactId>
       <version>${project.version}</version>
-    </dependency>-->
+    </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>

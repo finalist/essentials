@@ -14,13 +14,6 @@
   <artifactId>hippo-textblock-plugin</artifactId>
   <packaging>jar</packaging>
 
-  <properties>
-    <servlet-api.version>2.5</servlet-api.version>
-    <junit.version>4.11</junit.version>
-    <spring-test.version>3.2.6.RELEASE</spring-test.version>
-
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>org.onehippo.cms7.essentials</groupId>

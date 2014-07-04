@@ -800,32 +800,6 @@
     {
         "enabled": true,
         "@type": "plugin",
-        "name": "Add field to content type plugin",
-        "introduction": "Adds a text property to an existing content type",
-        "description": "The Add field plugin is a Hippo CMS 7 editor plugin by which you can a content type for which a simple String field will be added.",
-        "pluginId": "addFieldPlugin",
-        "packageFile": "",
-        "restClasses": ["com.finalist.plugin.AddFieldPluginResource"],
-        "type": "plugins",
-        "vendor": {
-            "@type": "vendor",
-            "name": "Finalist",
-            "url": "http://www.finalist.com"
-        },
-        "libraries": [
-            {
-                "items": [
-                    {
-                        "component": "addFieldPlugin",
-                        "file": "addFieldPlugin.js"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "enabled": true,
-        "@type": "plugin",
         "name": "Employee plugin",
         "introduction": "Add a employee content type, sample data, a sitemap item (/medewerkers), jsp templates, java bean and an overview component.",
         "pluginId": "employeePlugin",

@@ -12,12 +12,10 @@
   <description>Adds a text field to an existing content type</description>
   <groupId>com.finalist.essentials</groupId>
   <artifactId>hippo-addfield-plugin</artifactId>
-  <version>1.00.00-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <properties>
     <servlet-api.version>2.5</servlet-api.version>
-    <essentials.version>1.01.03-SNAPSHOT</essentials.version>
     <junit.version>4.11</junit.version>
     <spring-test.version>3.2.6.RELEASE</spring-test.version>
 
@@ -27,13 +25,13 @@
     <dependency>
       <groupId>org.onehippo.cms7.essentials</groupId>
       <artifactId>hippo-essentials-plugin-api</artifactId>
-      <version>${essentials.version}</version>
+      <version>${project.version}</version>
     </dependency>
 
     <dependency>
       <groupId>org.onehippo.cms7.essentials</groupId>
       <artifactId>hippo-essentials-plugin-api-implementation</artifactId>
-      <version>${essentials.version}</version>
+      <version>${project.version}</version>
     </dependency>
 
     <dependency>
@@ -48,7 +46,7 @@
       <artifactId>hippo-essentials-plugin-api-implementation</artifactId>
       <type>test-jar</type>
       <scope>test</scope>
-      <version>${essentials.version}</version>
+      <version>${project.version}</version>
     </dependency>
 
     <dependency>

@@ -11,8 +11,9 @@
 
                 $scope.addField = function () {
                     var payload = Essentials.addPayloadData("fieldName", $scope.fieldName, null);
-                    Essentials.addPayloadData("selectedDocumentType", $scope.selectedDocumentType.name, payload);
+                    Essentials.addPayloadData("documentType", $scope.selectedDocumentType.name, payload);
                     Essentials.addPayloadData("fieldPosition", $scope.fieldPosition, payload);
+                    Essentials.addPayloadData("namespace", $scope.selectedDocumentType.prefix, payload);
                     $http.post(endpointAddField, payload).success(function (data) {
                     });
                 };

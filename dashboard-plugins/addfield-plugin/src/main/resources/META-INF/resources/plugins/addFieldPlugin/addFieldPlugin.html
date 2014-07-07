@@ -31,7 +31,16 @@
                     </tr>
                     </tbody>
                 </table>
-
+                <div class="form-group" ng-show="positionMatters">
+                    <label class="col-sm-4 control-label">Field position:</label>
+                    <div class="col-sm-8">
+                        <select class="form-control"
+                                ng-model="fieldPosition"
+                                ng-selected="fieldPosition"
+                                ng-options="positionMap[position] for position in selectedDocumentType.fieldLocations">
+                        </select>
+                    </div>
+                </div>
             </div>
         </form>
     </div>

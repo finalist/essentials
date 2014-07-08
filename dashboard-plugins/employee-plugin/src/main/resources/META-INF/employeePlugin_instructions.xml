@@ -30,7 +30,10 @@
 
   <!-- SAMPLES GROUP-->
   <instructionSet group="sampleData">
-      <xml action="copy" source="data/medewerkers.xml" target="/content/documents/{{namespace}}"/>
+      <folder template="hst/employee-folder-creator.xml" path="/content/documents/{{namespace}}/medewerkers"/>
+      <xml action="copy" source="data/test-medewerker1.xml" target="/content/documents/{{namespace}}/medewerkers"/>
+      <xml action="copy" source="data/test-medewerker2.xml" target="/content/documents/{{namespace}}/medewerkers"/>
+      <xml action="copy" source="data/employee_images.xml" target="/content/gallery/{{namespace}}"/>
   </instructionSet>
 
   <!-- HST CONFIG-->

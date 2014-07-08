@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sv:node sv:name="medewerkerfacet" xmlns:sv="http://www.jcp.org/jcr/sv/1.0">
+    <sv:property sv:name="jcr:primaryType" sv:type="Name">
+        <sv:value>hippofacnav:facetnavigation</sv:value>
+    </sv:property>
+    <sv:property sv:name="hippo:count" sv:type="Long">
+        <sv:value>9</sv:value>
+    </sv:property>
+    <sv:property sv:name="hippo:docbase" sv:type="String">
+        <sv:value>5639bc35-7fb6-0000-868d-170c3f1b4f96</sv:value>
+    </sv:property>
+    <sv:property sv:multiple="true" sv:name="hippofacnav:facetnodenames" sv:type="String">
+        <sv:value>functie${sortBy:'value', sortOrder:'ascending'}</sv:value>
+        <sv:value>afdeling${sortBy:'value', sortOrder:'ascending'}</sv:value>
+    </sv:property>
+    <sv:property sv:multiple="true" sv:name="hippofacnav:facets" sv:type="String">
+        <sv:value>{{namespace}}:functie</sv:value>
+        <sv:value>{{namespace}}:afdeling</sv:value>
+    </sv:property>
+    <sv:property sv:multiple="true" sv:name="hippofacnav:filters" sv:type="String">
+        <sv:value>jcr:primaryType = {{namespace}}:medewerker</sv:value>
+        <sv:value>hippo:availability = live</sv:value>
+    </sv:property>
+    <sv:property sv:name="hippofacnav:limit" sv:type="Long">
+        <sv:value>150</sv:value>
+    </sv:property>
+</sv:node>

@@ -8,12 +8,18 @@ import org.hippoecm.hst.content.beans.query.HstQueryResult;
 import org.hippoecm.hst.content.beans.query.exceptions.QueryException;
 import org.hippoecm.hst.content.beans.query.filter.Filter;
 import org.hippoecm.hst.content.beans.standard.HippoBean;
+import org.hippoecm.hst.content.beans.standard.HippoFacetNavigationBean;
+import org.hippoecm.hst.content.beans.standard.facetnavigation.HippoFacetNavigation;
+import org.hippoecm.hst.content.beans.standard.facetnavigation.HippoFacetSubNavigation;
 import org.hippoecm.hst.core.component.HstComponentException;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.component.HstResponse;
 import org.hippoecm.hst.core.request.HstRequestContext;
 import org.hippoecm.hst.core.request.ResolvedSiteMapItem;
+import org.hippoecm.hst.util.ContentBeanUtils;
 import org.onehippo.cms7.essentials.components.CommonComponent;
+import org.hippoecm.hst.util.PathUtils;
+import org.hippoecm.hst.utils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,6 +27,8 @@ public class EmployeesComponent extends CommonComponent {
     private static final String DEPARMENT_PARAM = "afdeling";
     private static final Logger LOG = LoggerFactory.getLogger(EmployeesComponent.class);
     private static final int QUERY_LIMIT = 50;
+    private static final String FACET_NAVIGATION = "facetNavigation";
+    private static final String FACET_LOCATION = "facet.location";
 
     @SuppressWarnings("unchecked")
     @Override
@@ -38,22 +46,67 @@ public class EmployeesComponent extends CommonComponent {
         HstQuery hstQuery;
 
         try {
-            hstQuery = ctx.getQueryManager().createQuery(currentBean, EmployeeBean.class);
-            hstQuery.setLimit(QUERY_LIMIT);
-            hstQuery.addOrderByAscending(Employee.FAMILY_NAME);
-            String department = getPublicRequestParameter(request, DEPARMENT_PARAM);
+            if(currentBean instanceof HippoFacetNavigation){
+                HippoFacetNavigation navigationBean = (HippoFacetNavigation)currentBean;
+                request.setAttribute("employees", navigationBean.getResultSet().getDocuments());
+                ResolvedSiteMapItem resolvedSiteMapItem = request.getRequestContext().getResolvedSiteMapItem();
+                String resolvedContentPath = PathUtils.normalizePath(resolvedSiteMapItem.getRelativeContentPath());
+                HippoFacetNavigationBean facNavBean = ContentBeanUtils.getFacetNavigationBean(resolvedContentPath,null);
+                request.setAttribute(FACET_NAVIGATION, facNavBean);
+            }else{
+                hstQuery = ctx.getQueryManager().createQuery(currentBean, EmployeeBean.class);
+                hstQuery.setLimit(QUERY_LIMIT);
+                hstQuery.addOrderByAscending(Employee.FAMILY_NAME);
+                String department = getPublicRequestParameter(request, DEPARMENT_PARAM);
 
-            if (StringUtils.isNotEmpty(department)) {
-                Filter departmentFilter = hstQuery.createFilter();
-                departmentFilter.addEqualTo(Employee.DEPARTMENT, department);
-                hstQuery.setFilter(departmentFilter);
+                if (StringUtils.isNotEmpty(department)) {
+                    Filter departmentFilter = hstQuery.createFilter();
+                    departmentFilter.addEqualTo(Employee.DEPARTMENT, department);
+                    hstQuery.setFilter(departmentFilter);
+                }
+                doFacetNavigation(request, response, hstQuery);
+                HstQueryResult queryResult = hstQuery.execute();
+                request.setAttribute("employees", queryResult.getHippoBeans());
             }
-
-            HstQueryResult queryResult = hstQuery.execute();
-            request.setAttribute("employees", queryResult.getHippoBeans());
-
         } catch (QueryException e) {
             LOG.error("Failed to retrieve employees", e);
         }
+
+
     }
+
+   protected void doFacetNavigation(HstRequest request, HstResponse response, HstQuery hstQuery) {
+      String facetLocation = getComponentParameter(FACET_LOCATION);
+
+      if (facetLocation == null) {
+         LOG.warn("Please configure the 'facet.location' parameter on facet navigation component");
+         return;
+      }
+
+      ResolvedSiteMapItem resolvedSiteMapItem = request.getRequestContext().getResolvedSiteMapItem();
+      String resolvedContentPath = PathUtils.normalizePath(resolvedSiteMapItem.getRelativeContentPath());
+      HippoFacetSubNavigation resolvedContentBean = null;
+
+      // when the resolved sitemap item is /search, resolved content path can be
+      // null...
+      if (!StringUtils.isEmpty(resolvedContentPath)) {
+         resolvedContentBean = getSiteContentBaseBean(request).getBean(resolvedContentPath, HippoFacetSubNavigation.class);
+      }
+      HippoFacetNavigationBean facNavBean = null;
+
+      if (hstQuery != null) {
+         if (resolvedContentBean != null) {
+            // the content bean of the resolved sitemap item already points to a
+            // facet child navigation, perform a text search within that facet.
+            facNavBean = BeanUtils.getFacetNavigationBean(request, hstQuery, resolvedContentPath, getObjectConverter());
+            // facNavBean is a sub
+         } else {
+            // perform a free text search within the facet indicated by the
+            // component parameter 'facetnav.location'
+            facNavBean = BeanUtils.getFacetNavigationBean(request, hstQuery, facetLocation, getObjectConverter());
+         }
+      }
+
+      request.setAttribute(FACET_NAVIGATION, facNavBean);
+   }
 }

@@ -34,7 +34,7 @@
           <sv:value>ascending</sv:value>
           <sv:value>hippostdpubwf:creationDate</sv:value>
           <sv:value>hippostdpubwf:creationDate</sv:value>
-          <sv:value>contacten/contactfacetten</sv:value>
+          <sv:value>medewerkers/medewerkerfacet</sv:value>
           <sv:value>Zoeken in medewerkers</sv:value>
         </sv:property>
         <sv:property sv:name="hst:referencecomponent" sv:type="String">

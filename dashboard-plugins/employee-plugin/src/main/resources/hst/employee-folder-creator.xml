@@ -23,6 +23,9 @@
     <sv:value>hippo:harddocument</sv:value>
     <sv:value>hippotranslation:translated</sv:value>
   </sv:property>
+  <sv:property sv:name="jcr:uuid" sv:type="String">
+    <sv:value>5639bc35-7fb6-0000-868d-170c3f1b4f96</sv:value>
+  </sv:property>
   <sv:property sv:name="hippostd:foldertype" sv:type="String" sv:multiple="true">
     <sv:value>new-employee</sv:value>
     <sv:value>new-employee-folder</sv:value>

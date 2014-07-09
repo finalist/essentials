@@ -1,0 +1,33 @@
+package {{componentsPackage}}info;
+
+import org.hippoecm.hst.core.parameters.*;
+
+@FieldGroupList({
+        @FieldGroup(titleKey = "group.base", value = { "title", "imagePath", "notClosable" }),
+        @FieldGroup(titleKey = "group.moreLink", value = { "moreLinkTitle", "moreLinkUrl" }),
+        @FieldGroup(titleKey = "group.visibity", value = { "visibleForStudents", "visibleForEmployees" })
+})
+public interface BaseWidgetInfo {
+
+    @Parameter(name = "notClosable", displayName = "Onafsluitbaar", defaultValue = "off")
+    Boolean getNotClosable();
+
+    @Parameter(name = "visibleForStudents", displayName = "Zichtbaar voor studenten", defaultValue = "on")
+    Boolean getVisibleForStudents();
+
+    @Parameter(name = "visibleForEmployees", displayName = "Zichtbaar voor medewerkers", defaultValue = "on")
+    Boolean getVisibleForEmployees();
+
+    @Parameter(name = "title", displayName = "Title", defaultValue = "")
+    String getTitle();
+
+    @Parameter(name = "moreLinkTitle", displayName = "Title of the morelink", defaultValue = "Meer")
+    String getMoreLinkTitle();
+
+    @Parameter(name = "moreLinkUrl", displayName = "URL of the morelink", defaultValue = "")
+    String getMoreLinkUrl();
+
+    @Parameter(name = "imagePath", displayName = "Image", defaultValue = "")
+    @JcrPath(pickerConfiguration = "cms-pickers/images", pickerSelectableNodeTypes = { "hippogallery:imageset" }, pickerInitialPath = "/content/gallery/widgets")
+    String getImagePath();
+}

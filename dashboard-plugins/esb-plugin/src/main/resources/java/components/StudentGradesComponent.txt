@@ -14,6 +14,8 @@ import org.hippoecm.hst.core.parameters.ParametersInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.http.HttpServletRequest;
+
 @ParametersInfo(type = ListWidgetInfo.class)
 public class StudentGradesComponent extends BaseHstComponent {
     private static final Logger LOG = LoggerFactory.getLogger(StudentGradesComponent.class);
@@ -32,6 +34,8 @@ public class StudentGradesComponent extends BaseHstComponent {
                 MockGrades grades = gradeService.getStudentGrades(uid);
                 List<MockGrade> studentGrades = grades == null ? Collections.<MockGrade>emptyList() : grades.getGrades();
                 request.setAttribute("grades", sortAndLimitGrades(studentGrades, info.getLimit()));
+                request.setAttribute("visible", isVisible(request));
+                setHttpRequestParameter(request, "locale", request.getLocale());
             } catch (Exception e) {
                 LOG.warn("Error before rendering component: " + e.getMessage());
                 request.setAttribute("error", true);
@@ -53,5 +57,12 @@ public class StudentGradesComponent extends BaseHstComponent {
 
     protected boolean isVisible(HstRequest request) {
         return true;
+    }
+
+    public void setHttpRequestParameter(HstRequest request, String name, Object value) {
+        HttpServletRequest servletRequest = request.getRequestContext().getServletRequest();
+        if (servletRequest != null) {
+            servletRequest.setAttribute(name, value);
+        }
     }
 }

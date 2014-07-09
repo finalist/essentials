@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright 2014 Hippo B.V. (http://www.onehippo.com)
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<sv:node sv:name="grades.widget" xmlns:sv="http://www.jcp.org/jcr/sv/1.0">
+    <sv:property sv:name="jcr:primaryType" sv:type="Name">
+        <sv:value>hst:containeritemcomponent</sv:value>
+    </sv:property>
+    <sv:property sv:name="hst:async" sv:type="Boolean">
+        <sv:value>true</sv:value>
+    </sv:property>
+    <sv:property sv:name="hst:cacheable" sv:type="Boolean">
+        <sv:value>false</sv:value>
+    </sv:property>
+    <sv:property sv:name="hst:componentclassname" sv:type="String">
+        <sv:value>nl.zuyd.intranet.components.StudentGradesComponent</sv:value>
+    </sv:property>
+    <sv:property sv:name="hst:iconpath" sv:type="String">
+        <sv:value>images/component-icon-list.png</sv:value>
+    </sv:property>
+    <sv:property sv:name="hst:label" sv:type="String">
+        <sv:value>Mijn recente cijfers</sv:value>
+    </sv:property>
+    <sv:property sv:name="hst:parameternames" sv:type="String" sv:multiple="true">
+        <sv:value>title</sv:value>
+        <sv:value>moreLinkTitle</sv:value>
+        <sv:value>moreLinkUrl</sv:value>
+        <sv:value>imagePath</sv:value>
+        <sv:value>visibleForStudents</sv:value>
+        <sv:value>visibleForEmployees</sv:value>
+    </sv:property>
+    <sv:property sv:name="hst:parametervalues" sv:type="String" sv:multiple="true">
+        <sv:value>Mijn recente cijfers</sv:value>
+        <sv:value>Meer cijfers</sv:value>
+        <sv:value>http://www.google.nl</sv:value>
+        <sv:value>/content/gallery/zuyd-intranet/nieuws/980_newspapers.jpg</sv:value>
+        <sv:value>on</sv:value>
+        <sv:value>off</sv:value>
+    </sv:property>
+    <sv:property sv:name="hst:template" sv:type="String">
+        <sv:value>grades.widget.content</sv:value>
+    </sv:property>
+    <sv:property sv:name="hst:xtype" sv:type="String">
+        <sv:value>HST.Item</sv:value>
+    </sv:property>
+</sv:node>

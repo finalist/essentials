@@ -230,6 +230,11 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
+      <groupId>com.finalist.essentials</groupId>
+      <artifactId>hippo-esb-plugin</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>
     </dependency>

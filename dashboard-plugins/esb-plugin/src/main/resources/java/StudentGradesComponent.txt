@@ -1,0 +1,68 @@
+package {{componentsPackage}};
+
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+import nl.zuyd.integration.exception.EsbException;
+import nl.zuyd.integration.exception.NotFoundException;
+import nl.zuyd.integration.model.Grade;
+import nl.zuyd.integration.model.Grades;
+import nl.zuyd.integration.services.GradeService;
+import nl.zuyd.intranet.componentsinfo.ListWidgetInfo;
+import nl.zuyd.intranet.security.model.userdetails.UserDetails;
+
+import org.hippoecm.hst.core.component.HstComponentException;
+import org.hippoecm.hst.core.component.HstRequest;
+import org.hippoecm.hst.core.component.HstResponse;
+import org.hippoecm.hst.core.parameters.ParametersInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+@ParametersInfo(type = ListWidgetInfo.class)
+public class StudentGradesComponent extends AbstractUserComponent<ListWidgetInfo> {
+    private static final Logger LOG = LoggerFactory.getLogger(StudentGradesComponent.class);
+
+    @Override
+    public void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
+        super.doBeforeRender(request, response);
+
+        if (isVisible(request)) {
+            try {
+                ListWidgetInfo info = getComponentParametersInfo(request);
+                if (isStudent(request)) {
+                    UserDetails userDetails = getUserDetails(request);
+                    String uid = userDetails.getUid();
+
+                    GradeService gradeService = getClientComponent(GradeService.class);
+                    // FIXME: The ESB should support  getting the grades with a limit parameter and sorted.
+                    Grades grades = gradeService.getStudentGrades(uid);
+                    List<Grade> studentGrades = grades == null ? Collections.<Grade>emptyList() : grades.getGrades();
+                    request.setAttribute("grades", sortAndLimitGrades(studentGrades, info.getLimit()));
+                }
+            } catch (NotFoundException e) {
+                LOG.info("No data found: " + e.getMessage());
+                request.setAttribute("error", false);
+            } catch (EsbException e) {
+                LOG.warn("Error before rendering component: " + e.getMessage());
+                request.setAttribute("error", true);
+            } catch (Exception e) {
+                LOG.warn("Error before rendering component: " + e.getMessage());
+                request.setAttribute("error", true);
+            }
+        }
+    }
+
+    private List<Grade> sortAndLimitGrades(List<Grade> studentGrades, int limit) {
+        Collections.sort(studentGrades, new Comparator<Grade>() {
+            @Override
+            public int compare(Grade o1, Grade o2) {
+                // show newest first
+                return o2.getMutationDate().compareTo(o1.getMutationDate());
+            }
+        });
+        // apply limit
+        return studentGrades.subList(0, Math.min(studentGrades.size(), limit));
+    }
+
+}

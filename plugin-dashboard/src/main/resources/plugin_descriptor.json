@@ -844,5 +844,27 @@
                 ]
             }
         ]
+    },
+    {
+        "enabled": true,
+        "@type": "plugin",
+        "name": "ESB plugin",
+        "introduction": "Add java esb classes and components used to get/show education related data.",
+        "pluginId": "esbPlugin",
+        "packageFile": "/META-INF/esbPlugin_instructions.xml",
+        "restClasses": [],
+        "type": "plugins",
+        "vendor": {
+            "@type": "vendor",
+            "name": "Finalist",
+            "url": "http://www.finalist.com"
+        },
+        "libraries": [
+            {
+                "items": [
+
+                ]
+            }
+        ]
     }
 ]}

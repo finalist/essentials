@@ -71,6 +71,7 @@
     <module>textblock-plugin</module>
     <module>addfield-plugin</module>
     <module>employee-plugin</module>
+    <module>esb-plugin</module>
   </modules>
   <dependencyManagement>
 

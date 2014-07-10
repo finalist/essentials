@@ -231,7 +231,7 @@
     </dependency>
     <dependency>
       <groupId>com.finalist.essentials</groupId>
-      <artifactId>hippo-esb-plugin</artifactId>
+      <artifactId>hippo-studentgrade-component</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>

@@ -848,10 +848,10 @@
     {
         "enabled": true,
         "@type": "plugin",
-        "name": "ESB plugin",
-        "introduction": "Add java esb classes and components used to get/show education related data.",
-        "pluginId": "esbPlugin",
-        "packageFile": "/META-INF/esbPlugin_instructions.xml",
+        "name": "Student Grade plugin",
+        "introduction": "Add studentgrade draggable component.",
+        "pluginId": "studentGradesComponent",
+        "packageFile": "/META-INF/studentGradesComponent_instructions.xml",
         "restClasses": [],
         "type": "plugins",
         "vendor": {

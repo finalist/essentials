@@ -11,7 +11,7 @@
   <name>Hippo Essentials Employee Plugin</name>
   <groupId>com.finalist.essentials</groupId>
   <description>Hippo Essentials Employee Plugin</description>
-  <artifactId>hippo-esb-plugin</artifactId>
+  <artifactId>hippo-studentgrade-component</artifactId>
   <packaging>jar</packaging>
 
   <dependencies>

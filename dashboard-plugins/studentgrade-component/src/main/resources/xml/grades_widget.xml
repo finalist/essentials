@@ -20,13 +20,13 @@
         <sv:value>hst:containeritemcomponent</sv:value>
     </sv:property>
     <sv:property sv:name="hst:async" sv:type="Boolean">
-        <sv:value>true</sv:value>
+        <sv:value>false</sv:value>
     </sv:property>
     <sv:property sv:name="hst:cacheable" sv:type="Boolean">
         <sv:value>false</sv:value>
     </sv:property>
     <sv:property sv:name="hst:componentclassname" sv:type="String">
-        <sv:value>nl.zuyd.intranet.components.StudentGradesComponent</sv:value>
+        <sv:value>{{componentsPackage}}.StudentGradesComponent</sv:value>
     </sv:property>
     <sv:property sv:name="hst:iconpath" sv:type="String">
         <sv:value>images/component-icon-list.png</sv:value>

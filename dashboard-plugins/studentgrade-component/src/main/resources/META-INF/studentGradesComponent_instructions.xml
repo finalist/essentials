@@ -28,7 +28,7 @@
   </instructionSet>
 
   <instructionSet>
-    <file action="copy" source="jsp/grades/widget/content.jsp" target="{{jspRoot}}/grades/widget/content/content.jsp"/>
+    <file action="copy" source="jsp/grades/widget/content.jsp" target="{{jspRoot}}/grades/widget/content.jsp"/>
     <file action="copy" binary="true" source="images/component-icon-list.png" target="{{siteWebRoot}}/images/component-icon-list.png"/>
     <xml action="copy" source="xml/grades_widget.xml" target="/hst:hst/hst:configurations/hst:default/hst:catalog/essentials-catalog"/>
     <xml action="copy" source="xml/grades_template.xml" target="/hst:hst/hst:configurations/hst:default/hst:templates"/>

@@ -72,6 +72,7 @@
     <module>addfield-plugin</module>
     <module>employee-plugin</module>
     <module>studentgrade-component</module>
+    <module>schedule-component</module>
   </modules>
   <dependencyManagement>
 

@@ -1,0 +1,31 @@
+package {{componentsPackage}};
+
+import org.codehaus.jackson.annotate.JsonProperty;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+public class MockGrades {
+    @JsonProperty("results")
+    private List<MockGrade> grades;
+
+    public List<MockGrade> getGrades() {
+        List<MockGrade> mockgrades = new ArrayList<MockGrade>();
+        mockgrades.add(new MockGrade());
+        mockgrades.add(new MockGrade());
+        mockgrades.get(0).setStudyProgramEn("testsubject");
+        mockgrades.get(0).setGrade("voldoende");
+        mockgrades.get(0).setTestDescriptionEn("dit is de beschrijving");
+        mockgrades.get(0).setMutationDate(new Date());
+        mockgrades.get(1).setStudyProgramEn("testsubject2");
+        mockgrades.get(1).setGrade("goed");
+        mockgrades.get(1).setTestDescriptionEn("dit is de tweede beschrijving");
+        mockgrades.get(1).setMutationDate(new Date());
+        return mockgrades;
+    }
+
+    public void setGrades(List<MockGrade> grades) {
+        this.grades = grades;
+    }
+}

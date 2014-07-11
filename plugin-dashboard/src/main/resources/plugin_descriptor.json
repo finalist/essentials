@@ -866,5 +866,27 @@
                 ]
             }
         ]
+    },
+    {
+        "enabled": true,
+        "@type": "plugin",
+        "name": "Schedule plugin",
+        "introduction": "Add schedule draggable component.",
+        "pluginId": "scheduleComponent",
+        "packageFile": "/META-INF/scheduleComponent_instructions.xml",
+        "restClasses": [],
+        "type": "plugins",
+        "vendor": {
+            "@type": "vendor",
+            "name": "Finalist",
+            "url": "http://www.finalist.com"
+        },
+        "libraries": [
+            {
+                "items": [
+
+                ]
+            }
+        ]
     }
 ]}

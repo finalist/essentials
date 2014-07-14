@@ -155,6 +155,36 @@
       <artifactId>hippo-video-component-plugin</artifactId>
       <version>${project.version}</version>
     </dependency>
+    <dependency>
+      <groupId>com.finalist.essentials</groupId>
+      <artifactId>hippo-addfield-plugin</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.finalist.essentials</groupId>
+      <artifactId>hippo-employee-plugin</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.finalist.essentials</groupId>
+      <artifactId>hippo-schedule-component</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.finalist.essentials</groupId>
+      <artifactId>hippo-studentgrade-component</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.finalist.essentials</groupId>
+      <artifactId>hippo-profile-component</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.finalist.essentials</groupId>
+      <artifactId>hippo-textblock-plugin</artifactId>
+      <version>${project.version}</version>
+    </dependency>
 
     <dependency>
       <groupId>org.onehippo.cms7.essentials</groupId>
@@ -171,7 +201,6 @@
       <artifactId>hippo-dashboard-restservices-plugin</artifactId>
       <version>${project.version}</version>
     </dependency>
-
     <dependency>
       <groupId>org.onehippo.cms7</groupId>
       <artifactId>hippo-repository-connector</artifactId>

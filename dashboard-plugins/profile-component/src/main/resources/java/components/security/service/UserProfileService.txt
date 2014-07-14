@@ -1,0 +1,15 @@
+package {{componentsPackage}}.security.service;
+
+import {{componentsPackage}}.security.model.UserProfile;
+
+/**
+ * Created by brian on 4/17/14.
+ */
+public interface UserProfileService {
+  boolean hasProfile(String username);
+
+  UserProfile createProfile(String username);
+  UserProfile getProfile(String username);
+  UserProfile updateProfile(UserProfile userProfile);
+  void deleteProfile(UserProfile userProfile);
+}

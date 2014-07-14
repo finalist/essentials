@@ -1,0 +1,86 @@
+package {{componentsPackage}}.security.model;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
+import {{componentsPackage}}.domain.LinkItem;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.couchbase.core.mapping.Document;
+import org.springframework.data.couchbase.core.mapping.Field;
+
+@Document
+public class UserProfile implements Serializable {
+
+    private static final long serialVersionUID = -6877823185693568897L;
+
+    @Id
+    private String id;
+
+    @Field
+    private String username;
+
+    @Field
+    private Set<String> disabledComponents = new TreeSet<String>();
+
+    @Field
+    private List<LinkItem> favourites = new ArrayList<LinkItem>();
+
+    @Field
+    private Set<String> disabledAreasOfInterest = new HashSet<String>();
+
+    public UserProfile() {
+    }
+
+    public UserProfile(String id, String username) {
+        this.id = id;
+        this.username = username;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("\nUSERPROFILE > id: ").append(getId()).append("; ");
+        sb.append("\nUSERPROFILE > username: ").append(getUsername()).append("; ");
+        sb.append("\nUSERPROFILE > disabled components: ").append(getDisabledComponents()).append("; ");
+        sb.append("\nUSERPROFILE > disabled areas of interest: ").append(getDisabledAreasOfInterest()).append("; ");
+
+        return sb.toString();
+    }
+
+    public List<LinkItem> getFavourites() {
+        return favourites;
+    }
+
+    public void setFavourites(List<LinkItem> favourites) {
+        this.favourites = favourites;
+    }
+
+    public Set<String> getDisabledAreasOfInterest() {
+        return disabledAreasOfInterest;
+    }
+
+    public void setDisabledAreasOfInterest(Set<String> areasOfInterest) {
+        this.disabledAreasOfInterest = areasOfInterest;
+    }
+
+    public Set<String> getDisabledComponents() {
+        return disabledComponents;
+    }
+
+    public void setDisabledComponents(Set<String> disabledComponents) {
+        this.disabledComponents = disabledComponents;
+    }
+}

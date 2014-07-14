@@ -1,0 +1,36 @@
+package {{componentsPackage}}.model;
+
+import java.io.Serializable;
+
+import org.codehaus.jackson.annotate.JsonProperty;
+
+public class Faculty implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    @JsonProperty("facultyCode")
+    private String facultyCode;
+
+    @JsonProperty("facultyName")
+    private String facultyName;
+
+    public String getFacultyCode() {
+        return facultyCode;
+    }
+
+    public void setFacultyCode(String facultyCode) {
+        this.facultyCode = facultyCode;
+    }
+
+    public String getFacultyName() {
+        return facultyName;
+    }
+
+    public void setFacultyName(String facultyName) {
+        this.facultyName = facultyName;
+    }
+
+    @Override
+    public String toString() {
+        return "Faculty. code=" + facultyCode + ", name=" + facultyName;
+    }
+}

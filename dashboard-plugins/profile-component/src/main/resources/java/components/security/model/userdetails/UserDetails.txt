@@ -1,0 +1,68 @@
+package {{componentsPackage}}.security.model.userdetails;
+
+import java.util.Collection;
+
+import {{componentsPackage}}.model.UserInfo;
+import {{componentsPackage}}.security.model.UserProfile;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+
+public class UserDetails extends User {
+    private static final long serialVersionUID = 1L;
+    private final String uid;
+    private final String logoutPath;
+
+    private UserProfile userProfile;
+    private UserInfo userInfo;
+
+    public UserDetails(String uid, Collection<? extends GrantedAuthority> authorities, UserProfile userProfile, UserInfo userInfo, String username, String password, String logoutPath) {
+        super(username, password, authorities);
+        this.uid = uid;
+        this.userProfile = userProfile;
+        this.userInfo = userInfo;
+        this.logoutPath = logoutPath;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public String getLogoutPath() {
+        return logoutPath;
+    }
+
+    public UserProfile getUserProfile() {
+        return this.userProfile;
+    }
+
+    public UserInfo getUserInfo() {
+        return this.userInfo;
+    }
+
+    /**
+     * Set the profile for the current user details, when the user profile is updated
+     * @param userProfile the new profile to set
+     */
+    public void setUserProfile(UserProfile userProfile) {
+        this.userProfile = userProfile;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("\nUSERDETAILS > username: ").append(getUsername()).append("; ");
+        sb.append("\nUSERDETAILS > password: [PROTECTED]; ");
+        sb.append("\nUSERDETAILS > enabled: ").append(isEnabled()).append("; ");
+        sb.append("\nUSERDETAILS > accountNonExpired: ").append(isAccountNonExpired()).append("; ");
+        sb.append("\nUSERDETAILS > credentialsNonExpired: ").append(isCredentialsNonExpired()).append("; ");
+        sb.append("\nUSERDETAILS > accountNonLocked: ").append(isAccountNonLocked()).append("; ");
+        sb.append("\nUSERDETAILS > authorities: ").append(getAuthorities()).append("; ");
+        sb.append("\nUSERDETAILS > uid: ").append(getUid()).append("; ");
+        sb.append("\nUSERDETAILS > logoutPath: ").append(getLogoutPath()).append("; ");
+        sb.append(getUserProfile().toString());
+        sb.append(getUserInfo().toString());
+
+        return sb.toString();
+    }
+}

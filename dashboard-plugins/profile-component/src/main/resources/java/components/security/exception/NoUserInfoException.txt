@@ -1,0 +1,8 @@
+package {{componentsPackage}}.security.exception;
+
+public class NoUserInfoException extends RuntimeException {
+
+  public NoUserInfoException(String message) {
+    super(message);
+  }
+}

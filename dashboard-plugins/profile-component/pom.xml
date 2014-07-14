@@ -10,8 +10,8 @@
 
   <name>Hippo Essentials Employee Plugin</name>
   <groupId>com.finalist.essentials</groupId>
-  <description>Hippo Schedule Plugin</description>
-  <artifactId>hippo-schedule-component</artifactId>
+  <description>Hippo Essentials Employee Plugin</description>
+  <artifactId>hippo-profile-component</artifactId>
   <packaging>jar</packaging>
 
   <dependencies>

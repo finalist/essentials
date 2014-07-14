@@ -1,0 +1,19 @@
+package {{componentsPackage}}.security.model.userdetails;
+
+/**
+ * Convenience class to map IdP-authorities to constants.
+ */
+public enum UserRole {
+    STUDENT("ROLE_student"),
+    TEACHER("ROLE_employee");
+
+    private String authority = null;
+
+    UserRole(String authority) {
+        this.authority = authority;
+    }
+
+    public String getAuthority() {
+        return authority;
+    }
+}

@@ -1,0 +1,7 @@
+package {{componentsPackage}}.security.dao;
+
+import {{componentsPackage}}.security.model.UserProfile;
+import org.springframework.data.repository.CrudRepository;
+
+public interface UserProfileDAO extends CrudRepository<UserProfile, String> {
+}

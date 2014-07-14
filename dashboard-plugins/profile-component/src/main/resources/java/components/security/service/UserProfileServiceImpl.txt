@@ -1,0 +1,58 @@
+package {{componentsPackage}}.security.service;
+
+import {{componentsPackage}}.security.dao.UserProfileDAO;
+import {{componentsPackage}}.security.model.UserProfile;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class UserProfileServiceImpl implements UserProfileService {
+    private static final Logger LOG = LoggerFactory.getLogger(UserProfileServiceImpl.class);
+    private static final String ID_PREFIX = "profile-";
+
+    @Autowired
+    private UserProfileDAO userProfileDAO;
+
+    @Override
+    public boolean hasProfile(String username) {
+        if (userProfileDAO.exists(ID_PREFIX + username)) {
+            LOG.debug("User profile for username '{}' exists", username);
+            return true;
+        } else {
+            LOG.debug("User profile for username '{}' does not exist", username);
+            return false;
+        }
+    }
+
+    @Override
+    public UserProfile createProfile(String username) {
+        LOG.debug("Creating user profile for username '{}'", username);
+
+        UserProfile userProfile = new UserProfile(ID_PREFIX + username, username);
+        return userProfileDAO.save(userProfile);
+    }
+
+    @Override
+    public UserProfile getProfile(String username) {
+        LOG.debug("Retrieving user profile for username '{}'", username);
+
+        return userProfileDAO.findOne(ID_PREFIX + username);
+    }
+
+    @Override
+    public UserProfile updateProfile(UserProfile userProfile) {
+        LOG.debug("Updating user profile for username '{}'", userProfile.getUsername());
+
+        return userProfileDAO.save(userProfile);
+    }
+
+    @Override
+    public void deleteProfile(UserProfile userProfile) {
+        LOG.debug("Deleting user profile for username '{}'", userProfile.getUsername());
+
+        userProfileDAO.delete(userProfile);
+    }
+}

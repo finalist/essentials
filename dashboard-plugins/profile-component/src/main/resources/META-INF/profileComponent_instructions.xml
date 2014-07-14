@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright 2014 Hippo B.V. (http://www.onehippo.com)
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<instructions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://www.onehippo.org/essentials/instructions /instructions.xsd" xmlns="http://www.onehippo.org/essentials/instructions">
+  <instructionSet>
+    <file action="copy" source="java/components/AbstractUserComponent.txt" target="{{componentsFolder}}/AbstractUserComponent.java"/>
+    <file action="copy" source="java/componentsinfo/BaseWidgetInfo.txt" target="{{componentsFolder}}info/BaseWidgetInfo.java"/>
+    <file action="copy" source="java/componentsinfo/ListWidgetInfo.txt" target="{{componentsFolder}}info/ListWidgetInfo.java"/>
+    <file action="copy" source="java/components/domain/LinkItem.txt" target="{{componentsFolder}}/domain/LinkItem.java"/>
+    <file action="copy" source="java/components/model/UserInfo.txt" target="{{componentsFolder}}/model/UserInfo.java"/>
+    <file action="copy" source="java/components/model/Faculty.txt" target="{{componentsFolder}}/model/Faculty.java"/>
+    <file action="copy" source="java/components/security/model/userdetails/UserDetails.txt" target="{{componentsFolder}}/security/model/userdetails/UserDetails.java"/>
+    <file action="copy" source="java/components/security/model/userdetails/UserRole.txt" target="{{componentsFolder}}/security/model/userdetails/UserRole.java"/>
+    <file action="copy" source="java/components/security/model/UserProfile.txt" target="{{componentsFolder}}/security/model/UserProfile.java"/>
+    <file action="copy" source="java/components/security/service/UserProfileService.txt" target="{{componentsFolder}}/security/service/UserProfileService.java"/>
+    <file action="copy" source="java/components/security/service/UserProfileServiceImpl.txt" target="{{componentsFolder}}/security/service/UserProfileServiceImpl.java"/>
+    <file action="copy" source="java/components/security/dao/UserProfileDAO.txt" target="{{componentsFolder}}/security/service/UserProfileDAO.java"/>
+    <file action="copy" source="java/components/security/util/SecurityUtil.txt" target="{{componentsFolder}}/security/util/SecurityUtil.java"/>
+    <file action="copy" source="java/components/security/exception/NoUserProfileException.txt" target="{{componentsFolder}}/security/exception/NoUserProfileException.java"/>
+    <file action="copy" source="java/components/security/exception/NoUserDetailsException.txt" target="{{componentsFolder}}/security/exception/NoUserDetailsException.java"/>
+    <file action="copy" source="java/components/security/exception/NoUserInfoException.txt" target="{{componentsFolder}}/security/exception/NoUserInfoException.java"/>
+  </instructionSet>
+</instructions>

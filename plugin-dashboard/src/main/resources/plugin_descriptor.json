@@ -888,5 +888,84 @@
                 ]
             }
         ]
+    },
+    {
+        "enabled": true,
+        "@type": "plugin",
+        "name": "Profile plugin",
+        "introduction": "Add profile config and component.",
+        "pluginId": "profileComponent",
+        "packageFile": "/META-INF/profileComponent_instructions.xml",
+        "restClasses": [],
+        "type": "plugins",
+        "vendor": {
+            "@type": "vendor",
+            "name": "Finalist",
+            "url": "http://www.finalist.com"
+        },
+        "libraries": [
+            {
+                "items": [
+
+                ]
+            }
+        ],
+        "dependencies": [
+            {
+                "@type": "dependency",
+                "groupId": "org.springframework.security",
+                "artifactId": "spring-security-core",
+                "scope": "compile",
+                "version": "3.1.3.RELEASE",
+                "type": "site"
+            },
+            {
+                "@type": "dependency",
+                "groupId": "org.springframework",
+                "artifactId": "spring-context",
+                "scope": "compile",
+                "version": "3.2.5.RELEASE",
+                "type": "site"
+            },
+            {
+                "@type": "dependency",
+                "groupId": "org.springframework",
+                "artifactId": "spring-beans",
+                "scope": "compile",
+                "version": "3.2.5.RELEASE",
+                "type": "site"
+            },
+            {
+                "@type": "dependency",
+                "groupId": "net.sf.ehcache",
+                "artifactId": "ehcache",
+                "scope": "compile",
+                "version": "2.4.8",
+                "type": "site"
+            },
+            {
+                "@type": "dependency",
+                "groupId": "org.springframework.data",
+                "artifactId": "spring-data-couchbase",
+                "scope": "compile",
+                "version": "1.0.0.RELEASE",
+                "type": "site"
+            },
+            {
+                "@type": "dependency",
+                "groupId": "org.springframework.data",
+                "artifactId": "spring-data-commons",
+                "version": "1.7.1.RELEASE",
+                "scope": "compile",
+                "type": "site"
+            },
+            {
+                "@type": "dependency",
+                "groupId": "org.onehippo.forge.selectionplugins",
+                "artifactId": "selectionplugins-hst-client",
+                "scope": "compile",
+                "type": "site"
+            }
+        ]
     }
 ]}

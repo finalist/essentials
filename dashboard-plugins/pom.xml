@@ -73,6 +73,7 @@
     <module>employee-plugin</module>
     <module>studentgrade-component</module>
     <module>schedule-component</module>
+    <module>profile-component</module>
   </modules>
   <dependencyManagement>
 

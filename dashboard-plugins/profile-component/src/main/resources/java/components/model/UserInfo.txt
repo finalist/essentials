@@ -1,0 +1,121 @@
+package {{componentsPackage}}.model;
+
+import java.io.Serializable;
+
+import org.codehaus.jackson.annotate.JsonProperty;
+
+public abstract class UserInfo implements Serializable {
+
+    private static final long serialVersionUID = -608184545800561207L;
+
+
+    @JsonProperty("lastName")
+    private String lastName;
+
+    @JsonProperty("lastNamePrefix")
+    private String lastNamePrefix;
+
+    @JsonProperty("firstName")
+    private String firstName;
+
+    @JsonProperty("initials")
+    private String initials;
+
+    @JsonProperty("displayName")
+    private String displayName;
+
+    @JsonProperty("faculty")
+    private Faculty faculty;
+
+    private String fullName;
+
+    public String getFullName() {
+        if (fullName == null) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(firstName);
+        sb.append(" ");
+        if (lastNamePrefix != null && !"".equals(lastNamePrefix)) {
+            sb.append(lastNamePrefix);
+            sb.append(" ");
+        }
+        sb.append(lastName);
+
+        fullName = sb.toString();
+        }
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getTitle() {
+        return getDisplayName();
+    }
+
+    abstract public String getAccount();
+
+    abstract public void setAccount(String account);
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getLastNamePrefix() {
+        return lastNamePrefix;
+    }
+
+    public void setLastNamePrefix(String lastNamePrefix) {
+        this.lastNamePrefix = lastNamePrefix;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getInitials() {
+        return initials;
+    }
+
+    public void setInitials(String initials) {
+        this.initials = initials;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public Faculty getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(Faculty faculty) {
+        this.faculty = faculty;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("\nUSERINFO > accountNo: ").append(getAccount()).append("; ");
+        sb.append("\nUSERINFO > lastName: ").append(getLastName()).append("; ");
+        sb.append("\nUSERINFO > lastNamePrefix: ").append(getLastNamePrefix()).append("; ");
+        sb.append("\nUSERINFO > firstName: ").append(getFirstName()).append("; ");
+        sb.append("\nUSERINFO > initials: ").append(getInitials()).append("; ");
+        sb.append("\nUSERINFO > displayName: ").append(getDisplayName()).append("; ");
+        sb.append("\nUSERINFO > faculty: ").append(getFaculty()).append("; ");
+
+        return sb.toString();
+    }
+}

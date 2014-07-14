@@ -3,10 +3,11 @@
     {
         "enabled": true,
         "@type": "plugin",
-        "name": "Content Blocks",
-        "introduction": "Provide the ability to add multiple pre-configured compound type blocks to a document. The CMS administrator can configure the available content blocks on a per-document-type basis.",
+        "name": "Content Blocks plugin",
+        "introduction": "Provides the ability to add multiple Content Blocks to document types. Each Content Block offers a choice between multiple (potentially complex) field types, as determined by a Provider Compound.",
         "pluginId": "contentBlocks",
         "type": "plugins",
+        "restClasses": ["org.onehippo.cms7.essentials.plugins.contentblocks.ContentBlocksResource"],
         "vendor": {
             "@type": "vendor",
             "name": "Detailed Content Blocks documentation",
@@ -74,7 +75,7 @@
                 "artifactId": "hippo-essentials-blog-plugin",
                 "scope": "compile",
                 "type": "essentials",
-                "version": "1.01.03-SNAPSHOT"
+                "version": "1.01.04-SNAPSHOT"
             }
 
         ],
@@ -165,7 +166,7 @@
         "pluginId": "selectionPlugin",
         "name": "Selection plugin",
         "introduction": "Add value lists and selection document fields to your Hippo project",
-        "description": "Add selection fields to your document types. The list of choices are backed by a CMS-based value list. <p>Read more about the Selection plugin at <a href=\"http://selection.forge.onehippo.org/\" target=\"_blank\">http://selection.forge.onehippo.org/</a></p>",
+        "description": "Add selection fields to your document types. The choices are backed by a CMS-based value list. <p>Read more about the Selection plugin at <a href=\"http://selection.forge.onehippo.org/\" target=\"_blank\">http://selection.forge.onehippo.org/</a></p>",
         "packageFile": "/META-INF/selectionPlugin_instructions.xml",
         "restClasses": ["org.onehippo.cms7.essentials.plugins.selection.SelectionResource"],
         "vendor": {
@@ -296,7 +297,7 @@
         "@type": "plugin",
         "name": "Related documents plugin",
         "introduction": "Adds Related documents support to hippo project",
-        "description": "The Related Documents plugin is a Hippo CMS 7 editor plugin by which you can pick docments that are related to the currently edited document. It has also the capability to create a list of suggested documents you may want to pick, based on matching metadata search.<p>Read more about the Related documents  plugin at <a href=\"http://relateddocs.forge.onehippo.org/\" target=\"_blank\">http://relateddocs.forge.onehippo.org/</a></p>",
+        "description": "The Related Documents plugin is a Hippo CMS 7 document editor plugin with which you can pick documents that are related to the currently edited document. It has the capability of creating a list of suggested documents you may want to pick, based on matching metadata search.<p>Read more about the Related documents  plugin at <a href=\"http://relateddocs.forge.onehippo.org/\" target=\"_blank\">http://relateddocs.forge.onehippo.org/</a></p>",
         "pluginId": "relatedDocumentsPlugin",
         "packageFile": "",
         "restClasses": ["org.onehippo.cms7.essentials.plugins.relateddocuments.RelatedDocumentsResource"],
@@ -359,7 +360,7 @@
         "name": "Gallery manager",
         "introduction": "Manage your project's image sets.",
         "pluginId": "galleryPlugin",
-
+        "restClasses": ["org.onehippo.cms7.essentials.plugins.gallery.GalleryPluginResource"],
         "type": "tools",
         "vendor": {
             "@type": "vendor",
@@ -381,7 +382,7 @@
         "enabled": true,
         "@type": "plugin",
         "name": "Beanwriter",
-        "introduction": "Create (re-generate) HST beans.",
+        "introduction": "Generate HST Content beans.",
         "pluginId": "beanwriter",
         "packageFile": "",
         "restClasses": ["org.onehippo.cms7.essentials.beanwriter.rest.BeanWriterResource"],
@@ -475,30 +476,6 @@
     {
         "enabled": true,
         "@type": "plugin",
-        "name": "Clone a component",
-        "introduction": "Duplicate a Channel Manager catalog component and its markup (template).",
-        "pluginId": "cloneComponent",
-        "restClasses": ["org.onehippo.cms7.essentials.plugin.clonecomponent.CloneComponentResource"],
-        "type": "tools",
-        "vendor": {
-            "@type": "vendor",
-            "name": "Hippo",
-            "url": "http://www.onehippo.com"
-        },
-        "libraries": [
-            {
-                "items": [
-                    {
-                        "component": "cloneComponent",
-                        "file": "cloneComponent.js"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "enabled": true,
-        "@type": "plugin",
         "name": "Search support",
         "introduction": "Add a search page to the project, including URL mapping and main menu item, and a Search Box component to the Channel Manager's component catalog.",
         "pluginId": "searchPlugin",
@@ -521,7 +498,7 @@
     {
         "enabled": true,
         "@type": "plugin",
-        "name": "Image component plugin",
+        "name": "Image component",
         "introduction": "Add image component and rendering template",
         "pluginId": "imageComponentPlugin",
         "packageFile": "/META-INF/imageComponentPlugin_instructions.xml",
@@ -543,7 +520,7 @@
     {
         "enabled": true,
         "@type": "plugin",
-        "name": "Video component plugin",
+        "name": "Video component",
         "introduction": "Add video component and rendering template",
         "pluginId": "videoComponentPlugin",
         "packageFile": "/META-INF/videoComponentPlugin_instructions.xml",
@@ -565,9 +542,9 @@
     {
         "enabled": true,
         "@type": "plugin",
-        "name": "FAQ component plugin",
-        "introduction": "Add FAQ component, rendering template and sample data",
-        "pluginId": "faqComponentPlugin",
+        "name": "FAQ support",
+        "introduction": "Add FAQ document types, component, rendering template and sample data",
+        "pluginId": "faqPlugin",
         "packageFile": "/META-INF/faqComponentPlugin_instructions.xml",
         "restClasses": [],
         "type": "plugins",
@@ -587,7 +564,7 @@
     {
         "enabled": true,
         "@type": "plugin",
-        "name": "Banner support",
+        "name": "Banner component",
         "introduction": "Add Banner document type to your project. Add Banner and Carousel components to the Channel Manager's component catalog.",
         "pluginId": "bannerPlugin",
         "packageFile": "/META-INF/banner_instructions.xml",
@@ -610,7 +587,7 @@
                 "artifactId": "hippo-banner-plugin",
                 "scope": "compile",
                 "type": "essentials",
-                "version": "1.01.03-SNAPSHOT"
+                "version": "1.01.04-SNAPSHOT"
             }
         ]
     },
@@ -683,32 +660,6 @@
     {
         "enabled": true,
         "@type": "plugin",
-        "name": "Freemarker synchronizing",
-        "introduction": "Synchronize Freemarker templates between your project sources and your project's repository.",
-        "pluginId": "freemarkersync",
-
-        "restClasses": ["org.onehippo.cms7.essentials.tools.rest.FreemarkerSyncResource"],
-        "type": "tools",
-        "vendor": {
-            "@type": "vendor",
-            "name": "Hippo",
-            "url": "http://www.onehippo.com"
-        },
-        "libraries": [
-            {
-                "items": [
-                    {
-                        "component": "freemarkersync",
-                        "file": "freemarkersync.js"
-                    }
-                ]
-            }
-        ]
-
-    },
-    {
-        "enabled": true,
-        "@type": "plugin",
         "name": "Events support",
         "introduction": "Add support for event documents, rendered in an event overview and event detail pages. All pages are disclosed under the \"events\" URL space, and the overview is linked into the site's main menu.",
         "packageFile": "/META-INF/events_package_instructions.xml",
@@ -732,7 +683,7 @@
     {
         "enabled": true,
         "@type": "plugin",
-        "name": "List and Content support",
+        "name": "List and Content component",
         "introduction": "Add generic List and Content components to the Channel Manager's component catalog.",
         "packageFile": "/META-INF/list_content_instructions.xml",
         "pluginId": "listContentPlugin",

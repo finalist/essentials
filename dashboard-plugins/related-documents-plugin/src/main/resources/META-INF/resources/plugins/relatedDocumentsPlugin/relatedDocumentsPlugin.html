@@ -14,7 +14,12 @@
   limitations under the License.
   -->
 
-<div class="panel panel-default" ng-controller="relatedDocumentsCtrl">
+<div ng-controller="relatedDocumentsCtrl">
+  <div class="infobox infobox-warning" ng-hide="uiEnabled">
+    <h3>Please Rebuild</h3>
+    <p>In order to be able to use this feature, you first need to rebuild your project.</p>
+  </div>
+  <div class="panel panel-default"  ng-show="uiEnabled">
     <div class="panel-heading">Related documents plugin</div>
     <div class="panel-body">
         <div class="infobox infobox-success" ng-show="pluginDescription" ng-bind-html="pluginDescription"></div>
@@ -25,13 +30,11 @@
 
                 <h3>Add related document plugin to following documents:</h3>
 
-
                 <table class="table table-hover">
                     <thead>
                     <tr>
                         <th></th>
                         <th>Document</th>
-                        <th>Field position</th>
                         <th>Search folder</th>
                         <th>Nr. of suggestions</th>
                     </tr>
@@ -43,29 +46,16 @@
                         </td>
                         <td>{{doc.name}}</td>
                         <td>
-                            <select
-                                    name="fieldLocation"
-                                    class="chosen-select pull-right" chosen ng-disabled="doc.name == 'basedocument'"
-                                    style="width:120px;margin-left: 20px;"
-                                    ng-model="doc.fieldLocation"
-                                    ng-selected="doc.fieldLocation"
-                                    ng-required="doc.checked"
-                                    ng-options="option for option in doc.fieldLocations">
-                                <option value=""></option>
-                            </select>
-                        </td>
-                        <td>
-
-                            <input type="text" ng-hide="doc.name == 'basedocument'" ng-model="searchPaths" ng-required="doc.name != 'basedocument' && doc.checked" name="searchPaths"/>
+                            <input type="text" ng-hide="doc.name == 'basedocument'" ng-model="doc.searchPaths" ng-required="doc.name != 'basedocument' && doc.checked" name="searchPaths"/>
                             <essentials-folder-picker ng-hide="doc.name == 'basedocument'"
                                                       button-text="Select search folder"
                                                       title="Select search folder"
-                                                      selected-path="searchPaths"
-                                                      selected="searchPaths"
+                                                      selected-path="doc.searchPaths"
+                                                      selected="doc.searchPaths"
                                                       end-point="http://localhost:8080/essentials/rest/jcrbrowser/folders"/>
                         </td>
                         <td>
-                            <input type="text" ng-hide="doc.name == 'basedocument'" ng-model="numberOfSuggestions" ng-required="doc.name != 'basedocument' && doc.checked" name="numberOfSuggestions"/>
+                            <input type="text" ng-hide="doc.name == 'basedocument'" ng-model="doc.numberOfSuggestions" ng-required="doc.name != 'basedocument' && doc.checked" name="numberOfSuggestions" placeholder="10"/>
                         </td>
                     </tr>
                     </tbody>
@@ -74,7 +64,6 @@
             </div>
         </form>
 
-
     </div>
     <div class="panel-footer">
         <div class="pull-right">
@@ -82,6 +71,7 @@
         </div>
         <p class="clearfix">&nbsp;</p>
     </div>
+  </div>
 </div>
 
 

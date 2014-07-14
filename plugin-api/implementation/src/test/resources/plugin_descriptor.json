@@ -57,27 +57,11 @@
         
         "enabled": false,
         "@type": "plugin",
-        "introduction": "Creates (re-generates) HST beans",
+        "introduction": "Generate HST Content beans.",
         "name": "Beanwriter plugin",
         "pluginId": "beanwriter",
 
         "restClasses": ["org.onehippo.cms7.essentials.beanwriter.rest.BeanWriterResource"],
-        "type": "tools",
-        "vendor": {
-            "@type": "vendor",
-            "name": "Hippo",
-            "url": "http://www.onehippo.com"
-        }
-    },
-    {
-        
-        "enabled": false,
-        "@type": "plugin",
-        "introduction": "Freemarker synchronizing tool",
-        "name": "Freemarker synchronizing",
-        "pluginId": "freemarkersync",
-
-        "restClasses": ["org.onehippo.cms7.essentials.tools.rest.FreemarkerSyncResource"],
         "type": "tools",
         "vendor": {
             "@type": "vendor",

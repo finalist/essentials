@@ -36,8 +36,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.wicket.util.string.Strings;
 import org.onehippo.cms7.essentials.dashboard.ctx.PluginContext;
+import org.onehippo.cms7.essentials.dashboard.ctx.PluginContextFactory;
 import org.onehippo.cms7.essentials.dashboard.rest.BaseResource;
 import org.onehippo.cms7.essentials.dashboard.rest.ErrorMessageRestful;
 import org.onehippo.cms7.essentials.dashboard.rest.MessageRestful;
@@ -50,6 +50,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Joiner;
+import com.google.common.base.Strings;
 
 /**
  * @version "$Id$"
@@ -66,7 +67,7 @@ public class EcmTaggingResource extends BaseResource {
     @POST
     @Path("/")
     public MessageRestful addDocuments(final PostPayloadRestful payloadRestful, @Context ServletContext servletContext) {
-        final PluginContext context = getContext(servletContext);
+        final PluginContext context = PluginContextFactory.getContext();
         final Session session = context.createSession();
         try {
 
@@ -94,18 +95,12 @@ public class EcmTaggingResource extends BaseResource {
                 log.info("/tags node already exists");
             }
 
-            if (!Strings.isEmpty(documents)) {
+            if (!Strings.isNullOrEmpty(documents)) {
 
                 final String[] docs = PayloadUtils.extractValueArray(values.get("documents"));
-                final String[] locations = PayloadUtils.extractValueArray(values.get("locations"));
 
                 final Collection<String> addedDocuments = new HashSet<>();
-                for (int i = 0; i < docs.length; i++) {
-
-                    final String document = docs[i];
-
-
-                    final String location = locations[i];
+                for (final String document : docs) {
                     final String fieldImportPath = MessageFormat.format("/hippo:namespaces/{0}/{1}/editor:templates/_default_", prefix, document);
                     final String suggestFieldPath = MessageFormat.format("{0}/relateddocs", fieldImportPath);
                     if (session.nodeExists(suggestFieldPath)) {
@@ -115,7 +110,8 @@ public class EcmTaggingResource extends BaseResource {
                     DocumentTemplateUtils.addMixinToTemplate(context, document, MIXIN_NAME, true);
                     // add place holders:
                     final Map<String, String> templateData = new HashMap<>(values);
-                    templateData.put("fieldLocation", location);
+                    final Node editorTemplate = session.getNode(fieldImportPath);
+                    templateData.put("fieldLocation", DocumentTemplateUtils.getDefaultPosition(editorTemplate));
                     // import field:
                     final String fieldData = TemplateUtils.replaceStringPlaceholders(templateTags, templateData);
                     session.importXML(fieldImportPath, IOUtils.toInputStream(fieldData), ImportUUIDBehavior.IMPORT_UUID_COLLISION_REPLACE_EXISTING);

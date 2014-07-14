@@ -17,16 +17,16 @@
 package org.onehippo.cms7.essentials.rest.client;
 
 import javax.ws.rs.core.MediaType;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 
 import org.apache.cxf.jaxrs.client.WebClient;
 import org.apache.cxf.transport.http.HTTPConduit;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.onehippo.cms7.essentials.dashboard.model.PluginRestful;
 import org.onehippo.cms7.essentials.dashboard.rest.RestfulList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.common.base.Strings;
 
 
 /**
@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory;
  */
 public class RestClient {
 
-    public static final int DEFAULT_CONNECTION_TIMEOUT = 2500;
+    public static final int DEFAULT_CONNECTION_TIMEOUT = 2000;
     public static final int DEFAULT_RECEIVE_TIMEOUT = 2000;
     private static Logger log = LoggerFactory.getLogger(RestClient.class);
 
@@ -74,28 +74,22 @@ public class RestClient {
 
     @SuppressWarnings("unchecked")
     public RestfulList<PluginRestful> getPlugins() {
-        // TODO use rest client
-        if (isEnabled()) {
-            try {
-                final JAXBContext context = JAXBContext.newInstance(RestfulList.class);
-                final Unmarshaller unmarshaller = context.createUnmarshaller();
-                return (RestfulList<PluginRestful>) unmarshaller.unmarshal(getClass().getResourceAsStream("/rest.xml"));
-            } catch (JAXBException e) {
-                log.error("Error parsing XML", e);
+        final WebClient client = WebClient.create(baseResourceUri);
+        setTimeouts(client, connectionTimeout, receiveTimeout);
+        try {
+            final String json = client.accept(MediaType.APPLICATION_JSON_TYPE).get(String.class);
+            if (Strings.isNullOrEmpty(json)) {
+                return new RestfulList<>();
             }
+            final ObjectMapper mapper = new ObjectMapper();
 
-        } else {
-
-            final WebClient client = WebClient.create(baseResourceUri);
-            setTimeouts(client, connectionTimeout, receiveTimeout);
-            return client.path("plugins").accept(MediaType.APPLICATION_XML).get(RestfulList.class);
+            @SuppressWarnings("unchecked")
+            final RestfulList<PluginRestful> restfulList = mapper.readValue(json, RestfulList.class);
+            return restfulList;
+        } catch (Exception e) {
+            log.error("Error parsing remote plugins for repository: " + baseResourceUri, e);
         }
-        return null;
+        return new RestfulList<>();
     }
-
-    private boolean isEnabled() {
-        return true;
-    }
-
 
 }

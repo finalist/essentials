@@ -20,23 +20,21 @@
         .controller('relatedDocumentsCtrl', function ($scope, $filter, $sce, $log, $modal, $rootScope, $http) {
             var endpoint = $rootScope.REST.dynamic + 'related-documents';
             $scope.pluginId = "relatedDocumentsPlugin";
-            $scope.numberOfSuggestions = "10";
-            $scope.fieldLocation = "";
-            $scope.searchPaths = "";
-
+            $scope.uiEnabled = false;
             $scope.addDocs = function () {
                 var documents = [];
-                var locations = [];
+                var searchPaths = [];
+                var suggestions = [];
                 angular.forEach($scope.documentTypes, function (value) {
                     if (value.checked) {
                         documents.push(value.name);
-                        locations.push(value.fieldLocation);
+                        searchPaths.push(value.searchPaths);
+                        suggestions.push(value.numberOfSuggestions);
                     }
                 });
                 var payload = Essentials.addPayloadData("documents", documents.join(','), null);
-                Essentials.addPayloadData("numberOfSuggestions", $scope.numberOfSuggestions, payload);
-                Essentials.addPayloadData("searchPaths", $scope.searchPaths, payload);
-                Essentials.addPayloadData("locations", locations.join(','), payload);
+                Essentials.addPayloadData("numberOfSuggestions", suggestions.join(','), payload);
+                Essentials.addPayloadData("searchPaths", searchPaths.join(','), payload);
                 $http.post(endpoint, payload).success(function (data) {
                 });
 
@@ -46,13 +44,12 @@
             // INIT
             //############################################
             $http.get($rootScope.REST.root + "/plugins/plugins/" + $scope.pluginId).success(function (plugin) {
+                $scope.uiEnabled = plugin.installState !== 'boarding';
                 $scope.pluginDescription = $sce.trustAsHtml(plugin.description);
             });
 
             $http.get($rootScope.REST.documents).success(function (data) {
                 $scope.documentTypes = data;
             });
-
-
         })
 })();

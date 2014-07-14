@@ -29,8 +29,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-import org.apache.wicket.util.string.Strings;
 import org.onehippo.cms7.essentials.dashboard.ctx.PluginContext;
+import org.onehippo.cms7.essentials.dashboard.ctx.PluginContextFactory;
 import org.onehippo.cms7.essentials.dashboard.rest.BaseResource;
 import org.onehippo.cms7.essentials.dashboard.rest.ErrorMessageRestful;
 import org.onehippo.cms7.essentials.dashboard.rest.MessageRestful;
@@ -38,6 +38,8 @@ import org.onehippo.cms7.essentials.dashboard.rest.PostPayloadRestful;
 import org.onehippo.cms7.essentials.dashboard.utils.GlobalUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.common.base.Strings;
 
 /**
  * @version "$Id$"
@@ -55,7 +57,7 @@ public class DocumentWizardResource extends BaseResource {
     @POST
     @Path("/")
     public MessageRestful addWizard(final PostPayloadRestful payloadRestful, @Context ServletContext servletContext) {
-        final PluginContext context = getContext(servletContext);
+        final PluginContext context = PluginContextFactory.getContext();
         final Session session = context.createSession();
         try {
             final Node root = session.getNode(ROOT_CONFIG_PATH);
@@ -67,7 +69,7 @@ public class DocumentWizardResource extends BaseResource {
             final String valueListPath = values.get("valueListPath");
             final String query = values.get("documentQuery");
 
-            if (Strings.isEmpty(shortcutName)) {
+            if (Strings.isNullOrEmpty(shortcutName)) {
                 return new ErrorMessageRestful("Shortcut name was empty/invalid");
             }
             if (root.hasNode(shortcutName)) {

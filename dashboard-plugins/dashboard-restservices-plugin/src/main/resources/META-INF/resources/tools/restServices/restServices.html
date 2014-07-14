@@ -40,7 +40,7 @@
                                     <div class="input-group">
                                         <span class="input-group-addon">http://localhost:8080/site/</span>
                                         <input type="hidden" ng-model="restType" class="form-control" ng-required="true"/>
-                                        <input type="text" ng-model="restName" class="form-control" ng-required="true"/>
+                                        <input type="text" ng-model="restName" ng-pattern="/^[a-z]{1,}$/" class="form-control" ng-required="true"/>
                                         <div class="input-group-btn">
                                             <button type="button" class="btn btn-default" tabindex="-1">{{selectedType}}</button>
                                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" tabindex="-1">
@@ -48,19 +48,19 @@
                                                 <span class="sr-only">Rest Type</span>
                                             </button>
                                             <ul class="dropdown-menu pull-right" role="menu">
+                                                <!-- DISBALE CONTENT SRVICES AFTER WE HAVE BETTER IMPLEMENTATION-->
+                                                <!--
                                                 <li>
                                                     <a ng-click="onChangeType('content')" href="javascript:void(0)">Content REST</a>
                                                 </li>
+                                                -->
                                                 <li>
                                                     <a ng-click="onChangeType('plain')" href="javascript:void(0)">Plain REST</a>
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
-
-
                                 </td>
-
                             </tr>
                             <tr>
                                 <td>
@@ -68,15 +68,15 @@
                                         <p>Select document(s) to expose through REST</p>
                                         <ul class="list-group">
                                             <li ng-repeat="doc in documentTypes" style="cursor: move; height: 28px; padding-top: 2px" class="list-group-item">
-                                                <span style="padding-right: 20px; cursor: default"><input type="checkbox" checked="{{doc.checked}}" ng-model="doc.checked"/></span>
+                                                <span style="padding-right: 20px; cursor: default"><input type="checkbox" ng-checked="checked(doc)" name="myDocument" checked="{{doc.checked}}" ng-model="doc.checked"/></span>
                                                 {{doc.name}}
+                                                <span style="padding-left: 40px; cursor: default" class="pull-right">{{doc.endpoint}}</span>
                                             </li>
                                         </ul>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
-
                                 <td>
                                     <button ng-disabled="!restForm.$valid" class="btn btn-primary pull-right" ng-click="runRestSetup()">Run setup</button>
                                 </td>

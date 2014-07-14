@@ -25,7 +25,7 @@
   <parent>
     <groupId>org.onehippo.cms7.essentials</groupId>
     <artifactId>hippo-components-plugin</artifactId>
-    <version>1.01.03-SNAPSHOT</version>
+    <version>1.01.05-SNAPSHOT</version>
   </parent>
 
   <name>Hippo Essentials components</name>
@@ -44,12 +44,6 @@
       <artifactId>hippo-repository-modules</artifactId>
       <version>${hippo.repository.version}</version>
       <scope>test</scope>
-      <!--<exclusions>-->
-      <!--<exclusion>-->
-      <!--<artifactId>tika-parsers</artifactId>-->
-      <!--<groupId>org.apache.tika</groupId>-->
-      <!--</exclusion>-->
-      <!--</exclusions>-->
     </dependency>
     <dependency>
       <groupId>org.onehippo.cms7.hst</groupId>

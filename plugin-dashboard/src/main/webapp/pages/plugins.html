@@ -15,3 +15,8 @@
   limitations under the License.
   -->
 
+<div class="row">
+    <div ng-repeat="plugin in plugins | filter:{type:'plugins'} | orderBy:'name'">
+        <essentials-plugin plugins="plugins" plugin="plugin"></essentials-plugin>
+    </div>
+</div>

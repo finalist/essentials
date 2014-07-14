@@ -22,7 +22,7 @@
   <parent>
     <groupId>org.onehippo.cms7.essentials</groupId>
     <artifactId>hippo-essentials-plugin-sdk</artifactId>
-    <version>1.01.03-SNAPSHOT</version>
+    <version>1.01.05-SNAPSHOT</version>
   </parent>
 
   <name>Hippo Essentials plugins api implementation</name>
@@ -42,10 +42,6 @@
     <dependency>
       <groupId>com.wordnik</groupId>
       <artifactId>swagger-jaxrs_2.10</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.antlr</groupId>
-      <artifactId>antlr</artifactId>
     </dependency>
     <dependency>
       <groupId>javax.inject</groupId>
@@ -84,12 +80,6 @@
       <groupId>org.onehippo.cms7</groupId>
       <artifactId>hippo-repository-modules</artifactId>
       <scope>provided</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>tika-parsers</artifactId>
-          <groupId>org.apache.tika</groupId>
-        </exclusion>
-      </exclusions>
     </dependency>
 
     <dependency>
@@ -115,6 +105,22 @@
         <exclusion>
           <artifactId>wicket-extjs</artifactId>
           <groupId>org.wicketstuff</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>wicket-core</artifactId>
+          <groupId>org.apache.wicket</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>wicketstuff-input-events</artifactId>
+          <groupId>org.wicketstuff</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>yui-2.xx-sources</artifactId>
+          <groupId>org.onehippo.yui</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>htmldiff</artifactId>
+          <groupId>org.hippoecm</groupId>
         </exclusion>
       </exclusions>
     </dependency>

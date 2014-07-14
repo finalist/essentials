@@ -22,6 +22,7 @@
             var endpoint = $rootScope.REST.documents;
             var endpointTaxonomy = $scope.endpoint = $rootScope.REST.dynamic + 'taxonomyplugin/';
             var endpointDocument = endpointTaxonomy + "add";
+            $scope.uiEnabled = false;
             $scope.locales = [
                 {name: "en"},
                 {name: "fr"},
@@ -35,16 +36,13 @@
             $scope.addDocuments = function () {
 
                 var selectedDocumentNames = [];
-                var selectedDocumentLocations = [];
                 var selectedTaxonomyNames = [];
                 var documents = $filter('filter')($scope.documentTypes, {checked: true});
                 angular.forEach(documents, function (value) {
                     selectedDocumentNames.push(value.name);
-                    selectedDocumentLocations.push(value.selectedField ? value.selectedField : "${cluster.id}.field");
                     selectedTaxonomyNames.push(value.selectedTaxonomy.key);
                 });
                 var payload = Essentials.addPayloadData("documents", selectedDocumentNames.join(','), null);
-                Essentials.addPayloadData("locations", selectedDocumentLocations.join(','), payload);
                 Essentials.addPayloadData("taxonomies", selectedTaxonomyNames.join(','), payload);
                 $http.post(endpointDocument, payload).success(function (data) {
                     //
@@ -68,10 +66,12 @@
             });
             //
             $http.get($rootScope.REST.root + "/plugins/plugins/" + $scope.pluginId).success(function (plugin) {
+                $scope.uiEnabled = plugin.installState !== 'boarding';
+                if ($scope.uiEnabled) {
+                    loadTaxonomies();
+                }
                 $scope.pluginDescription = $sce.trustAsHtml(plugin.description);
             });
-            //
-            loadTaxonomies();
             //############################################
             // HELPERS
             //############################################
@@ -87,7 +87,7 @@
                 if (loc.length == 0) {
                     locales.push('en');
                 } else {
-                    angular.forEach(l, function (value) {
+                    angular.forEach(loc, function (value) {
                         locales.push(value.name);
                     });
                 }

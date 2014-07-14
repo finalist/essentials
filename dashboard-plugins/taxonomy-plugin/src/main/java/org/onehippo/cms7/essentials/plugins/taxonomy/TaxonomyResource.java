@@ -40,13 +40,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-import org.apache.wicket.util.string.Strings;
 import org.hippoecm.repository.HippoStdNodeType;
 import org.hippoecm.repository.HippoStdPubWfNodeType;
 import org.hippoecm.repository.api.HippoNodeType;
 import org.hippoecm.repository.api.StringCodec;
 import org.hippoecm.repository.api.StringCodecFactory;
 import org.onehippo.cms7.essentials.dashboard.ctx.PluginContext;
+import org.onehippo.cms7.essentials.dashboard.ctx.PluginContextFactory;
 import org.onehippo.cms7.essentials.dashboard.rest.BaseResource;
 import org.onehippo.cms7.essentials.dashboard.rest.ErrorMessageRestful;
 import org.onehippo.cms7.essentials.dashboard.rest.KeyValueRestful;
@@ -61,6 +61,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
+import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 
 /**
@@ -91,14 +92,14 @@ public class TaxonomyResource extends BaseResource {
     @POST
     @Path("/")
     public MessageRestful createTaxonomy(final PostPayloadRestful payloadRestful, @Context ServletContext servletContext) {
-        final PluginContext context = getContext(servletContext);
+        final PluginContext context = PluginContextFactory.getContext();
         final Session session = context.createSession();
         try {
             final Map<String, String> values = payloadRestful.getValues();
             final String taxonomyName = values.get("taxonomyName");
             final String localeString = values.get("locales");
             final String[] locales;
-            if (Strings.isEmpty(localeString)) {
+            if (Strings.isNullOrEmpty(localeString)) {
                 locales = new String[]{"en"};
             } else {
                 final Splitter splitter = Splitter.on(",").omitEmptyStrings().trimResults();
@@ -106,7 +107,7 @@ public class TaxonomyResource extends BaseResource {
                 final List<String> strings = Lists.newArrayList(iterable);
                 locales = strings.toArray(new String[strings.size()]);
             }
-            if (!Strings.isEmpty(taxonomyName)) {
+            if (!Strings.isNullOrEmpty(taxonomyName)) {
                 final Node taxonomiesNode = createOrGetTaxonomyContainer(session);
                 if (taxonomiesNode.hasNode(taxonomyName)) {
                     return new ErrorMessageRestful("Taxonomy with name: " + taxonomyName + " already exists");
@@ -133,17 +134,15 @@ public class TaxonomyResource extends BaseResource {
     @POST
     @Path("/add")
     public MessageRestful addTaxonomyToDocument(final PostPayloadRestful payloadRestful, @Context HttpServletResponse response, @Context ServletContext servletContext) {
-        final PluginContext context = getContext(servletContext);
+        final PluginContext context = PluginContextFactory.getContext();
         final Session session = context.createSession();
         try {
             final Map<String, String> values = payloadRestful.getValues();
             final String[] taxonomyNames = PayloadUtils.extractValueArray(values.get("taxonomies"));
             final String[] documentNames = PayloadUtils.extractValueArray(values.get("documents"));
-            final String[] locations = PayloadUtils.extractValueArray(values.get("locations"));
             final Collection<String> changedDocuments = new HashSet<>();
             for (int i = 0; i < documentNames.length; i++) {
                 final String documentName = documentNames[i];
-                final String location = locations[i];
                 final String taxonomyName = taxonomyNames[i];
                 final String prefix = context.getProjectNamespacePrefix();
                 DocumentTemplateUtils.addMixinToTemplate(context, documentName, HIPPOTAXONOMY_MIXIN, true);
@@ -157,7 +156,7 @@ public class TaxonomyResource extends BaseResource {
                     final Node fieldNode = node.addNode("classifiable", "frontend:plugin");
                     fieldNode.setProperty("mixin", HIPPOTAXONOMY_MIXIN);
                     fieldNode.setProperty("plugin.class", "org.hippoecm.frontend.editor.plugins.mixin.MixinLoaderPlugin");
-                    fieldNode.setProperty("wicket.id", location);
+                    fieldNode.setProperty("wicket.id", DocumentTemplateUtils.getDefaultPosition(node));
                     final Node clusterNode = fieldNode.addNode("cluster.options", "frontend:pluginconfig");
                     clusterNode.setProperty("taxonomy.name", taxonomyName);
                     changedDocuments.add(documentName);
@@ -191,7 +190,7 @@ public class TaxonomyResource extends BaseResource {
     @Path("/taxonomies")
     public List<KeyValueRestful> getTaxonomies(@Context ServletContext servletContext) {
         final List<KeyValueRestful> taxonomies = new ArrayList<>();
-        final PluginContext context = getContext(servletContext);
+        final PluginContext context = PluginContextFactory.getContext();
         final Session session = context.createSession();
 
         try {
@@ -247,6 +246,7 @@ public class TaxonomyResource extends BaseResource {
         taxonomyNode.setProperty(HippoStdNodeType.HIPPOSTD_STATE, HippoStdNodeType.PUBLISHED);
         taxonomyNode.setProperty(HippoStdNodeType.HIPPOSTD_HOLDER, session.getUserID());
         taxonomyNode.setProperty(HippoStdNodeType.HIPPOSTD_STATESUMMARY, "live");
+        taxonomyNode.setProperty("hippo:availability", new String[]{"live","preview"});
         taxonomyNode.setProperty(HIPPOTAXONOMY_LOCALES, locales);
         session.save();
         return true;

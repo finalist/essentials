@@ -166,6 +166,17 @@ public final class HippoNodeUtils {
         } else {
             return null;
         }
+
+    }  public static String getStringProperty(final Node node, final String property, final String defaultValue) throws RepositoryException {
+        if (node.hasProperty(property)) {
+            return node.getProperty(property).getString();
+        } else {
+            return defaultValue;
+        }
+    }
+
+    public static boolean getBooleanProperty(final Node node, final String property) throws RepositoryException {
+        return node.hasProperty(property) && node.getProperty(property).getBoolean();
     }
 
     public static Long getLongProperty(final Node node, final String property, final Long defaultValue) throws RepositoryException {
@@ -175,10 +186,24 @@ public final class HippoNodeUtils {
         }
         return value;
     }
+    public static double getDoubleProperty(final Node node, final String property, final double defaultValue) throws RepositoryException {
+        final Double value = getDoubleProperty(node, property);
+        if (value == null) {
+            return defaultValue;
+        }
+        return value;
+    }
 
     public static Long getLongProperty(final Node node, final String property) throws RepositoryException {
         if (node.hasProperty(property)) {
             return node.getProperty(property).getLong();
+        } else {
+            return null;
+        }
+    }
+    public static Double getDoubleProperty(final Node node, final String property) throws RepositoryException {
+        if (node.hasProperty(property)) {
+            return node.getProperty(property).getDouble();
         } else {
             return null;
         }
@@ -293,6 +318,21 @@ public final class HippoNodeUtils {
             return type;
         }
         return type.substring(i + 1);
+    }
+
+    public static String getTypeFromPrefixAndName(final String prefix, final String name) {
+        if (StringUtils.isBlank(prefix)) {
+            return name;
+        } else if(StringUtils.isBlank(name)) {
+            return prefix;
+        } else {
+            return new StringBuilder()
+                    .append(prefix.trim())
+                    .append(':')
+                    .append(name.trim())
+                    .toString();
+        }
+
     }
 
     //############################################

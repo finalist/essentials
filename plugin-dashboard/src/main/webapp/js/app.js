@@ -29,12 +29,43 @@
  */
 (function () {
     "use strict";
-    angular.module('hippo.essentials', [ 'hippo.theme', 'ngRoute', 'localytics.directives', 'ui.bootstrap', 'ui.router'])
+    angular.module('hippo.essentials', [ 'hippo.theme', 'ngSanitize', 'ngRoute', 'ngAnimate', 'localytics.directives', 'ui.bootstrap', 'ui.router'])
 
 //############################################
 // GLOBAL LOADING
 //############################################
-        .config(function ($provide, $httpProvider, $controllerProvider, $compileProvider) {
+        .config(function ($provide, $httpProvider) {
+
+            function addError($rootScope, error) {
+                if (!error) {
+                    return;
+                }
+                if (error.data) {
+                    if (error.data.value) {
+                        $rootScope.feedbackMessages.push({type: 'error', message: error.data.value});
+                    } else {
+                        $rootScope.feedbackMessages.push({type: 'error', message: error.data});
+                    }
+                }
+                else if (error.status) {
+                    $rootScope.feedbackMessages.push({type: 'error', message: error.status});
+                } else {
+                    $rootScope.feedbackMessages.push({type: 'error', message: error});
+                }
+
+            }
+
+            function addMessage($rootScope, data) {
+                if (!data) {
+                    return;
+                }
+                if (data.data && data.data.successMessage) {
+                    $rootScope.feedbackMessages.push({type: 'info', message: data.data.value});
+                } else if (data.successMessage) {
+                    $rootScope.feedbackMessages.push({type: 'info', message: data.successMessage.value});
+                }
+
+            }
 
             $provide.factory('MyHttpInterceptor', function ($q, $rootScope, $log) {
                 return {
@@ -42,33 +73,11 @@
                     // REQUEST
                     //############################################
                     request: function (config) {
-                        if (!$rootScope.FEEDBACK_TIMER) {
-                            $rootScope.FEEDBACK_TIMER = new Date();
-                        }
-                        $rootScope.busyLoading = true;
-                        var date = new Date();
-                        // keep success messages for 5 seconds
-                        if ((date.getTime() - $rootScope.FEEDBACK_TIMER.getTime()) > 5000) {
-                            $rootScope.FEEDBACK_TIMER = new Date();
-                            $rootScope.feedbackMessages = [];
-                        }
                         return config || $q.when(config);
                     },
                     requestError: function (error) {
                         $rootScope.busyLoading = true;
-                        $rootScope.globalError = [];
-                        $rootScope.feedbackMessages = [];
-                        if (error.data) {
-                            if (error.data.value) {
-                                $rootScope.globalError.push(error.data.value);
-
-                            } else {
-                                $rootScope.globalError.push(error.data);
-                            }
-                        }
-                        else {
-                            $rootScope.globalError.push(error.status);
-                        }
+                        addError($rootScope, error);
                         return $q.reject(error);
                     },
 
@@ -77,31 +86,14 @@
                     //############################################
                     response: function (data) {
                         $rootScope.busyLoading = false;
-                        $rootScope.globalError = [];
                         // show success message:
-                        if (data.data.successMessage) {
-                            $rootScope.globalError = [];
-                            $rootScope.feedbackMessages = [];
-                            $rootScope.feedbackMessages.push(data.data.value);
-                        }
-                        $log.info(data);
+                        addMessage($rootScope, data);
                         return data || $q.when(data);
                     },
                     responseError: function (error) {
                         $rootScope.busyLoading = false;
-                        $rootScope.globalError = [];
-                        $rootScope.feedbackMessages = [];
-                        if (error.data) {
-                            if (error.data.value) {
-                                $rootScope.globalError.push(error.data.value);
-                            } else {
-                                $rootScope.globalError.push(error.data);
-                            }
-                        }
-                        else {
-                            $rootScope.globalError.push(error.status);
-                        }
-                        $log.error(error);
+                        addError($rootScope, error);
+
                         return $q.reject(error);
                     }
                 };
@@ -112,17 +104,33 @@
 //############################################
 // RUN
 //############################################
+        .run(function ($rootScope, $location, $log, $http, $timeout, modalService) {
+            $rootScope.$on('$stateChangeStart',
+                function (event, toState, toParams, fromState, fromParams) {
+                    console.log(toState.url);
+                    if (toState && toState.url) {
+                        if (toState.url.indexOf('/tools') != -1) {
+                            $rootScope.mainHeader = 'Tools';
+                        }
+                        else if (toState.url.indexOf('/build') != -1) {
+                            $rootScope.mainHeader = 'Build instructions';
+                        }
+                        else if (toState.url.indexOf('/plugins') != -1) {
+                            $rootScope.mainHeader = 'All plugins';
+                        }
+                        else if (toState.url.indexOf('/installed-plugins') != -1) {
+                            $rootScope.mainHeader = 'Installed plugins';
+                        } else {
+                            $rootScope.mainHeader = 'Hippo Essentials';
+                        }
+                    } else {
+                        $rootScope.mainHeader = 'Hippo Essentials';
+                    }
+                });
 
-
-        .run(function ($rootScope, $location, $log, $http, $state) {
+            $rootScope.feedbackMessages = [];
             $rootScope.headerMessage = "Welcome on the Hippo Trail";
-            // routing listener
-            $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-                // noop
-
-            });
-
-
+            $rootScope.applicationUrl = 'http://localhost:8080/essentials';
             var root = 'http://localhost:8080/essentials/rest';
             var plugins = root + "/plugins";
 
@@ -143,6 +151,7 @@
                  * //TODO: change this once we have marketplace up and running
                  */
                 plugins: root + "/plugins/",
+                ping: plugins + '/ping/',
                 projectSettings: plugins + '/settings',
                 packageStatus: plugins + '/status/package/',
                 packageMessages: plugins + '/changes/',
@@ -171,27 +180,17 @@
                  */
                 pluginModules: plugins + '/modules/',
 
-                // TODO: refactor, this service is content-blocks specific. Use 'documents' instead.
-                documentTypes: root + '/documenttypes/',
-
                 package_install: plugins + '/install/package',
                 save_settings: plugins + '/savesettings',
                 project_settings: plugins + '/projectsettings',
 
-                compounds: root + '/documenttypes/compounds',
-                compoundsCreate: root + '/documenttypes/compounds/create/',
-                compoundsDelete: root + '/documenttypes/compounds/delete/',
-                contentblocksCreate: root + '/documenttypes/compounds/contentblocks/create/',
                 //############################################
                 // NODE
                 //############################################
                 node: root + '/node/',
                 getProperty: root + '/node/property',
                 setProperty: root + '/node/property/save',
-                galleryProcessor: root + '/imagegallery/',
-                imageSets: root + '/imagegallery/imagesets/',
-                galleryProcessorSave: root + '/imagegallery/save',
-                imageSetsSave: root + '/imagegallery/imagesets/save',
+
                 //############################################
                 // DOCUMENTS
                 //############################################
@@ -200,12 +199,65 @@
                 documents_documents: root + '/documents/' + 'documents',
                 documents_template_queries: root + '/documents/' + 'templatequeries'
 
+
             };
 
             /**
              * Set global variables (often used stuff)
              */
             $rootScope.initData = function () {
+
+                var PING_RUNNING_TIMER = 7000;
+                var PING_DOWN_TIMER = 10000;
+                //############################################
+                // PINGER
+                //############################################
+                // keep reference to old modal:
+                var pingModal = null;
+                (function ping() {
+
+                    var modalOptions = {
+                        closeButtonText: '',
+                        actionButtonText: 'Close',
+                        headerText: 'Service Down',
+                        bodyText: 'The Essentials dashboard server appears to be down. If you are' +
+                            ' rebuilding the project, please wait until it is up and running again.'
+
+                    };
+
+                    function openModal() {
+                        if (pingModal == null) {
+                            pingModal = modalService.showModal({}, modalOptions);
+                            pingModal.then(function () {
+                                // discard modal
+                                pingModal = null;
+                            });
+                        }
+                    }
+
+                    $http.get($rootScope.REST.ping).success(function (data) {
+                        if (data) {
+                            if (data.initialized) {
+                                $timeout(ping, PING_RUNNING_TIMER);
+                                $rootScope.TOTAL_PLUGINS = data.totalPlugins;
+                                $rootScope.TOTAL_TOOLS = data.totalTools;
+                                $rootScope.NEEDS_REBUILD = data.needsRebuild;
+                                $rootScope.NEEDS_REBUILD_PLUGINS = data.plugins;
+                                $rootScope.TOTAL_CONFIGURABLE = data.configurablePlugins;
+                                $rootScope.REBUILD_PLUGINS = data.rebuildPlugins;
+
+                            } else {
+                                // app is back up, but needs to restart
+                                window.location.href = $rootScope.applicationUrl;
+                            }
+                        }
+                    }).error(function () {
+                        openModal();
+                        $timeout(ping, PING_DOWN_TIMER);
+                    });
+
+                })();
+
                 $http.get($rootScope.REST.controllers).success(function (data) {
                     $rootScope.controllers = data;
                 });
@@ -295,7 +347,65 @@
                 $rootScope.$broadcast(this.eventName);
             };
             return broadcaster;
-        });
+        })
+        .service('modalService', function ($modal) {
+            /**
+             *
+             * NOTE: template must be here because if server is down,
+             * template cannot be serverd anymore
+             */
+            var modalDefaults = {
+                backdrop: true,
+                keyboard: true,
+                modalFade: true,
+                template: '<div class="modal-header"><h3>{{modalOptions.headerText}}</h3></div>' +
+                    '<div class="modal-body"><p>{{modalOptions.bodyText}}</p></div>' +
+                    '<div class="modal-footer">' +
+                    '<button type="button" ng-hide="!modalOptions.closeButtonText" class="btn" data-ng-click="modalOptions.close()">{{modalOptions.closeButtonText}}</button>' +
+                    '<button ng-hide="!modalOptions.actionButtonText" class="btn btn-primary" data-ng-click="modalOptions.ok();">{{modalOptions.actionButtonText}}</button>' +
+                    '</div>'
+
+            };
+            var modalOptions = {
+                closeButtonText: "",
+                actionButtonText: "",
+                headerText: "",
+                bodyText: ""
+            };
+
+            this.showModal = function (customModalDefaults, customModalOptions) {
+                if (!customModalDefaults) {
+                    customModalDefaults = {};
+                }
+                customModalDefaults.backdrop = 'static';
+                return this.show(customModalDefaults, customModalOptions);
+
+            };
+
+            this.show = function (customModalDefaults, customModalOptions) {
+                var myDefaults = {};
+                var myOptions = {};
+                angular.extend(myDefaults, modalDefaults, customModalDefaults);
+                angular.extend(myOptions, modalOptions, customModalOptions);
+
+                if (!myDefaults.controller) {
+                    myDefaults.controller = function ($scope, $modalInstance) {
+                        $scope.modalOptions = myOptions;
+                        $scope.modalOptions.ok = function (result) {
+                            $modalInstance.close(result);
+                        };
+                        $scope.modalOptions.close = function (result) {
+                            $modalInstance.dismiss('cancel');
+                        };
+                        myOptions = $scope.modalOptions;
+                    }
+                }
+                var myResult = $modal.open(myDefaults).result;
+                myResult.options = myOptions;
+                return  myResult;
+            };
+        }
+    );
 
 })();
 

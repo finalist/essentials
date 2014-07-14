@@ -15,22 +15,17 @@
   -->
 
 <div ng-controller="selectionPluginCtrl">
-  <div ng-show="plugin.installState === 'onBoard' || plugin.installState === 'boarding'">
   <essentials-simple-install-plugin
     plugin-id="selectionPlugin"
-    plugin-title="Selection Plugin Installation"
-    button-text="Add Selection Plugin"
-    has-no-templates="true"/>
-  </div>
+    has-no-templates="true"
+    hide-installed-info="true">
+  </essentials-simple-install-plugin>
 
-  <div class="panel panel-default" ng-show="plugin.installState === 'installing'">
-    <div class="panel-heading">Please Rebuild</div>
-    <div class="panel-body">
-      <p>Installation of this plug-in is pending. Please rebuild your project to make the changes effective.</p>
-      <p>After the rebuild, you will be able to create Value List documents in the CMS. Go ahead and create some,
-        and fill them with values. Then, come back to the dashboard and create new document type fields, using these
-        value lists.</p>
-    </div>
+  <div class="infobox infobox-info" ng-show="plugin.installState === 'installing'">
+    <h3>Next Steps</h3>
+    <p>After the rebuild, you will be able to create Value List documents in the CMS. Go ahead and create some,
+      and fill them with values. Then, come back to the dashboard and create new document type fields, using these
+      value lists.</p>
   </div>
 
     <!--Configuration part-->
@@ -63,9 +58,12 @@
         <div ng-show="fieldAdded" class="infobox infobox-info">
           <p>You have changed one or more document types, and may want to update your document type beans now. You can use
             the BeanWriter tool for this.</p>
-          </p><p>Also, you may want to move the selection field to the desired position in the
-          CMS Document Editor. You can do that in the Document Type Editor (Browse perspective &#8594; Configuration
-          &#8594; Document type).</p>
+          <p>Also, you may want to move the selection field to the desired position in the
+            <essentials-cms-document-type-deep-link
+                name-space="{{modifiedType.prefix}}"
+                document-name="{{modifiedType.name}}">
+            </essentials-cms-document-type-deep-link>. You can do that in the Document Type Editor
+            (Browse perspective &#8594; Configuration &#8594; Document type).</p>
         </div>
 
         <form class="form-horizontal" novalidate name="addFieldForm">
@@ -87,13 +85,11 @@
               <table class="table table-hover">
                 <tr>
                   <th>Field name</th>
-                  <th ng-show="positionMatters">Position</th>
                   <th>Type</th>
                   <th>Value list</th>
                 </tr>
                 <tr ng-repeat="field in selectionFields">
                   <td>{{field.name}}</td>
-                  <td ng-show="positionMatters">{{positionMap[field.position]}}</td>
                   <td>{{field.type}}</td>
                   <td><span title="{{field.valueList}}">{{valueListNameByPath(field.valueList)}}</span></td>
                 </tr>
@@ -104,16 +100,6 @@
             <label class="col-sm-4 control-label">Name of new field:</label>
             <div class="col-sm-8" ng-class="addFieldForm.fieldName.$invalid?'bg-danger':''">
               <input class="form-control" required name="fieldName" type="text" ng-model="fieldName"/>
-            </div>
-          </div>
-          <div class="form-group" ng-show="positionMatters">
-            <label class="col-sm-4 control-label">Field position:</label>
-            <div class="col-sm-8">
-              <select class="form-control"
-                      ng-model="fieldPosition"
-                      ng-selected="fieldPosition"
-                      ng-options="positionMap[position] for position in selectedDocumentType.fieldLocations">
-              </select>
             </div>
           </div>
           <div class="form-group">

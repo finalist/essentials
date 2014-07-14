@@ -18,12 +18,13 @@ package org.onehippo.cms7.essentials.plugins.relateddocuments;
 
 import java.io.IOException;
 import java.text.MessageFormat;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import javax.jcr.ImportUUIDBehavior;
+import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.servlet.ServletContext;
@@ -35,8 +36,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.wicket.util.string.Strings;
 import org.onehippo.cms7.essentials.dashboard.ctx.PluginContext;
+import org.onehippo.cms7.essentials.dashboard.ctx.PluginContextFactory;
 import org.onehippo.cms7.essentials.dashboard.rest.BaseResource;
 import org.onehippo.cms7.essentials.dashboard.rest.MessageRestful;
 import org.onehippo.cms7.essentials.dashboard.rest.PostPayloadRestful;
@@ -48,6 +49,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Joiner;
+import com.google.common.base.Strings;
 
 /**
  * @version "$Id$"
@@ -65,31 +67,26 @@ public class RelatedDocumentsResource extends BaseResource {
     @POST
     @Path("/")
     public MessageRestful addDocuments(final PostPayloadRestful payloadRestful, @Context ServletContext servletContext) {
-        final PluginContext context = getContext(servletContext);
+        final PluginContext context = PluginContextFactory.getContext();
         final Session session = context.createSession();
         try {
             final Map<String, String> values = payloadRestful.getValues();
             final String documents = values.get("documents");
-
-            //final String numberOfSuggestions = values.get("numberOfSuggestions");
-            //final String searchPaths = values.get("searchPaths");
             final String prefix = context.getProjectNamespacePrefix();
 
             final String templateRelatedDocs = GlobalUtils.readStreamAsText(getClass().getResourceAsStream("/related_documents_template.xml"));
             final String templateSuggestDocs = GlobalUtils.readStreamAsText(getClass().getResourceAsStream("/related_documents_suggestion_template.xml"));
 
-            final Set<String> changedDocuments = new HashSet<>();
-            if (!Strings.isEmpty(documents)) {
+            final Collection<String> changedDocuments = new HashSet<>();
 
+            if (!Strings.isNullOrEmpty(documents)) {
+
+                final String[] suggestions = PayloadUtils.extractValueArray(values.get("numberOfSuggestions"));
+                final String[] searchPaths = PayloadUtils.extractValueArray(values.get("searchPaths"));
                 final String[] docs = PayloadUtils.extractValueArray(values.get("documents"));
-                final String[] locations = PayloadUtils.extractValueArray(values.get("locations"));
 
-                for (int i = 0; i < docs.length; i++) {
-
-                    final String document = docs[i];
-
-
-                    final String location = locations[i];
+                int idx = 0;
+                for (final String document : docs) {
                     final String fieldImportPath = MessageFormat.format("/hippo:namespaces/{0}/{1}/editor:templates/_default_", prefix, document);
                     final String suggestFieldPath = MessageFormat.format("{0}/relateddocs", fieldImportPath);
                     if (session.nodeExists(suggestFieldPath)) {
@@ -99,7 +96,10 @@ public class RelatedDocumentsResource extends BaseResource {
                     DocumentTemplateUtils.addMixinToTemplate(context, document, MIXIN_NAME, true);
                     // add place holders:
                     final Map<String, String> templateData = new HashMap<>(values);
-                    templateData.put("fieldLocation", location);
+                    final Node editorTemplate = session.getNode(fieldImportPath);
+                    templateData.put("fieldLocation", DocumentTemplateUtils.getDefaultPosition(editorTemplate));
+                    templateData.put("searchPaths", searchPaths[idx]);
+                    templateData.put("numberOfSuggestions", suggestions[idx]);
                     // import field:
                     final String fieldData = TemplateUtils.replaceStringPlaceholders(templateRelatedDocs, templateData);
                     session.importXML(fieldImportPath, IOUtils.toInputStream(fieldData), ImportUUIDBehavior.IMPORT_UUID_COLLISION_REPLACE_EXISTING);
@@ -108,7 +108,9 @@ public class RelatedDocumentsResource extends BaseResource {
                     session.importXML(fieldImportPath, IOUtils.toInputStream(suggestData), ImportUUIDBehavior.IMPORT_UUID_COLLISION_REPLACE_EXISTING);
                     session.save();
                     changedDocuments.add(document);
+                    idx++;
                 }
+
 
             }
             if (changedDocuments.size() > 0) {

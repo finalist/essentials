@@ -18,18 +18,6 @@
     "use strict";
     angular.module('hippo.essentials')
 
-        //############################################
-        // MENU DATA
-        //############################################
-        .service('menuService', function () {
-            this.getMenu = function () {
-                return [
-                    {name: "Plugins", link: "#/plugins"},
-                    {name: "Tools", link: "#/tools"}
-                ];
-            };
-
-        })
 
         //############################################
         // PLUGINS CONTROLLER LOADER
@@ -46,7 +34,7 @@
             $scope.removeUrl = function (url) {
                 var idx = $scope.projectSettings.pluginRepositories.indexOf(url);
                 if (idx > -1) {
-                     $scope.projectSettings.pluginRepositories.splice(idx, 1);
+                    $scope.projectSettings.pluginRepositories.splice(idx, 1);
                 }
             };
             $scope.getStarted = function () {
@@ -115,8 +103,9 @@
                     processItems($rootScope.pluginsCache);
                 } else {
                     $http.get($rootScope.REST.plugins).success(function (data) {
-                        $rootScope.pluginsCache = data.items;
-                        processItems(data.items);
+                        var items = data.items;
+                        $rootScope.pluginsCache = items;
+                        processItems(items);
                     });
                 }
 
@@ -170,13 +159,8 @@
          // MENU CONTROLLER
          //############################################
          */
-        .controller('mainMenuCtrl', ['$scope', '$location', '$rootScope', 'menuService', function ($scope, $location, $rootScope, menuService) {
+        .controller('mainMenuCtrl', ['$scope', '$location', '$rootScope', function ($scope, $location, $rootScope) {
 
-            $scope.$watch(function () {
-                return $rootScope.busyLoading;
-            }, function () {
-                $scope.menu = menuService.getMenu();
-            });
 
             $scope.isPageSelected = function (path) {
                 var myPath = $location.path();
@@ -190,9 +174,6 @@
                 return  '#' + myPath == path;
             };
 
-            $scope.onMenuClick = function (menuItem) {
-                //
-            };
 
         }]);
 

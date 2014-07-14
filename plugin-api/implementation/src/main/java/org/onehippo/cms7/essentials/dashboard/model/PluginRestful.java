@@ -38,6 +38,7 @@ public class PluginRestful implements Plugin, Restful {
     private List<String> restClasses;
     private Vendor vendor;
     private List<EssentialsDependency> dependencies;
+    private List<Repository> repositories;
     private String title;
     private String name;
     private String introduction;
@@ -59,8 +60,20 @@ public class PluginRestful implements Plugin, Restful {
         libraries.add(library);
     }
 
-    public void addAll(final List<PluginModuleRestful.PrefixedLibrary> libraries) {
-        libraries.addAll(libraries);
+    public void addAllLibraries(final List<PluginModuleRestful.PrefixedLibrary> libraries) {
+        if (this.libraries == null) {
+            this.libraries = new ArrayList<>();
+
+        }
+        this.libraries.addAll(libraries);
+    }
+
+    public void addAllRepositories(final List<Repository> repos) {
+        if (this.repositories == null) {
+            this.repositories = new ArrayList<>();
+
+        }
+        this.repositories.addAll(repos);
     }
 
     public List<PluginModuleRestful.PrefixedLibrary> getLibraries() {
@@ -108,10 +121,14 @@ public class PluginRestful implements Plugin, Restful {
     }
 
     @Override
-    public String getInstallState() { return installState; }
+    public String getInstallState() {
+        return installState;
+    }
 
     @Override
-    public void setInstallState(final String installState) { this.installState = installState; }
+    public void setInstallState(final String installState) {
+        this.installState = installState;
+    }
 
     @Override
     public boolean isInstalled() {
@@ -223,6 +240,13 @@ public class PluginRestful implements Plugin, Restful {
 
     }
 
+    public void addRepository(final Repository repository) {
+        if (repositories == null) {
+            repositories = new ArrayList<>();
+        }
+        repositories.add(repository);
+    }
+
     @Override
     public String getTitle() {
         return title;
@@ -281,6 +305,23 @@ public class PluginRestful implements Plugin, Restful {
     @Override
     public void setDescription(final String description) {
         this.description = description;
+    }
+
+
+    @XmlElementRef(type = RepositoryRestful.class)
+    @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
+    @JsonSubTypes({@JsonSubTypes.Type(value = RepositoryRestful.class, name = "repository")})
+    @Override
+    public List<Repository> getRepositories() {
+        if(repositories ==null){
+            return new ArrayList<>();
+        }
+        return repositories;
+    }
+
+    @Override
+    public void setRepositories(final List<Repository> repositories) {
+        this.repositories = repositories;
     }
 
     @Override

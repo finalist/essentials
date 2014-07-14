@@ -1,9 +1,9 @@
 package com.finalist.plugin;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.wicket.util.string.Strings;
+import org.apache.commons.lang.StringUtils;
 import org.hippoecm.repository.api.NodeNameCodec;
-import org.onehippo.cms7.essentials.dashboard.ctx.PluginContext;
+import org.onehippo.cms7.essentials.dashboard.ctx.PluginContextFactory;
 import org.onehippo.cms7.essentials.dashboard.rest.BaseResource;
 import org.onehippo.cms7.essentials.dashboard.rest.ErrorMessageRestful;
 import org.onehippo.cms7.essentials.dashboard.rest.MessageRestful;
@@ -37,10 +37,10 @@ public class AddFieldPluginResource extends BaseResource {
     @Path("/")
     public MessageRestful runAddFieldPlugin(final PostPayloadRestful payloadRestful,
                                             @Context ServletContext servletContext, @Context HttpServletResponse response) {
-        final Session session = getContext(servletContext).createSession();
+        final Session session = PluginContextFactory.getContext().createSession();
             final Map<String, String> values = payloadRestful.getValues();
             final String fieldName = values.get("fieldName");
-            if (!Strings.isEmpty(fieldName)) {
+            if (StringUtils.isNotBlank(fieldName)) {
                 try{
                     return addField(session,payloadRestful.getValues(),response);
                 }catch (RepositoryException | IOException e){

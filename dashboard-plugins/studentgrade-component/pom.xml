@@ -8,9 +8,9 @@
     <version>1.01.05-SNAPSHOT</version>
   </parent>
 
-  <name>Hippo Essentials Employee Plugin</name>
+  <name>Hippo Essentials Studentgrade Plugin</name>
   <groupId>com.finalist.essentials</groupId>
-  <description>Hippo Essentials Employee Plugin</description>
+  <description>If the profile plugin is installes gives a draggable component to view grades</description>
   <artifactId>hippo-studentgrade-component</artifactId>
   <packaging>jar</packaging>
 

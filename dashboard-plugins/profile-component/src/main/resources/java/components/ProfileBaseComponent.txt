@@ -218,7 +218,7 @@ public abstract class ProfileBaseComponent extends BaseHstComponent {
      * @return the component or <code>null</code> if no component could be found.
      */
     public <T> T getClientComponent(Class<T> componentClass) {
-        ComponentManager componentManager = getDefaultClientComponentManager();
+        ComponentManager componentManager = org.hippoecm.hst.site.HstServices.getComponentManager();
         if (componentManager == null) {
             throw new IllegalStateException("Unable to find ComponentManager");
         }

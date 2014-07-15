@@ -8,9 +8,9 @@
     <version>1.01.05-SNAPSHOT</version>
   </parent>
 
-  <name>Hippo Essentials Employee Plugin</name>
+  <name>Hippo Essentials Profile Plugin</name>
   <groupId>com.finalist.essentials</groupId>
-  <description>Hippo Essentials Employee Plugin</description>
+  <description>Puts esb/spring classes for profile into the project</description>
   <artifactId>hippo-profile-component</artifactId>
   <packaging>jar</packaging>
 

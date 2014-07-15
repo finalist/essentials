@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sv:node xmlns:sv="http://www.jcp.org/jcr/sv/1.0" sv:name="account.preferences">
+    <sv:property sv:name="jcr:primaryType" sv:type="Name">
+        <sv:value>hst:component</sv:value>
+    </sv:property>
+    <sv:property sv:name="hst:cacheable" sv:type="Boolean">
+        <sv:value>false</sv:value>
+    </sv:property>
+    <sv:property sv:name="hst:componentclassname" sv:type="String">
+        <sv:value>{{componentsPackage}}.AccountPreferencesComponent</sv:value>
+    </sv:property>
+    <sv:property sv:name="hst:template" sv:type="String">
+        <sv:value>account.detail.preferences</sv:value>
+    </sv:property>
+</sv:node>

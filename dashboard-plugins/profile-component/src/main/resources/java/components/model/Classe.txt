@@ -1,0 +1,25 @@
+package {{componentsPackage}}.model;
+
+import java.io.Serializable;
+
+import org.codehaus.jackson.annotate.JsonProperty;
+
+public class Classe implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    @JsonProperty("className")
+    private String className;
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    @Override
+    public String toString() {
+        return "Classe. name=" + className;
+    }
+}

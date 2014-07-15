@@ -1,0 +1,75 @@
+package  {{componentsPackage}}.domain;
+
+public class ItemState implements Comparable<ItemState>{
+
+    private String key;
+    private String title;
+    private boolean enabled = true;
+
+    public ItemState(String key, String title, boolean enabled) {
+        this.key = key;
+        this.title = title;
+        this.enabled = enabled;
+    }
+
+    public ItemState() {
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    @Override
+    public String toString() {
+        return key + (enabled ? " YES" : " NO");
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof ItemState) {
+            ItemState other = (ItemState)obj;
+            if (key == null) {
+                return other.key == null;
+            } else {
+                return key.equals(other.key);
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return key == null ? 33 : key.hashCode();
+    }
+
+    @Override
+    public int compareTo(ItemState o) {
+        if (title == null) {
+            return o.title == null ? 0 : -1;
+        }
+        if (o.title == null) {
+            return 1;
+        }
+        return title.compareTo(o.title);
+    }
+}

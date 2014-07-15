@@ -1,0 +1,160 @@
+package {{componentsPackage}};
+
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import {{componentsPackage}}.exception.EsbException;
+import {{componentsPackage}}.exception.NotFoundException;
+import {{componentsPackage}}.model.EmployeeInfo;
+import {{componentsPackage}}.model.Employees;
+import {{componentsPackage}}.model.UserInfo;
+import {{componentsPackage}}.services.EmployeeInfoService;
+import {{componentsPackage}}.services.EmployeeSearchService;
+import {{componentsPackage}}.domain.LinkItem;
+
+import org.apache.commons.lang.StringUtils;
+import org.hippoecm.hst.core.component.HstComponentException;
+import org.hippoecm.hst.core.component.HstRequest;
+import org.hippoecm.hst.core.component.HstResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class UserDetailComponent extends ProfileBaseComponent {
+    private static final Logger LOG = LoggerFactory.getLogger(UserDetailComponent.class);
+    static final Set<String> SOCIAL_NETWORKS = new HashSet<String>(Arrays.asList(new String[]{
+            "LinkedIn", "Facebook", "Twitter"}));
+    static final Set<String> PERSONAL_WEBSITES = new HashSet<String>(Arrays.asList(new String[]{
+            "PersonalSite", "PersonalSite0", "PersonalSite1", "PersonalSite2", "PersonalSite3", "PersonalSite4"}));
+
+    private static final String URL_REGEX = "^(http:\\/\\/|https:\\/\\/|ftp:\\/\\/|www.)?(([0-9a-z_!~*'().&=+$%-]+: )?[0-9a-z_!~*'().&=+$%-]+@)?(([0-9]{1,3}\\.){3}[0-9]{1,3}|([0-9a-z_!~*'()-]+\\.)*([0-9a-z][0-9a-z-]{0,61})?[0-9a-z][a-z]{1,6})(:[0-9]{1,4})?((/?)|(/[0-9a-z_!~*'().;?:@&=+$,%#-]+)+/?)$";
+
+    @Override
+    public void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
+        super.doBeforeRender(request, response);
+
+        // The last part of the requestURI is the account id of the person
+        // For example http://localhost:8080/site/person/<accountId>
+        String requestURI = request.getRequestURI();
+        int lastIndexOf = requestURI.lastIndexOf('/');
+        if (lastIndexOf > -1) {
+            String account = requestURI.substring(lastIndexOf + 1);
+            if (StringUtils.isNotBlank(account)) {
+                try {
+                    UserInfo userInfo = getPerson(request, account);
+                    putUserDetailsOnRequest(request, userInfo);
+                } catch (NotFoundException e) {
+                    LOG.info("No data found: " + e.getMessage());
+                    request.setAttribute("error", false);
+                } catch (EsbException e) {
+                    LOG.warn("Error before rendering component: " + e.getMessage());
+                    request.setAttribute("error", true);
+                }
+            }
+        }
+    }
+
+    private UserInfo getPerson(HstRequest request, String account) throws NotFoundException, EsbException {
+        EmployeeSearchService employeeSearchService = getClientComponent(EmployeeSearchService.class);
+
+        Employees employees = employeeSearchService.searchEmployee(account, true);
+        if (employees == null || employees.getEmployees() == null || employees.getEmployees().isEmpty()) {
+            return null;
+        }
+        return employees.getEmployees().get(0);
+    }
+
+
+    protected void putUserDetailsOnRequest(HstRequest request, UserInfo userInfo) {
+        request.setAttribute("userInfo", userInfo);
+        request.setAttribute("socialAccounts", getSocialAccounts(userInfo));
+        request.setAttribute("personalWebsites", getPersonalWebsites(userInfo));
+        request.setAttribute("notPresentContact", getNotPresentContact(userInfo));
+    }
+
+    private EmployeeInfo getNotPresentContact(UserInfo userInfo) {
+        if (userInfo instanceof EmployeeInfo) {
+            String notPresentContactName = ((EmployeeInfo)userInfo).getNotPresentContactName();
+            if (notPresentContactName != null) {
+                LOG.debug("Fetching notPresentContactName= " + notPresentContactName);
+                EmployeeInfoService employeeInfoService = getClientComponent(EmployeeInfoService.class);
+                try {
+                    return employeeInfoService.getEmployeeInfo(notPresentContactName);
+                } catch (NotFoundException e) {
+                    return null;
+                } catch (EsbException e) {
+                    return null;
+                }
+            }
+        }
+        return null;
+    }
+
+    private List<LinkItem> getSocialAccounts(UserInfo userInfo) {
+        return getLinkItems(SOCIAL_NETWORKS, userInfo);
+    }
+
+    private List<LinkItem> getPersonalWebsites(UserInfo userInfo) {
+        return getLinkItems(PERSONAL_WEBSITES, userInfo);
+    }
+
+    private List<LinkItem> getLinkItems(Set<String> types, UserInfo userInfo) {
+        if (userInfo instanceof EmployeeInfo) {
+            return getLinkItems(types, ((EmployeeInfo)userInfo).getLinks());
+        }
+        return Collections.emptyList();
+    }
+
+    List<LinkItem> getLinkItems(Set<String> types, String links) {
+        List<LinkItem> result = new ArrayList<LinkItem>();
+
+        // links is "LinkedIn|http://www.linkedin.com/in/robinjanssen87;PersonalSite|www.iamrobin.nl;Twitter|http://www.twitter.com/Robin_Janssen;Facebook|http://www.facebook.com/robinjanssen87;PersonalSite2|www.zuyd.nl"
+        if (StringUtils.isNotBlank(links)) {
+            String[] split = links.split(";");
+            for (String item : split) {
+
+                LinkItem linkItem = getLinkItem(types, item);
+                if (linkItem != null) {
+                    result.add(linkItem);
+                }
+            }
+        }
+
+        return result;
+    }
+
+    LinkItem getLinkItem(Set<String> types, String item) {
+        // item is "LinkedIn|http://www.linkedin.com/in/robinjanssen87"
+        String[] itemSplit = item.split("\\|");
+        if (itemSplit.length == 2) {
+            String type = itemSplit[0];
+            if (types.contains(type)) {
+                String validUrl = getValidUrl(itemSplit[1]);
+                if (validUrl != null) {
+                    return new LinkItem(type, type, validUrl);
+                }
+            }
+        }
+        return null;
+    }
+
+    String getValidUrl(String input) {
+        if (StringUtils.isBlank(input)) {
+            return null;
+        }
+        if (input.startsWith("http://") || input.startsWith("https://")) {
+            return input;
+        }
+        // try to make the input a valid URL.
+        String newUrl = "http://" + input;
+
+        Pattern pattern = Pattern.compile(URL_REGEX);
+        Matcher matcher = pattern.matcher(newUrl);
+        if (matcher.matches()) {
+            LOG.debug("Created a valid URL from " + input + ": " + newUrl);
+            return newUrl;
+        }
+        LOG.debug("Failed to create a valid URL from " + input);
+        return null;
+    }
+}

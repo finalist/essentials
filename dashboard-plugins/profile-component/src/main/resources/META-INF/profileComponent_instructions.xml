@@ -47,7 +47,18 @@
     <file action="copy" source="java/components/model/EmployeeInfo.txt" target="{{componentsFolder}}/model/EmployeeInfo.java"/>
     <file action="copy" source="java/components/model/Employees.txt" target="{{componentsFolder}}/model/Employees.java"/>
     <file action="copy" source="java/components/model/StudentInfo.txt" target="{{componentsFolder}}/model/StudentInfo.java"/>
+    <file action="copy" source="java/components/model/Classe.txt" target="{{componentsFolder}}/model/Classe.java"/>
     <file action="copy" source="java/components/services/EmployeeSearchService.txt" target="{{componentsFolder}}/services/EmployeeSearchService.java"/>
     <file action="copy" source="java/components/services/StudentInfoService.txt" target="{{componentsFolder}}/services/StudentInfoService.java"/>
+  </instructionSet>
+    <!--little refactor and add component classes -->
+  <instructionSet>
+    <file action="copy" source="java/components/selection/FinalistValueListManager.txt" target="{{componentsFolder}}/selection/FinalistValueListManager.java"/>
+    <file action="copy" source="java/components/ProfileBaseComponent.txt" target="{{componentsFolder}}/ProfileBaseComponent.java"/>
+    <file action="copy" source="java/components/AccountPreferencesComponent.txt" target="{{componentsFolder}}/AccountPreferencesComponent.java"/>
+    <file action="copy" source="java/components/domain/ItemState.txt" target="{{componentsFolder}}/domain/ItemState.java"/>
+    <file action="copy" source="java/components/UserDetailComponent.txt" target="{{componentsFolder}}/UserDetailComponent.java"/>
+    <file action="copy" source="java/components/services/EmployeeInfoService.txt" target="{{componentsFolder}}/services/EmployeeInfoService.java"/>
+    <file action="copy" source="java/componentsinfo/ProfileComponentInfo.txt" target="{{componentsFolder}}info/ProfileComponentInfo.java"/>
   </instructionSet>
 </instructions>

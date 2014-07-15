@@ -1,0 +1,238 @@
+package {{componentsPackage}};
+
+import net.sf.ehcache.Element;
+import net.sf.ehcache.constructs.blocking.BlockingCache;
+import {{componentsPackage}}.model.UserInfo;
+import {{componentsPackage}}.security.model.UserProfile;
+import {{componentsPackage}}.security.model.userdetails.UserDetails;
+import {{componentsPackage}}.security.model.userdetails.UserRole;
+import {{componentsPackage}}.security.util.SecurityUtil;
+import {{componentsPackage}}.selection.FinalistValueListManager;
+import org.apache.commons.lang.LocaleUtils;
+import org.hippoecm.hst.component.support.bean.BaseHstComponent;
+import org.hippoecm.hst.content.beans.standard.HippoAvailableTranslationsBean;
+import org.hippoecm.hst.content.beans.standard.HippoBean;
+import org.hippoecm.hst.core.component.HstComponentException;
+import org.hippoecm.hst.core.component.HstRequest;
+import org.hippoecm.hst.core.component.HstResponse;
+import org.hippoecm.hst.core.container.ComponentManager;
+import org.hippoecm.hst.core.linking.HstLink;
+import org.hippoecm.hst.core.sitemenu.HstSiteMenuItem;
+import org.onehippo.forge.selection.hst.contentbean.ValueList;
+import org.onehippo.forge.selection.hst.manager.ValueListManager;
+import org.onehippo.forge.selection.hst.util.SelectionUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
+
+public abstract class ProfileBaseComponent extends BaseHstComponent {
+
+    private static final Logger LOG = LoggerFactory.getLogger(ProfileBaseComponent.class);
+
+    public static final String VALUE_LISTS_CACHE = "valueListsCache";
+
+    public static final String TARGETGROUP_STUDENTEN = "studenten";
+    public static final String TARGETGROUP_DOCENTEN_EN_MEDEWERKERS = "docenten-en-medewerkers";
+    public static final String TARGETGROUP_STUDENTEN_DOCENTEN_EN_MEDEWERKERS = "studenten-docenten-en-medewerkers";
+
+
+    @Override
+    public void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
+        super.doBeforeRender(request, response);
+        setHttpRequestParameter(request, "locale", request.getLocale());
+        putAllSelectionListsOnRequest(request);
+    }
+
+    public void setHttpRequestParameter(HstRequest request, String name, Object value) {
+        HttpServletRequest servletRequest = request.getRequestContext().getServletRequest();
+        if (servletRequest != null) {
+            servletRequest.setAttribute(name, value);
+        }
+    }
+
+    /**
+     * Returns all the targetGroups for the current user
+     * @param request
+     * @return
+     */
+    public Set<String> getTargetGroups(HstRequest request) {
+        Set<String> result = new HashSet<String>();
+        if (isStudent(request)) {
+            result.add(TARGETGROUP_STUDENTEN);
+            result.add(TARGETGROUP_STUDENTEN_DOCENTEN_EN_MEDEWERKERS);
+        }
+        if (isTeacher(request)) {
+            result.add(TARGETGROUP_DOCENTEN_EN_MEDEWERKERS);
+            result.add(TARGETGROUP_STUDENTEN_DOCENTEN_EN_MEDEWERKERS);
+        }
+        if (result.isEmpty()) {
+            // do not return an empty list because that will lead to a query which doesnt filter on targetgroup
+            result.add("illegal value");
+        }
+        return result;
+    }
+
+    protected boolean hasUserDetails(HstRequest request) {
+        SecurityUtil securityUtil = getClientComponent(SecurityUtil.class);
+        return securityUtil.hasUserDetails(request);
+    }
+
+    protected UserDetails getUserDetails(HttpServletRequest request) {
+        SecurityUtil securityUtil = getClientComponent(SecurityUtil.class);
+        return securityUtil.getUserDetails(request);
+    }
+
+    public UserProfile getUserProfile(HstRequest request) {
+        SecurityUtil securityUtil = getClientComponent(SecurityUtil.class);
+        return securityUtil.getUserProfile(request);
+    }
+
+    public UserInfo getUserInfo(HstRequest request) {
+        SecurityUtil securityUtil = getClientComponent(SecurityUtil.class);
+        return securityUtil.getUserInfo(request);
+    }
+
+    protected void setUserProfile(HstRequest request, UserProfile userProfile) {
+        SecurityUtil securityUtil = getClientComponent(SecurityUtil.class);
+        securityUtil.setUserProfile(request, userProfile);
+    }
+
+    protected boolean isStudent(HstRequest request) {
+        SecurityUtil securityUtil = getClientComponent(SecurityUtil.class);
+        UserDetails userDetails = securityUtil.getUserDetails(request);
+
+        return securityUtil.hasRole(userDetails, UserRole.STUDENT);
+    }
+
+    protected boolean isTeacher(HstRequest request) {
+        SecurityUtil securityUtil = getClientComponent(SecurityUtil.class);
+        UserDetails userDetails = securityUtil.getUserDetails(request);
+
+        return securityUtil.hasRole(userDetails, UserRole.TEACHER);
+    }
+
+    public void putAllSelectionListsOnRequest(HstRequest request) {
+        FinalistValueListManager valueListManager = (FinalistValueListManager) getClientComponent(ValueListManager.class);
+        if (valueListManager == null) {
+            LOG.error("No ValuelistManager available");
+        } else {
+            for (String listIdentifier : valueListManager.getKeySet()) {
+                LinkedHashMap<String, String> valueListMap = getValueListMap(request, listIdentifier);
+                if (valueListMap != null) {
+                    request.setAttribute(listIdentifier, valueListMap);
+                }
+            }
+        }
+    }
+
+    /**
+     * Purpose is to be able to show labels for valuelist items in the site, whereas keys are stored in the content
+     * documents.
+     *
+     * @param request
+     * @param identifier
+     */
+    public LinkedHashMap<String, String> getValueListMap(HstRequest request, String identifier) {
+
+        BlockingCache cache = getDefaultClientComponentManager().getComponent(VALUE_LISTS_CACHE);
+        ValueListManager valueListManager = getClientComponent(ValueListManager.class);
+        HippoBean siteContentBaseBean = getSiteContentBaseBean(request);
+
+        return getValueListMap(request, identifier, cache, valueListManager, siteContentBaseBean);
+    }
+
+    @SuppressWarnings("unchecked")
+    protected static LinkedHashMap<String, String> getValueListMap(HstRequest request, String identifier,
+            BlockingCache cache, ValueListManager valueListManager, HippoBean siteContentBaseBean) {
+        Map<String, LinkedHashMap<String, String>> valueListsByLanguage = null;
+        Element element = cache.get(identifier);
+        if (element == null) {
+            if (valueListManager == null) {
+                LOG.error("Failed to get Valuelist: {}. No valuelistmanager was found");
+                return null;
+            } else {
+                valueListsByLanguage = getValueListsByLanguage(identifier, siteContentBaseBean,
+                        valueListManager);
+                LOG.trace("Putting valuelist " + identifier + " in the cache");
+                cache.put(new Element(identifier, valueListsByLanguage));
+            }
+        } else {
+            valueListsByLanguage = (HashMap<String, LinkedHashMap<String, String>>) element.getValue();
+            LOG.trace("Retrieved valuelist from cache " + identifier + (valueListsByLanguage == null ? " is NULL" : ""));
+        }
+
+        return valueListsByLanguage.get(request.getLocale().getLanguage());
+    }
+
+    protected static Map<String, LinkedHashMap<String, String>> getValueListsByLanguage(String identifier,
+            HippoBean siteContentBaseBean, ValueListManager valueListManager) {
+        Map<String, LinkedHashMap<String, String>> valueListByLocale;
+        valueListByLocale = new HashMap<String, LinkedHashMap<String, String>>();
+        ValueList valueList = valueListManager.getValueList(siteContentBaseBean, identifier);
+        if (valueList != null) {
+            HippoAvailableTranslationsBean<HippoBean> availableTranslations = valueList.getAvailableTranslations();
+            for (String languageTag : availableTranslations.getAvailableLocales()) {
+                valueList = valueListManager.getValueList(siteContentBaseBean, identifier,
+                        getLocaleByLanguage(languageTag));
+                LOG.trace("Retrieved valuelist " + identifier + " and language " + languageTag
+                        + (valueList == null ? " is NULL" : ", has " + valueList.getItems().size() + " items"));
+                valueListByLocale
+                        .put(languageTag, new LinkedHashMap<String, String>(SelectionUtil.valueListAsMap(valueList)));
+            }
+        }
+        return valueListByLocale;
+    }
+
+    protected static Locale getLocaleByLanguage(String languageTag) {
+        return LocaleUtils.toLocale(languageTag);
+        // return Locale.forLanguageTag(languageTag); // this method requires JAVA 1.7
+    }
+
+    protected HstSiteMenuItem getSiteMenuItemByPath(List<HstSiteMenuItem> siteMenuItems, String pathComponent) {
+        for (HstSiteMenuItem hstSiteMenuItem : siteMenuItems) {
+
+            HstLink hstLink = hstSiteMenuItem.getHstLink();
+            if (hstLink != null) {
+                String path = hstLink.getPath();
+
+                if (path.endsWith(pathComponent)) {
+                    return hstSiteMenuItem;
+                }
+            }
+            HstSiteMenuItem item = getSiteMenuItemByPath(hstSiteMenuItem.getChildMenuItems(), pathComponent);
+            if (item != null) {
+                return item;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Returns the client component from the client component manager that matches the specified interface.
+     *
+     * @param componentClass
+     *            the interface of the component
+     * @return the component or <code>null</code> if no component could be found.
+     */
+    public <T> T getClientComponent(Class<T> componentClass) {
+        ComponentManager componentManager = getDefaultClientComponentManager();
+        if (componentManager == null) {
+            throw new IllegalStateException("Unable to find ComponentManager");
+        }
+        Map<String, T> componentsMap = componentManager.getComponentsOfType(componentClass);
+        Collection<T> components = componentsMap.values();
+
+        if (components.isEmpty()) {
+            throw new IllegalStateException("Unable to find service for class: " + componentClass);
+        } else {
+            return components.iterator().next();
+        }
+    }
+
+    public LinkedHashMap<String, String> getAreasOfInterest(HstRequest request) {
+        return getValueListMap(request, "areaOfInterestList");
+    }
+}

@@ -1,0 +1,8 @@
+package {{componentsPackage}}info;
+
+import org.hippoecm.hst.core.parameters.Parameter;
+
+public interface ProfileComponentInfo {
+    @Parameter(name = "profileEditUrl", displayName = "URL to edit the userprofile", defaultValue = "", required = true)
+    String getProfileEditUrl();
+}

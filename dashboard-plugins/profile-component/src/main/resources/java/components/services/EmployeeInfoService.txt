@@ -5,17 +5,18 @@ import javax.ws.rs.core.MediaType;
 
 import {{componentsPackage}}.exception.EsbException;
 import {{componentsPackage}}.exception.NotFoundException;
-import {{componentsPackage}}.model.StudentInfo;
+import {{componentsPackage}}.model.EmployeeInfo;
 
 /**
  * Created by ivor on 05/19/14.
  */
 @Path("/")
-public interface StudentInfoService {
+public interface EmployeeInfoService {
 
   @GET
-  @Path("/{studentCode}")
+  @Path("/{employeeCode}")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  StudentInfo getStudentInfo(@PathParam("studentCode") String studentCode) throws NotFoundException, EsbException;
+  EmployeeInfo getEmployeeInfo(@PathParam("employeeCode") String employeeCode) throws NotFoundException, EsbException;
+
 }

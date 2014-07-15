@@ -1,0 +1,82 @@
+package {{componentsPackage}}.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class StudentInfo extends UserInfo {
+
+    private static final long serialVersionUID = 1L;
+
+    @JsonProperty("accountNo")
+    private String account;
+
+    @JsonProperty("studentNo")
+    private String studentNo;
+
+
+    @JsonProperty("educationalProgram")
+    private String educationalProgram;
+
+    @JsonProperty("location")
+    private String location;
+
+    @JsonProperty("classes")
+    private List<Classe> classes = new ArrayList<Classe>();
+
+    @Override
+    public String getAccount() {
+        return account;
+    }
+
+    @Override
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public String getStudentNo() {
+        return studentNo;
+    }
+
+    public void setStudentNo(String studentNo) {
+        this.studentNo = studentNo;
+    }
+
+    public String getEducationalProgram() {
+        return educationalProgram;
+    }
+
+    public void setEducationalProgram(String educationalProgram) {
+        this.educationalProgram = educationalProgram;
+    }
+
+    public List<Classe> getClasses() {
+        return classes;
+    }
+
+    public void setClasses(List<Classe> classes) {
+        this.classes = classes;
+    }
+
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder(super.toString());
+        sb.append("\nUSERINFO > studentNo: ").append(getStudentNo()).append("; ");
+        sb.append("\nUSERINFO > educationalProgram: ").append(getEducationalProgram()).append("; ");
+        sb.append("\nUSERINFO > classes: ").append(getClasses()).append("; ");
+        sb.append("\nUSERINFO > location: ").append(getLocation()).append("; ");
+        return sb.toString();
+    }
+}

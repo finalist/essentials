@@ -1,0 +1,8 @@
+package {{componentsPackage}}.security.exception;
+
+public class NoAuthoritiesException extends RuntimeException {
+
+  public NoAuthoritiesException(String message) {
+    super(message);
+  }
+}

@@ -1,0 +1,30 @@
+package {{componentsPackage}}.services;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+
+import {{componentsPackage}}.exception.EsbException;
+import {{componentsPackage}}.exception.NotFoundException;
+import {{componentsPackage}}.model.Employees;
+
+@Path("/")
+public interface EmployeeSearchService {
+
+  @GET
+  @ Path("/")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  Employees searchEmployees(@QueryParam("keyword") String keyword) throws NotFoundException, EsbException;
+
+  @GET
+  @ Path("/")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  Employees searchEmployee(@QueryParam("accountNo") String account, @QueryParam("all") Boolean all) throws NotFoundException, EsbException;
+
+  @GET
+  @ Path("/")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  Employees searchEmployees(@QueryParam("name") String name, @QueryParam("facultyName") String facultyName) throws NotFoundException, EsbException;
+}

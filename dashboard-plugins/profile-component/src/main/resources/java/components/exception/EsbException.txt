@@ -1,0 +1,10 @@
+package {{componentsPackage}}.exception;
+
+public class EsbException extends Exception {
+
+    private static final long serialVersionUID = 1L;
+
+    public EsbException(Object payload) {
+        super("" +  payload);
+    }
+}

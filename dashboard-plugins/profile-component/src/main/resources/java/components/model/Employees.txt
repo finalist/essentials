@@ -1,0 +1,19 @@
+package {{componentsPackage}}.model;
+
+import org.codehaus.jackson.annotate.JsonProperty;
+
+import java.util.List;
+
+public class Employees {
+
+  @JsonProperty("employees")
+  private List<EmployeeInfo> employees;
+
+  public List<EmployeeInfo> getEmployees() {
+    return employees;
+  }
+
+  public void setEmployees(List<EmployeeInfo> employees) {
+    this.employees = employees;
+  }
+}

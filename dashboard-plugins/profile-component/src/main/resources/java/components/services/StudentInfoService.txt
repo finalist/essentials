@@ -1,0 +1,21 @@
+package {{componentsPackage}}.services;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+
+import {{componentsPackage}}.exception.EsbException;
+import {{componentsPackage}}.exception.NotFoundException;
+import nl.zuyd.integration.model.StudentInfo;
+
+/**
+ * Created by ivor on 05/19/14.
+ */
+@Path("/")
+public interface StudentInfoService {
+
+  @GET
+  @Path("/{studentCode}")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  StudentInfo getStudentInfo(@PathParam("studentCode") String studentCode) throws NotFoundException, EsbException;
+}

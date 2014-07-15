@@ -1,0 +1,368 @@
+package {{componentsPackage}}.model;
+
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class EmployeeInfo extends UserInfo {
+    private static final long serialVersionUID = 1L;
+
+    @JsonProperty("accountNo")
+    private String account;
+
+    @JsonProperty("primaryTeam")
+    private String primaryTeam;
+
+    @JsonProperty("title")
+    private String function;
+
+    @JsonProperty("organisationalUnit")
+    private String organisationalUnit;
+
+    @JsonProperty("phone")
+    private String phone;
+
+    @JsonProperty("mobile")
+    private String mobile;
+
+    @JsonProperty("email")
+    private String email;
+
+    @JsonProperty("photoData")
+    private String photoData;
+
+    @JsonProperty("hidePartnerName")
+    private Boolean hidePartnerName;
+
+    @JsonProperty("showInWhoIs")
+    private Boolean showInWhoIs;
+
+    @JsonProperty
+    private Boolean presenceMONMorning;
+    @JsonProperty
+    private Boolean presenceMONAfternoon;
+    @JsonProperty
+    private Boolean presenceMONEvening;
+    @JsonProperty
+    private Boolean presenceTUEMorning;
+    @JsonProperty
+    private Boolean presenceTUEAfternoon;
+    @JsonProperty
+    private Boolean presenceTUEEvening;
+    @JsonProperty
+    private Boolean presenceWEDMorning;
+    @JsonProperty
+    private Boolean presenceWEDAfternoon;
+    @JsonProperty
+    private Boolean presenceWEDEvening;
+    @JsonProperty
+    private Boolean presenceTHUMorning;
+    @JsonProperty
+    private Boolean presenceTHUAfternoon;
+    @JsonProperty
+    private Boolean presenceTHUEvening;
+    @JsonProperty
+    private Boolean presenceFRIMorning;
+    @JsonProperty
+    private Boolean presenceFRIAfternoon;
+    @JsonProperty
+    private Boolean presenceFRIEvening;
+    @JsonProperty
+    private String notPresentContactName;
+    @JsonProperty
+    private String projects;
+    @JsonProperty
+    private String work;
+    @JsonProperty
+    private String fields;
+    @JsonProperty
+    private String links;
+    @JsonProperty
+    private String networks;
+    @JsonProperty
+    private String otherPositions;
+    @JsonProperty
+    private String publications;
+
+    public Boolean getPresenceMONMorning() {
+        return presenceMONMorning;
+    }
+
+    public void setPresenceMONMorning(Boolean presenceMONMorning) {
+        this.presenceMONMorning = presenceMONMorning;
+    }
+
+    public Boolean getPresenceMONAfternoon() {
+        return presenceMONAfternoon;
+    }
+
+    public void setPresenceMONAfternoon(Boolean presenceMONAfternoon) {
+        this.presenceMONAfternoon = presenceMONAfternoon;
+    }
+
+    public Boolean getPresenceMONEvening() {
+        return presenceMONEvening;
+    }
+
+    public void setPresenceMONEvening(Boolean presenceMONEvening) {
+        this.presenceMONEvening = presenceMONEvening;
+    }
+
+    public Boolean getPresenceTUEMorning() {
+        return presenceTUEMorning;
+    }
+
+    public void setPresenceTUEMorning(Boolean presenceTUEMorning) {
+        this.presenceTUEMorning = presenceTUEMorning;
+    }
+
+    public Boolean getPresenceTUEAfternoon() {
+        return presenceTUEAfternoon;
+    }
+
+    public void setPresenceTUEAfternoon(Boolean presenceTUEAfternoon) {
+        this.presenceTUEAfternoon = presenceTUEAfternoon;
+    }
+
+    public Boolean getPresenceTUEEvening() {
+        return presenceTUEEvening;
+    }
+
+    public void setPresenceTUEEvening(Boolean presenceTUEEvening) {
+        this.presenceTUEEvening = presenceTUEEvening;
+    }
+
+    public Boolean getPresenceWEDMorning() {
+        return presenceWEDMorning;
+    }
+
+    public void setPresenceWEDMorning(Boolean presenceWEDMorning) {
+        this.presenceWEDMorning = presenceWEDMorning;
+    }
+
+    public Boolean getPresenceWEDAfternoon() {
+        return presenceWEDAfternoon;
+    }
+
+    public void setPresenceWEDAfternoon(Boolean presenceWEDAfternoon) {
+        this.presenceWEDAfternoon = presenceWEDAfternoon;
+    }
+
+    public Boolean getPresenceWEDEvening() {
+        return presenceWEDEvening;
+    }
+
+    public void setPresenceWEDEvening(Boolean presenceWEDEvening) {
+        this.presenceWEDEvening = presenceWEDEvening;
+    }
+
+    public Boolean getPresenceTHUMorning() {
+        return presenceTHUMorning;
+    }
+
+    public void setPresenceTHUMorning(Boolean presenceTHUMorning) {
+        this.presenceTHUMorning = presenceTHUMorning;
+    }
+
+    public Boolean getPresenceTHUAfternoon() {
+        return presenceTHUAfternoon;
+    }
+
+    public void setPresenceTHUAfternoon(Boolean presenceTHUAfternoon) {
+        this.presenceTHUAfternoon = presenceTHUAfternoon;
+    }
+
+    public Boolean getPresenceTHUEvening() {
+        return presenceTHUEvening;
+    }
+
+    public void setPresenceTHUEvening(Boolean presenceTHUEvening) {
+        this.presenceTHUEvening = presenceTHUEvening;
+    }
+
+    public Boolean getPresenceFRIMorning() {
+        return presenceFRIMorning;
+    }
+
+    public void setPresenceFRIMorning(Boolean presenceFRIMorning) {
+        this.presenceFRIMorning = presenceFRIMorning;
+    }
+
+    public Boolean getPresenceFRIAfternoon() {
+        return presenceFRIAfternoon;
+    }
+
+    public void setPresenceFRIAfternoon(Boolean presenceFRIAfternoon) {
+        this.presenceFRIAfternoon = presenceFRIAfternoon;
+    }
+
+    public Boolean getPresenceFRIEvening() {
+        return presenceFRIEvening;
+    }
+
+    public void setPresenceFRIEvening(Boolean presenceFRIEvening) {
+        this.presenceFRIEvening = presenceFRIEvening;
+    }
+
+    public String getNotPresentContactName() {
+        return notPresentContactName;
+    }
+
+    public void setNotPresentContactName(String notPresentContactName) {
+        this.notPresentContactName = notPresentContactName;
+    }
+
+    public String getProjects() {
+        return projects;
+    }
+
+    public void setProjects(String projects) {
+        this.projects = projects;
+    }
+
+    public String getWork() {
+        return work;
+    }
+
+    public void setWork(String work) {
+        this.work = work;
+    }
+
+    public String getFields() {
+        return fields;
+    }
+
+    public void setFields(String fields) {
+        this.fields = fields;
+    }
+
+    public String getLinks() {
+        return links;
+    }
+
+    public void setLinks(String links) {
+        this.links = links;
+    }
+
+    public String getNetworks() {
+        return networks;
+    }
+
+    public void setNetworks(String networks) {
+        this.networks = networks;
+    }
+
+    public String getOtherPositions() {
+        return otherPositions;
+    }
+
+    public void setOtherPositions(String otherPositions) {
+        this.otherPositions = otherPositions;
+    }
+
+    public String getPublications() {
+        return publications;
+    }
+
+    public void setPublications(String publications) {
+        this.publications = publications;
+    }
+
+    @Override
+    public String getAccount() {
+        return account;
+    }
+
+    @Override
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+
+    public String getPrimaryTeam() {
+        return primaryTeam;
+    }
+
+    public void setPrimaryTeam(String primaryTeam) {
+        this.primaryTeam = primaryTeam;
+    }
+
+    public String getFunction() {
+        return function;
+    }
+
+    public void setFunction(String function) {
+        this.function = function;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhotoData() {
+        return photoData;
+    }
+
+    public void setPhotoData(String photoData) {
+        this.photoData = photoData;
+    }
+
+    public Boolean getHidePartnerName() {
+        return hidePartnerName;
+    }
+
+    public void setHidePartnerName(Boolean hidePartnerName) {
+        this.hidePartnerName = hidePartnerName;
+    }
+
+    public Boolean getShowInWhoIs() {
+        return showInWhoIs;
+    }
+
+    public void setShowInWhoIs(Boolean showInWhoIs) {
+        this.showInWhoIs = showInWhoIs;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder(super.toString());
+        sb.append("\nUSERINFO > primaryTeam: ").append(getPrimaryTeam()).append("; ");
+        sb.append("\nUSERINFO > academicTitle: ").append(getFunction()).append("; ");
+        sb.append("\nUSERINFO > phone: ").append(getPhone()).append("; ");
+        sb.append("\nUSERINFO > mobile: ").append(getMobile()).append("; ");
+        sb.append("\nUSERINFO > email: ").append(getEmail()).append("; ");
+        sb.append("\nUSERINFO > hidePartnerName: ").append(getHidePartnerName()).append("; ");
+        sb.append("\nUSERINFO > showInWhoIs: ").append(getShowInWhoIs()).append("; ");
+        return sb.toString();
+    }
+
+    public String getOrganisationalUnit() {
+        return organisationalUnit;
+    }
+
+    public void setOrganisationalUnit(String organisationalUnit) {
+        this.organisationalUnit = organisationalUnit;
+    }
+
+
+}

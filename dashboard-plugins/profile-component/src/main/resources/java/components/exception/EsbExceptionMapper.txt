@@ -1,0 +1,26 @@
+package {{componentsPackage}}.exception;
+
+import javax.ws.rs.core.Response;
+
+import org.apache.cxf.jaxrs.client.ResponseExceptionMapper;
+
+public class EsbExceptionMapper implements ResponseExceptionMapper<Throwable> {
+
+    @Override
+    public Throwable fromResponse(Response r) {
+        if (r.getStatus() == 200) {
+            return null; // OK
+        }
+        switch (r.getStatus()) {
+        case (400):
+        case (404):
+            return new NotFoundException(r.getEntity());
+        case (500):
+            return new EsbException(r.getEntity());
+        default:
+            return null;
+        }
+
+    }
+
+}

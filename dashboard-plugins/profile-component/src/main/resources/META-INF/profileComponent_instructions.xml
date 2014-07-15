@@ -17,6 +17,7 @@
 
 <instructions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://www.onehippo.org/essentials/instructions /instructions.xsd" xmlns="http://www.onehippo.org/essentials/instructions">
+<!--first part is the base -->
   <instructionSet>
     <file action="copy" source="java/components/AbstractUserComponent.txt" target="{{componentsFolder}}/AbstractUserComponent.java"/>
     <file action="copy" source="java/componentsinfo/BaseWidgetInfo.txt" target="{{componentsFolder}}info/BaseWidgetInfo.java"/>
@@ -34,5 +35,19 @@
     <file action="copy" source="java/components/security/exception/NoUserProfileException.txt" target="{{componentsFolder}}/security/exception/NoUserProfileException.java"/>
     <file action="copy" source="java/components/security/exception/NoUserDetailsException.txt" target="{{componentsFolder}}/security/exception/NoUserDetailsException.java"/>
     <file action="copy" source="java/components/security/exception/NoUserInfoException.txt" target="{{componentsFolder}}/security/exception/NoUserInfoException.java"/>
+  </instructionSet>
+<!--stuff needed for the actual profile  -->
+  <instructionSet>
+    <file action="copy" source="java/components/converter/AbstractAccountConverter.txt" target="{{componentsFolder}}/security/converter/AbstractAccountConverter.java"/>
+    <file action="copy" source="java/components/security/exception/InvalidUserIdException.txt" target="{{componentsFolder}}/security/exception/InvalidUserIdException.java"/>
+    <file action="copy" source="java/components/security/exception/NoAuthoritiesException.txt" target="{{componentsFolder}}/security/exception/NoAuthoritiesException.java"/>
+    <file action="copy" source="java/components/exception/NotFoundException.txt" target="{{componentsFolder}}/exception/NotFoundException.java"/>
+    <file action="copy" source="java/components/exception/EsbException.txt" target="{{componentsFolder}}/exception/EsbException.java"/>
+    <file action="copy" source="java/components/exception/EsbExceptionMapper.txt" target="{{componentsFolder}}/exception/EsbExceptionMapper.java"/>
+    <file action="copy" source="java/components/model/EmployeeInfo.txt" target="{{componentsFolder}}/model/EmployeeInfo.java"/>
+    <file action="copy" source="java/components/model/Employees.txt" target="{{componentsFolder}}/model/Employees.java"/>
+    <file action="copy" source="java/components/model/StudentInfo.txt" target="{{componentsFolder}}/model/StudentInfo.java"/>
+    <file action="copy" source="java/components/services/EmployeeSearchService.txt" target="{{componentsFolder}}/services/EmployeeSearchService.java"/>
+    <file action="copy" source="java/components/services/StudentInfoService.txt" target="{{componentsFolder}}/services/StudentInfoService.java"/>
   </instructionSet>
 </instructions>

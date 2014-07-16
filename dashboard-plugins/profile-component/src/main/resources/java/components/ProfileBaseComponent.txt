@@ -18,6 +18,7 @@ import org.hippoecm.hst.core.component.HstResponse;
 import org.hippoecm.hst.core.container.ComponentManager;
 import org.hippoecm.hst.core.linking.HstLink;
 import org.hippoecm.hst.core.sitemenu.HstSiteMenuItem;
+import org.hippoecm.hst.site.HstServices;
 import org.onehippo.forge.selection.hst.contentbean.ValueList;
 import org.onehippo.forge.selection.hst.manager.ValueListManager;
 import org.onehippo.forge.selection.hst.util.SelectionUtil;
@@ -136,9 +137,9 @@ public abstract class ProfileBaseComponent extends BaseHstComponent {
      */
     public LinkedHashMap<String, String> getValueListMap(HstRequest request, String identifier) {
 
-        BlockingCache cache = getDefaultClientComponentManager().getComponent(VALUE_LISTS_CACHE);
+        BlockingCache cache = HstServices.getComponentManager().getComponent(VALUE_LISTS_CACHE);
         ValueListManager valueListManager = getClientComponent(ValueListManager.class);
-        HippoBean siteContentBaseBean = getSiteContentBaseBean(request);
+        HippoBean siteContentBaseBean = request.getRequestContext().getSiteContentBaseBean();
 
         return getValueListMap(request, identifier, cache, valueListManager, siteContentBaseBean);
     }
@@ -218,18 +219,11 @@ public abstract class ProfileBaseComponent extends BaseHstComponent {
      * @return the component or <code>null</code> if no component could be found.
      */
     public <T> T getClientComponent(Class<T> componentClass) {
-        ComponentManager componentManager = org.hippoecm.hst.site.HstServices.getComponentManager();
+        ComponentManager componentManager = HstServices.getComponentManager();
         if (componentManager == null) {
             throw new IllegalStateException("Unable to find ComponentManager");
         }
-        Map<String, T> componentsMap = componentManager.getComponentsOfType(componentClass);
-        Collection<T> components = componentsMap.values();
-
-        if (components.isEmpty()) {
-            throw new IllegalStateException("Unable to find service for class: " + componentClass);
-        } else {
-            return components.iterator().next();
-        }
+        return componentManager.getComponent(componentClass.getName());
     }
 
     public LinkedHashMap<String, String> getAreasOfInterest(HstRequest request) {

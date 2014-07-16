@@ -916,6 +916,20 @@
                 "artifactId": "selectionplugins-hst-client",
                 "scope": "compile",
                 "type": "site"
+            },
+            {
+                "@type": "dependency",
+                "type": "cms",
+                "groupId": "org.onehippo.forge.selectionplugins",
+                "artifactId": "selectionplugins-addon-cms",
+                "scope": "compile"
+            },
+            {
+                "@type": "dependency",
+                "type": "cms",
+                "groupId": "org.onehippo.forge.selectionplugins",
+                "artifactId": "selectionplugins-addon-repository",
+                "scope": "compile"
             }
         ]
     }

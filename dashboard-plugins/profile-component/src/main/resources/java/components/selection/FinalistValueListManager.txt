@@ -8,8 +8,6 @@ import org.onehippo.forge.selection.hst.manager.DefaultValueListManager;
 
 /**
  * The DefaultValueListManager does not expose the documentFieldLocationMapping.
- * @author Ivor Boers
- *
  */
 public class FinalistValueListManager extends DefaultValueListManager {
     private final Set<String> keySet;

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:oxm="http://www.springframework.org/schema/oxm" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                           http://www.springframework.org/schema/lang http://www.springframework.org/schema/beans/spring-lang-2.5.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+        				  	">
+
+    <bean id="customCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="configLocation" value="classpath:custom-ehcache.xml" />
+        <property name="shared" value="true"/>
+    </bean>
+
+    <!-- Cache component for caching PersonInfo -->
+    <bean id="personInfoCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+        <property name="blocking" value="true" />
+        <property name="cacheManager" ref="customCacheManager" />
+        <property name="timeToLive" value="43200" /> <!-- time in seconds: 43200s is 12h -->
+    </bean>
+    <!-- Cache component for caching valuelists -->
+    <bean id="valueListsCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+        <property name="blocking" value="true" />
+        <property name="cacheManager" ref="customCacheManager" />
+        <property name="timeToLive" value="86400" /> <!-- time in seconds: 86400s is 24h -->
+    </bean>
+    <!-- Cache component for caching rss results-->
+    <bean id="rssCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+        <property name="blocking" value="true" />
+        <property name="cacheManager" ref="customCacheManager" />
+        <property name="timeToLive" value="3600" />  <!-- time in seconds: 3600s is 1h -->
+    </bean>
+</beans>

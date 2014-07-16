@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/lang http://www.springframework.org/schema/beans/spring-lang-3.0.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<bean id="greeting" class="java.lang.String">
+		<constructor-arg>
+			<value>Hello, HST-2!</value>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="org.onehippo.forge.selection.hst.manager.ValueListManager"
+		class="{{componentsPackage}}.selection.FinalistValueListManager">
+		<constructor-arg>
+			<map>
+				<entry key="documenttypeList"
+					value="/content/documents/{{namespace}}/algemeen/waardelijsten/documenttypes" />
+				<entry key="targetGroupsList"
+					value="/content/documents/{{namespace}}/algemeen/waardelijsten/doelgroepen" />
+				<entry key="areaOfInterestList"
+					value="/content/documents/{{namespace}}/algemeen/waardelijsten/interessegebieden" />
+				<entry key="subjectsList"
+					value="/content/documents/{{namespace}}t/algemeen/waardelijsten/onderwerpen" />
+				<entry key="activitytypeList"
+					value="/content/documents/{{namespace}}/algemeen/waardelijsten/type-activiteit" />
+				<entry key="locationList"
+					value="/content/documents/{{namespace}}/algemeen/waardelijsten/locaties" />
+				<entry key="organizationalUnitsList"
+					value="/content/documents/{{namespace}}t/algemeen/waardelijsten/organisatieonderdelen" />
+				<entry key="studyProgramList"
+					value="/content/documents/{{namespace}}/algemeen/waardelijsten/opleidingen" />
+				<entry key="serviceList"
+					value="/content/documents/{{namespace}}/algemeen/waardelijsten/diensten" />
+				<entry key="weekdayList"
+					value="/content/documents/{{namespace}}/algemeen/waardelijsten/weekdagen" />
+					
+			</map>
+		</constructor-arg>
+	</bean>
+</beans>

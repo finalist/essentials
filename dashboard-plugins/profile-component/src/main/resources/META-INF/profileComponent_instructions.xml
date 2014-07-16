@@ -38,7 +38,7 @@
   </instructionSet>
   <!--stuff needed for the actual profile  -->
   <instructionSet>
-    <file action="copy" source="java/components/converter/AbstractAccountConverter.txt" target="{{componentsFolder}}/security/converter/AbstractAccountConverter.java"/>
+    <file action="copy" source="java/components/security/converter/AbstractAccountConverter.txt" target="{{componentsFolder}}/security/converter/AbstractAccountConverter.java"/>
     <file action="copy" source="java/components/security/exception/InvalidUserIdException.txt" target="{{componentsFolder}}/security/exception/InvalidUserIdException.java"/>
     <file action="copy" source="java/components/security/exception/NoAuthoritiesException.txt" target="{{componentsFolder}}/security/exception/NoAuthoritiesException.java"/>
     <file action="copy" source="java/components/exception/NotFoundException.txt" target="{{componentsFolder}}/exception/NotFoundException.java"/>
@@ -77,6 +77,16 @@
     <xml action="copy" source="xml/example_sitemap_profile.xml" target="/hst:hst/hst:configurations/{{namespace}}/hst:sitemap"/>
     <xml action="copy" source="xml/example_page_profile.xml" target="/hst:hst/hst:configurations/{{namespace}}/hst:pages"/>
     <xml action="copy" source="xml/example_page_preference.xml" target="/hst:hst/hst:configurations/{{namespace}}/hst:pages"/>
+    <xml action="copy" source="xml/algemeen.xml" target="/content/documents/{{namespace}}"/>
   </instructionSet>
+
+    <!--Install the Spring configurations for the ValueListManager-->
+    <instructionSet>
+        <file action="copy" source="xml/applicationContext.xml" target="{{siteRoot}}/src/main/webapp/WEB-INF/applicationContext.xml"/>
+        <file action="copy" source="xml/base.xml" target="{{siteRoot}}/src/main/resources/META-INF/client-assembly/base.xml"/>
+        <file action="copy" source="xml/cacheManager.xml" target="{{siteRoot}}/src/main/resources/META-INF/client-assembly/cacheManager.xml"/>
+        <file action="copy" source="xml/custom-ehcache.xml" target="{{siteRoot}}/src/main/resources/custom-ehcache.xml"/>
+        <file action="copy" source="xml/web.xml" target="{{siteRoot}}/src/main/webapp/WEB-INF/web.xml"/>
+    </instructionSet>
 
 </instructions>

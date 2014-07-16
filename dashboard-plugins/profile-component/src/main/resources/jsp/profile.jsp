@@ -15,28 +15,28 @@
         <h1><fmt:message key="account.profile.title"/></h1>
         
         <div class="userdata section">
-<%--          <c:if test="${userInfo.class.simpleName eq 'EmployeeInfo' and not empty userInfo.photoData}">
+          <c:if test="${not empty userInfo.photoData}">
             <div class="image"><img src="data:image/jpeg;base64,${userInfo.photoData}" /></div>
-          </c:if>--%>
+          </c:if>
           <div class="details">
             <h2><c:out value="${userInfo.fullName}"/></h2>
             <dl>
-<%--              <c:if test="${userInfo.class.simpleName eq 'EmployeeInfo' and not empty userInfo.function}">
+              <c:if test="${not empty userInfo.function}">
                 <dt><fmt:message key="account.profile.function"/>:</dt>
                 <dd><c:out value="${userInfo.function}"/></dd>
-              </c:if>--%>
+              </c:if>
               <c:if test="${not empty userInfo.faculty and not empty userInfo.faculty.facultyName}">
                 <dt><fmt:message key="account.profile.department"/>:</dt>
                 <dd><c:out value="${userInfo.faculty.facultyName}"/></dd>
               </c:if>
-<%--              <c:if test="${userInfo.class.simpleName eq 'EmployeeInfo' and not empty userInfo.phone}">
+              <c:if test="${not empty userInfo.phone}">
                 <dt><fmt:message key="account.profile.phone"/>:</dt>
                 <dd><c:out value="${userInfo.phone}"/></dd>
-              </c:if>--%>
-<%--              <c:if test="${userInfo.class.simpleName eq 'EmployeeInfo' and not empty userInfo.email}">
+              </c:if>
+              <c:if test="${not empty userInfo.email}">
                 <dt><fmt:message key="account.profile.email"/>:</dt>
                 <dd><a href='mailto:<c:out value="${userInfo.email}"/>'><c:out value="${userInfo.email}"/></a></dd>
-              </c:if>--%>
+              </c:if>
             </dl>
             <c:if test="${not empty profileEditUrl}">
               <a href="${profileEditUrl}" class="button">Wijzig je profiel</a>

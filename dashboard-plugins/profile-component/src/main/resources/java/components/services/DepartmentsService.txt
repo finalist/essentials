@@ -1,0 +1,19 @@
+package {{componentsPackage}}.services;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+
+import {{componentsPackage}}.exception.EsbException;
+import {{componentsPackage}}.exception.NotFoundException;
+import {{componentsPackage}}.model.Departments;
+
+@Path("/")
+public interface DepartmentsService {
+
+  @GET
+  @Path("/")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  Departments getDepartments() throws NotFoundException, EsbException;
+
+}

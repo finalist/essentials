@@ -1,0 +1,221 @@
+package {{componentsPackage}}.model;
+
+import org.codehaus.jackson.annotate.JsonProperty;
+
+import java.util.Date;
+
+/**
+ * Created by brian on 4/9/14.
+ */
+
+public class Grade {
+
+  @JsonProperty("studentId")
+  private String studentId;
+
+  @JsonProperty("subjectShortNl")
+  private String studyProgramShortNl;
+
+  @JsonProperty("subjectShortEn")
+  private String studyProgramShortEn;
+
+  @JsonProperty("subjectNl")
+  private String studyProgramNl;
+
+  @JsonProperty("subjectEn")
+  private String studyProgramEn;
+
+  @JsonProperty("test")
+  private String test;
+
+  @JsonProperty("testDescriptionNl")
+  private String testDescriptionNl;
+
+  @JsonProperty("testDescriptionEn")
+  private String testDescriptionEn;
+
+  @JsonProperty("testDate")
+  private Date testDate;
+
+  @JsonProperty("mutationDate")
+  private Date mutationDate;
+
+  @JsonProperty("lessonId")
+  private Long lessonId;
+
+  @JsonProperty("lesson")
+  private String lesson;
+
+  @JsonProperty("grade")
+  private String grade;
+
+  @JsonProperty("points")
+  private String points;
+
+  @JsonProperty("weight")
+  private Integer weight;
+
+  @JsonProperty("satisfactoryResult")
+  private Boolean satisfactoryResult;
+
+  @JsonProperty("resultType")
+  private String resultType;
+
+  @JsonProperty("status")
+  private String status;
+
+  @JsonProperty("teacherName")
+  private String teacherName;
+
+  public String getStudentId() {
+    return studentId;
+  }
+
+  public void setStudentId(String studentId) {
+    this.studentId = studentId;
+  }
+
+  public String getStudyProgramShortNl() {
+    return studyProgramShortNl;
+  }
+
+  public void setStudyProgramShortNl(String studyProgramShortNl) {
+    this.studyProgramShortNl = studyProgramShortNl;
+  }
+
+  public String getStudyProgramShortEn() {
+    return studyProgramShortEn;
+  }
+
+  public void setStudyProgramShortEn(String studyProgramShortEn) {
+    this.studyProgramShortEn = studyProgramShortEn;
+  }
+
+  public String getStudyProgramNl() {
+    return studyProgramNl;
+  }
+
+  public void setStudyProgramNl(String studyProgramNl) {
+    this.studyProgramNl = studyProgramNl;
+  }
+
+  public String getStudyProgramEn() {
+    return studyProgramEn;
+  }
+
+  public void setStudyProgramEn(String studyProgramEn) {
+    this.studyProgramEn = studyProgramEn;
+  }
+
+  public String getTest() {
+    return test;
+  }
+
+  public void setTest(String test) {
+    this.test = test;
+  }
+
+  public String getTestDescriptionNl() {
+    return testDescriptionNl;
+  }
+
+  public void setTestDescriptionNl(String testDescriptionNl) {
+    this.testDescriptionNl = testDescriptionNl;
+  }
+
+  public String getTestDescriptionEn() {
+    return testDescriptionEn;
+  }
+
+  public void setTestDescriptionEn(String testDescriptionEn) {
+    this.testDescriptionEn = testDescriptionEn;
+  }
+
+  public Date getTestDate() {
+    return testDate;
+  }
+
+  public void setTestDate(Date testDate) {
+    this.testDate = testDate;
+  }
+
+  public Date getMutationDate() {
+    return mutationDate;
+  }
+
+  public void setMutationDate(Date mutationDate) {
+    this.mutationDate = mutationDate;
+  }
+
+  public Long getLessonId() {
+    return lessonId;
+  }
+
+  public void setLessonId(Long lessonId) {
+    this.lessonId = lessonId;
+  }
+
+  public String getLesson() {
+    return lesson;
+  }
+
+  public void setLesson(String lesson) {
+    this.lesson = lesson;
+  }
+
+  public String getGrade() {
+    return grade;
+  }
+
+  public void setGrade(String grade) {
+    this.grade = grade;
+  }
+
+  public String getPoints() {
+    return points;
+  }
+
+  public void setPoints(String points) {
+    this.points = points;
+  }
+
+  public Integer getWeight() {
+    return weight;
+  }
+
+  public void setWeight(Integer weight) {
+    this.weight = weight;
+  }
+
+  public Boolean getSatisfactoryResult() {
+    return satisfactoryResult;
+  }
+
+  public void setSatisfactoryResult(Boolean satisfactoryResult) {
+    this.satisfactoryResult = satisfactoryResult;
+  }
+
+  public String getResultType() {
+    return resultType;
+  }
+
+  public void setResultType(String resultType) {
+    this.resultType = resultType;
+  }
+
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
+  public String getTeacherName() {
+    return teacherName;
+  }
+
+  public void setTeacherName(String teacherName) {
+    this.teacherName = teacherName;
+  }
+}

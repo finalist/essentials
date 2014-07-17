@@ -1,0 +1,23 @@
+package {{componentsPackage}}.model;
+
+import org.codehaus.jackson.annotate.JsonProperty;
+
+import java.util.List;
+
+/**
+ * Created by brian on 4/9/14.
+ */
+
+public class Grades {
+
+  @JsonProperty("results")
+  private List<Grade> grades;
+
+  public List<Grade> getGrades() {
+    return grades;
+  }
+
+  public void setGrades(List<Grade> grades) {
+    this.grades = grades;
+  }
+}

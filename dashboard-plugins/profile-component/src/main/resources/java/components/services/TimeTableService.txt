@@ -1,0 +1,37 @@
+package {{componentsPackage}}.services;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+
+import {{componentsPackage}}.exception.EsbException;
+import {{componentsPackage}}.exception.NotFoundException;
+import {{componentsPackage}}.model.Lesson;
+import {{componentsPackage}}.model.TimeTable;
+
+@Path("/")
+public interface TimeTableService {
+
+  @GET
+  @Path("/student/{studentCode}")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  TimeTable<Lesson> getStudentTimeTable(@PathParam("studentCode") String studentCode, @QueryParam("fromWeek") Long fromWeek, @QueryParam("toWeek") Long toWeek) throws NotFoundException, EsbException;
+
+  @GET
+  @Path("/teacher/{teacherCode}")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  TimeTable<Lesson> getTeacherTimeTable(@PathParam("teacherCode") String teacherCode, @QueryParam("fromWeek") Long fromWeek, @QueryParam("toWeek") Long toWeek) throws NotFoundException, EsbException;
+
+  @GET
+  @Path("/class/{classCode}")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  TimeTable<Lesson> getClassTimeTable(@PathParam("classCode") String classCode, @QueryParam("fromWeek") Long fromWeek, @QueryParam("toWeek") Long toWeek) throws NotFoundException, EsbException;
+
+  @GET
+  @Path("/class/{classCode}")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  TimeTable<Lesson> getClassTimeTable(@PathParam("classCode") String classCode, @QueryParam("educationalProgram") String educationalProgram, @QueryParam("fromWeek") Long fromWeek, @QueryParam("toWeek") Long toWeek) throws NotFoundException, EsbException;
+}

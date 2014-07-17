@@ -1,0 +1,20 @@
+package {{componentsPackage}}.model;
+
+import org.codehaus.jackson.annotate.JsonProperty;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class TimeTable<T> {
+
+  @JsonProperty("timetable")
+  private List<T> timeTable = new ArrayList<T>();
+
+  public List<T> getTimeTable() {
+    return timeTable;
+  }
+
+  public void setTimeTable(List<T> timeTable) {
+    this.timeTable = timeTable;
+  }
+}

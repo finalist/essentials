@@ -1,0 +1,123 @@
+package {{componentsPackage}}.model;
+
+import org.codehaus.jackson.annotate.JsonProperty;
+
+import java.util.Date;
+import java.util.List;
+
+/**
+ * Created by brian on 4/9/14.
+ */
+public class Lesson {
+
+  @JsonProperty("class")
+  private String classCode;
+
+  @JsonProperty("day")
+  private String day;
+
+  @JsonProperty("dc")
+  private String status;
+
+  @JsonProperty("description")
+  private String description;
+
+  @JsonProperty("discipline")
+  private String discipline;
+
+  @JsonProperty("startTime")
+  private Date startTime;
+
+  @JsonProperty("endTime")
+  private Date endTime;
+
+  @JsonProperty("faculty")
+  private String faculty;
+
+  @JsonProperty("room")
+  private String room;
+
+  @JsonProperty("teachers")
+  private List<Teacher> teachers;
+
+  public String getClassCode() {
+    return classCode;
+  }
+
+  public void setClassCode(String classCode) {
+    this.classCode = classCode;
+  }
+
+  public String getDay() {
+    return day;
+  }
+
+  public void setDay(String day) {
+    this.day = day;
+  }
+
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public String getDiscipline() {
+    return discipline;
+  }
+
+  public void setDiscipline(String discipline) {
+    this.discipline = discipline;
+  }
+
+  public Date getStartTime() {
+    return startTime;
+  }
+
+  public void setStartTime(Date startTime) {
+    this.startTime = startTime;
+  }
+
+  public Date getEndTime() {
+    return endTime;
+  }
+
+  public void setEndTime(Date endTime) {
+    this.endTime = endTime;
+  }
+
+  public String getFaculty() {
+    return faculty;
+  }
+
+  public void setFaculty(String faculty) {
+    this.faculty = faculty;
+  }
+
+  public String getRoom() {
+    return room;
+  }
+
+  public void setRoom(String room) {
+    this.room = room;
+  }
+
+  public List<Teacher> getTeachers() {
+    return teachers;
+  }
+
+  public void setTeachers(List<Teacher> teachers) {
+    this.teachers = teachers;
+  }
+}
+

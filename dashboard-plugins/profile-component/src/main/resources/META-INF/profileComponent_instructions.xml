@@ -30,7 +30,7 @@
     <file action="copy" source="java/components/security/model/UserProfile.txt" target="{{componentsFolder}}/security/model/UserProfile.java"/>
     <file action="copy" source="java/components/security/service/UserProfileService.txt" target="{{componentsFolder}}/security/service/UserProfileService.java"/>
     <file action="copy" source="java/components/security/service/UserProfileServiceImpl.txt" target="{{componentsFolder}}/security/service/UserProfileServiceImpl.java"/>
-    <file action="copy" source="java/components/security/dao/UserProfileDAO.txt" target="{{componentsFolder}}/security/service/UserProfileDAO.java"/>
+    <file action="copy" source="java/components/security/dao/UserProfileDAO.txt" target="{{componentsFolder}}/security/dao/UserProfileDAO.java"/>
     <file action="copy" source="java/components/security/util/SecurityUtil.txt" target="{{componentsFolder}}/security/util/SecurityUtil.java"/>
     <file action="copy" source="java/components/security/exception/NoUserProfileException.txt" target="{{componentsFolder}}/security/exception/NoUserProfileException.java"/>
     <file action="copy" source="java/components/security/exception/NoUserDetailsException.txt" target="{{componentsFolder}}/security/exception/NoUserDetailsException.java"/>
@@ -83,11 +83,33 @@
     <!--Install the Spring configurations for the ValueListManager-->
     <instructionSet>
         <file action="copy" source="xml/applicationContext.xml" target="{{siteRoot}}/src/main/webapp/WEB-INF/applicationContext.xml"/>
-        <file action="copy" source="xml/base.xml" target="{{siteRoot}}/src/main/resources/META-INF/client-assembly/base.xml"/>
-        <file action="copy" source="xml/cacheManager.xml" target="{{siteRoot}}/src/main/resources/META-INF/client-assembly/cacheManager.xml"/>
+        <file action="copy" source="xml/base.xml" target="{{siteOverrideFolder}}/base.xml"/>
+        <file action="copy" source="xml/cacheManager.xml" target="{{siteOverrideFolder}}/cacheManager.xml"/>
         <file action="copy" source="xml/custom-ehcache.xml" target="{{siteRoot}}/src/main/resources/custom-ehcache.xml"/>
         <!--can't overwrite with copy-->
         <file action="copy" source="xml/web.xml" target="{{siteRoot}}/src/main/webapp/WEB-INF/new-web.xml"/>
+    </instructionSet>
+
+    <!--Install the rest needed for the applicationContext.xml to work-->
+    <instructionSet>
+        <file action="copy" source="java/components/security/dao/UserProfileDAOImpl.txt" target="{{componentsFolder}}/security/dao/UserProfileDAOImpl.java"/>
+        <file action="copy" source="java/components/model/Classes.txt" target="{{componentsFolder}}/model/Classes.java"/>
+        <file action="copy" source="java/components/model/Department.txt" target="{{componentsFolder}}/model/Department.java"/>
+        <file action="copy" source="java/components/model/Departments.txt" target="{{componentsFolder}}/model/Departments.java"/>
+        <file action="copy" source="java/components/model/Grade.txt" target="{{componentsFolder}}/model/Grade.java"/>
+        <file action="copy" source="java/components/model/Grades.txt" target="{{componentsFolder}}/model/Grades.java"/>
+        <file action="copy" source="java/components/model/Lesson.txt" target="{{componentsFolder}}/model/Lesson.java"/>
+        <file action="copy" source="java/components/model/StudyProgram.txt" target="{{componentsFolder}}/model/StudyProgram.java"/>
+        <file action="copy" source="java/components/model/StudyPrograms.txt" target="{{componentsFolder}}/model/StudyPrograms.java"/>
+        <file action="copy" source="java/components/model/Teacher.txt" target="{{componentsFolder}}/model/Teacher.java"/>
+        <file action="copy" source="java/components/model/Teachers.txt" target="{{componentsFolder}}/model/Teachers.java"/>
+        <file action="copy" source="java/components/model/TimeTable.txt" target="{{componentsFolder}}/model/TimeTable.java"/>
+        <file action="copy" source="java/components/services/ClassesService.txt" target="{{componentsFolder}}/services/ClassesService.java"/>
+        <file action="copy" source="java/components/services/DepartmentsService.txt" target="{{componentsFolder}}/services/DepartmentsService.java"/>
+        <file action="copy" source="java/components/services/GradeService.txt" target="{{componentsFolder}}/services/GradeService.java"/>
+        <file action="copy" source="java/components/services/StudyProgramService.txt" target="{{componentsFolder}}/services/StudyProgramService.java"/>
+        <file action="copy" source="java/components/services/TeacherService.txt" target="{{componentsFolder}}/services/TeacherService.java"/>
+        <file action="copy" source="java/components/services/TimeTableService.txt" target="{{componentsFolder}}/services/TimeTableService.java"/>
     </instructionSet>
 
 </instructions>

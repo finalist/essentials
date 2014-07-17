@@ -1,0 +1,93 @@
+package {{componentsPackage}}.model;
+
+import java.io.Serializable;
+
+import org.codehaus.jackson.annotate.JsonProperty;
+
+public class Department implements Serializable {
+
+    private static final long serialVersionUID = -2368971951281788678L;
+    @JsonProperty
+    private String id;
+    @JsonProperty("departmentCode")
+    private String code;
+    @JsonProperty("departmentType")
+    private String type;
+    @JsonProperty("departmentNumber")
+    private String number;
+    @JsonProperty("departmentNL")
+    private String titleNL;
+    @JsonProperty("departmentEN")
+    private String titleEN;
+    @JsonProperty("parentDepartment")
+    private String parentDepartment;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getTitleNL() {
+        return titleNL;
+    }
+
+    public void setTitleNL(String titleNL) {
+        this.titleNL = titleNL;
+    }
+
+    public String getTitleEN() {
+        return titleEN;
+    }
+
+    public void setTitleEN(String titleEN) {
+        this.titleEN = titleEN;
+    }
+
+    public String getParentDepartment() {
+        return parentDepartment;
+    }
+
+    public void setParentDepartment(String parentDepartment) {
+        this.parentDepartment = parentDepartment;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("id:").append(getId()).append(";");
+        sb.append("code:").append(getCode()).append(";");
+        sb.append("type:").append(getType()).append(";");
+        sb.append("number:").append(getNumber()).append(";");
+        sb.append("titleNL:").append(getTitleNL()).append(";");
+        sb.append("parent:").append(getParentDepartment()).append(";");
+        return sb.toString();
+    }
+
+}

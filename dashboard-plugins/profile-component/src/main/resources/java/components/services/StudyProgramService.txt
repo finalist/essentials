@@ -1,0 +1,18 @@
+package {{componentsPackage}}.services;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+
+import {{componentsPackage}}.exception.EsbException;
+import {{componentsPackage}}.exception.NotFoundException;
+import {{componentsPackage}}.model.StudyProgram;
+
+@Path("/")
+public interface StudyProgramService {
+
+  @GET
+  @Path("/")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  StudyPrograms getStudyPrograms() throws NotFoundException, EsbException;
+}

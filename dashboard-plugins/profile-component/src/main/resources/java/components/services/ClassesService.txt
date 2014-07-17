@@ -1,0 +1,18 @@
+package {{componentsPackage}}.services;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+
+import {{componentsPackage}}.exception.EsbException;
+import {{componentsPackage}}.exception.NotFoundException;
+import {{componentsPackage}}.model.Classes;
+
+@Path("/")
+public interface ClassesService {
+
+    @GET
+    @Path("/")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    Classes getClasses(@QueryParam("educationalProgram") String educationalProgram) throws NotFoundException, EsbException;
+}

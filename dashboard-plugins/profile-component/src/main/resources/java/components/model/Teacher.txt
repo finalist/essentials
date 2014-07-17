@@ -1,0 +1,39 @@
+package {{componentsPackage}}.model;
+
+import org.codehaus.jackson.annotate.JsonProperty;
+
+public class Teacher {
+
+  @JsonProperty("teacherCode")
+  private String abbreviation;
+
+  @JsonProperty("teacherName")
+  private String name;
+
+  @JsonProperty("faculty")
+  private String faculty;
+
+  public String getAbbreviation() {
+    return abbreviation;
+  }
+
+  public void setAbbreviation(String abbreviation) {
+    this.abbreviation = abbreviation;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getFaculty() {
+    return faculty;
+  }
+
+  public void setFaculty(String faculty) {
+    this.faculty = faculty;
+  }
+}

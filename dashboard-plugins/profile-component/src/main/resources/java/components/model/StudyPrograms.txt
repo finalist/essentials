@@ -1,0 +1,19 @@
+package {{componentsPackage}}.model;
+
+import org.codehaus.jackson.annotate.JsonProperty;
+
+import java.util.List;
+
+public class StudyPrograms {
+
+  @JsonProperty("educationalPrograms")
+  private List<StudyProgram> studyPrograms;
+
+  public List<StudyProgram> getStudyPrograms() {
+    return studyPrograms;
+  }
+
+  public void setStudyPrograms(List<StudyProgram> studyPrograms) {
+    this.studyPrograms = studyPrograms;
+  }
+}

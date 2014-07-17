@@ -1,0 +1,54 @@
+package {{componentsPackage}}.model;
+
+import org.codehaus.jackson.annotate.JsonProperty;
+
+/**
+ * Created by brian on 4/9/14.
+ */
+
+public class StudyProgram {
+
+  @JsonProperty("sector")
+  private String sector;
+
+  @JsonProperty("abbreviation")
+  private String abbreviation;
+
+  @JsonProperty("description")
+  private String description;
+
+  @JsonProperty("faculty")
+  private String faculty;
+
+  public String getSector() {
+    return sector;
+  }
+
+  public void setSector(String sector) {
+    this.sector = sector;
+  }
+
+  public String getAbbreviation() {
+    return abbreviation;
+  }
+
+  public void setAbbreviation(String abbreviation) {
+    this.abbreviation = abbreviation;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public String getFaculty() {
+    return faculty;
+  }
+
+  public void setFaculty(String faculty) {
+    this.faculty = faculty;
+  }
+}

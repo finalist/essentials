@@ -116,7 +116,7 @@
     <instructionSet>
         <file action="copy" source="java/components/security/converter/LocalAccountConverter.txt" target="{{componentsFolder}}/security/converter/LocalAccountConverter.java"/>
         <file action="copy" source="java/components/security/dao/LocalAccountDAO.txt" target="{{componentsFolder}}/security/dao/LocalAccountDAO.java"/>
-        <file action="copy" source="java/components/security/dao/LocalAccountDOAImplDAO.txt" target="{{componentsFolder}}/security/dao/LocalAccountDOAImpl.java"/>
+        <file action="copy" source="java/components/security/dao/LocalAccountDAOImpl.txt" target="{{componentsFolder}}/security/dao/LocalAccountDAOImpl.java"/>
         <file action="copy" source="java/components/security/model/LocalAccount.txt" target="{{componentsFolder}}/security/model/LocalAccount.java"/>
         <file action="copy" source="java/components/security/service/LocalAccountService.txt" target="{{componentsFolder}}/security/service/LocalAccountService.java"/>
         <file action="copy" source="java/components/security/service/LocalAccountServiceImpl.txt" target="{{componentsFolder}}/security/service/LocalAccountServiceImpl.java"/>
@@ -126,7 +126,7 @@
     <instructionSet>
         <file action="copy" source="java/components/services/ClassesServiceImpl.txt" target="{{componentsFolder}}/services/ClassesServiceImpl.java"/>
         <file action="copy" source="java/components/services/DepartmentsServiceImpl.txt" target="{{componentsFolder}}/services/DepartmentsServiceImpl.java"/>
-        <file action="copy" source="java/components/services/GradeService.txtImpl" target="{{componentsFolder}}/services/GradeServiceImpl.java"/>
+        <file action="copy" source="java/components/services/GradeServiceImpl.txt" target="{{componentsFolder}}/services/GradeServiceImpl.java"/>
         <file action="copy" source="java/components/services/StudyProgramServiceImpl.txt" target="{{componentsFolder}}/services/StudyProgramServiceImpl.java"/>
         <file action="copy" source="java/components/services/TeacherServiceImpl.txt" target="{{componentsFolder}}/services/TeacherServiceImpl.java"/>
         <file action="copy" source="java/components/services/TimeTableServiceImpl.txt" target="{{componentsFolder}}/services/TimeTableServiceImpl.java"/>

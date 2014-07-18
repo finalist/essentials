@@ -223,7 +223,14 @@ public abstract class ProfileBaseComponent extends BaseHstComponent {
         if (componentManager == null) {
             throw new IllegalStateException("Unable to find ComponentManager");
         }
-        return componentManager.getComponent(componentClass.getName());
+        Map<String, T> componentsMap = componentManager.getComponentsOfType(componentClass);
+        Collection<T> components = componentsMap.values();
+
+        if (components.isEmpty()) {
+            throw new IllegalStateException("Unable to find service for class: " + componentClass);
+        } else {
+            return components.iterator().next();
+        }
     }
 
     public LinkedHashMap<String, String> getAreasOfInterest(HstRequest request) {

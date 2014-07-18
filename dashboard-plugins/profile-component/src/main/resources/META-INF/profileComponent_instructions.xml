@@ -86,8 +86,6 @@
         <file action="copy" source="xml/base.xml" target="{{siteOverrideFolder}}/base.xml"/>
         <file action="copy" source="xml/cacheManager.xml" target="{{siteOverrideFolder}}/cacheManager.xml"/>
         <file action="copy" source="xml/custom-ehcache.xml" target="{{siteRoot}}/src/main/resources/custom-ehcache.xml"/>
-        <!--can't overwrite with copy-->
-        <file action="copy" source="xml/web.xml" target="{{siteRoot}}/src/main/webapp/WEB-INF/new-web.xml"/>
     </instructionSet>
 
     <!--Install the rest needed for the applicationContext.xml to work-->

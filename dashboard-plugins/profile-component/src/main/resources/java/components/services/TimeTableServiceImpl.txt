@@ -1,0 +1,28 @@
+package {{componentsPackage}}.services;
+
+import {{componentsPackage}}.exception.EsbException;
+import {{componentsPackage}}.exception.NotFoundException;
+import {{componentsPackage}}.model.Lesson;
+import {{componentsPackage}}.model.TimeTable;
+
+public class TimeTableServiceImpl implements TimeTableService{
+    @Override
+    public TimeTable<Lesson> getStudentTimeTable(String studentCode, Long fromWeek, Long toWeek) throws NotFoundException, EsbException {
+        return null;
+    }
+
+    @Override
+    public TimeTable<Lesson> getTeacherTimeTable(String teacherCode, Long fromWeek, Long toWeek) throws NotFoundException, EsbException {
+        return null;
+    }
+
+    @Override
+    public TimeTable<Lesson> getClassTimeTable(String classCode, Long fromWeek, Long toWeek) throws NotFoundException, EsbException {
+        return null;
+    }
+
+    @Override
+    public TimeTable<Lesson> getClassTimeTable(String classCode, String educationalProgram, Long fromWeek, Long toWeek) throws NotFoundException, EsbException {
+        return null;
+    }
+}

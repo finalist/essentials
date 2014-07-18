@@ -1,0 +1,22 @@
+package {{componentsPackage}}.services;
+
+import {{componentsPackage}}.exception.EsbException;
+import {{componentsPackage}}.exception.NotFoundException;
+import {{componentsPackage}}.model.Employees;
+
+public class EmployeeSearchServiceImpl implements EmployeeSearchService{
+    @Override
+    public Employees searchEmployees(String keyword) throws NotFoundException, EsbException {
+        return null;
+    }
+
+    @Override
+    public Employees searchEmployee(String account, Boolean all) throws NotFoundException, EsbException {
+        return null;
+    }
+
+    @Override
+    public Employees searchEmployees(String name, String facultyName) throws NotFoundException, EsbException {
+        return null;
+    }
+}

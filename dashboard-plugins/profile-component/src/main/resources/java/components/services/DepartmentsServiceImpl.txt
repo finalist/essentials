@@ -1,0 +1,12 @@
+package {{componentsPackage}}.services;
+
+import {{componentsPackage}}.exception.EsbException;
+import {{componentsPackage}}.exception.NotFoundException;
+import {{componentsPackage}}.model.Departments;
+
+public class DepartmentsServiceImpl implements DepartmentsService{
+    @Override
+    public Departments getDepartments() throws NotFoundException, EsbException {
+        return null;
+    }
+}

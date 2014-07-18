@@ -5,7 +5,7 @@ import javax.ws.rs.core.MediaType;
 
 import {{componentsPackage}}.exception.EsbException;
 import {{componentsPackage}}.exception.NotFoundException;
-import {{componentsPackage}}.model.StudyProgram;
+import {{componentsPackage}}.model.StudyPrograms;
 
 @Path("/")
 public interface StudyProgramService {

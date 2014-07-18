@@ -1,0 +1,12 @@
+package {{componentsPackage}}.services;
+
+import {{componentsPackage}}.exception.EsbException;
+import {{componentsPackage}}.exception.NotFoundException;
+import {{componentsPackage}}.model.Grades;
+
+public class GradeServiceImpl implements GradeService{
+    @Override
+    public Grades getStudentGrades(String studentCode) throws NotFoundException, EsbException {
+        return null;
+    }
+}

@@ -1,7 +1,13 @@
 package {{componentsPackage}}.security.dao;
 
 import {{componentsPackage}}.security.model.UserProfile;
-import org.springframework.data.repository.CrudRepository;
 
-public interface UserProfileDAO extends CrudRepository<UserProfile, String> {
+public interface UserProfileDAO {
+    boolean exists(String s);
+
+    UserProfile save(UserProfile userProfile);
+
+    UserProfile findOne(String s);
+
+    void delete(UserProfile userProfile);
 }

@@ -1,0 +1,12 @@
+package {{componentsPackage}}.services;
+
+import {{componentsPackage}}.exception.EsbException;
+import {{componentsPackage}}.exception.NotFoundException;
+import {{componentsPackage}}.model.EmployeeInfo;
+
+public class EmployeeInfoServiceImpl implements EmployeeInfoService{
+    @Override
+    public EmployeeInfo getEmployeeInfo(String employeeCode) throws NotFoundException, EsbException {
+        return null;
+    }
+}

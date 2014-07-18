@@ -1,0 +1,12 @@
+package {{componentsPackage}}.services;
+
+import {{componentsPackage}}.exception.EsbException;
+import {{componentsPackage}}.exception.NotFoundException;
+import {{componentsPackage}}.model.StudentInfo;
+
+public class StudentInfoServiceImpl implements StudentInfoService{
+    @Override
+    public StudentInfo getStudentInfo(String studentCode) throws NotFoundException, EsbException {
+        return null;
+    }
+}

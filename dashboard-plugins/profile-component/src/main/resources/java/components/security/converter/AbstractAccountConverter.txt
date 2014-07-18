@@ -96,7 +96,6 @@ public abstract class AbstractAccountConverter {
      * @param grantedAuthorities the list of granted authorities for the user having the given user id
      * @return the user information belonging to the given user id in the given role, null otherwise
      * @throws EsbException
-     * @throws NoContentException
      * @throws NotFoundException
      */
     protected UserInfo getUserInfo(String uid, List<GrantedAuthority> grantedAuthorities) throws NotFoundException, EsbException {

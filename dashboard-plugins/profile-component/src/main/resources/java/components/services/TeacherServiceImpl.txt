@@ -1,0 +1,12 @@
+package {{componentsPackage}}.services;
+
+import {{componentsPackage}}.exception.EsbException;
+import {{componentsPackage}}.exception.NotFoundException;
+import {{componentsPackage}}.model.Teachers;
+
+public class TeacherServiceImpl implements TeacherService{
+    @Override
+    public Teachers getTeachers(String studyProgramAbbreviation) throws NotFoundException, EsbException {
+        return null;
+    }
+}

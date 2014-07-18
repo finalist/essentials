@@ -1,0 +1,30 @@
+package {{componentsPackage}}.security.service;
+
+import {{componentsPackage}}.security.dao.LocalAccountDAO;
+import {{componentsPackage}}.security.model.LocalAccount;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+@Service
+public class LocalAccountServiceImpl implements LocalAccountService {
+  private static final Logger LOG = LoggerFactory.getLogger(LocalAccountServiceImpl.class);
+  private static final String ID_PREFIX = "account-";
+
+  @Autowired
+  private LocalAccountDAO localAccountDAO;
+
+  @Override
+  public LocalAccount getAccount(String username) throws UsernameNotFoundException {
+    LOG.debug("Retrieving local account for username '{}'", username);
+
+    if(localAccountDAO.exists(ID_PREFIX + username)) {
+      return localAccountDAO.findOne(ID_PREFIX + username);
+    }
+    else {
+      throw new UsernameNotFoundException("Username '" + username + "' not found");
+    }
+  }
+}

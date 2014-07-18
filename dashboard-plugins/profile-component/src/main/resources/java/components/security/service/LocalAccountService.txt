@@ -1,0 +1,8 @@
+package {{componentsPackage}}.security.service;
+
+import {{componentsPackage}}.security.model.LocalAccount;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+public interface LocalAccountService {
+  LocalAccount getAccount(String username) throws UsernameNotFoundException;
+}

@@ -1,0 +1,9 @@
+package {{componentsPackage}}.security.dao;
+
+import {{componentsPackage}}.security.model.LocalAccount;
+
+public interface LocalAccountDAO {
+    boolean exists(String s);
+
+    LocalAccount findOne(String s);
+}

@@ -1,0 +1,12 @@
+package {{componentsPackage}}.services;
+
+import {{componentsPackage}}.exception.EsbException;
+import {{componentsPackage}}.exception.NotFoundException;
+import {{componentsPackage}}.model.StudyPrograms;
+
+public class StudyProgramServiceImpl implements StudyProgramService{
+    @Override
+    public StudyPrograms getStudyPrograms() throws NotFoundException, EsbException {
+        return null;
+    }
+}

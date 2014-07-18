@@ -1,0 +1,20 @@
+package {{componentsPackage}}.security.dao;
+
+import {{componentsPackage}}.security.model.LocalAccount;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class LocalAccountDAOImpl implements LocalAccountDAO{
+    private static final Logger LOG = LoggerFactory.getLogger(UserProfileDAO.class);
+    @Override
+    public boolean exists(String s) {
+        LOG.warn("using empty implementation of LocalAccountDOA");
+        return false;
+    }
+
+    @Override
+    public LocalAccount findOne(String s) {
+        LOG.warn("using empty implementation of LocalAccountDOA");
+        return null;
+    }
+}

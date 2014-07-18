@@ -1,0 +1,129 @@
+package {{componentsPackage}}.security.model;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.couchbase.core.mapping.Document;
+import org.springframework.data.couchbase.core.mapping.Field;
+
+import java.util.List;
+
+/**
+ * Created by brian on 4/17/14.
+ */
+@Document
+public class LocalAccount {
+
+    @Id
+    private String id;
+
+    @Field
+    private String username;
+
+    @Field
+    private String password;
+
+    @Field
+    private String surName;
+
+    @Field
+    private String givenName;
+
+    @Field
+    private List<String> commonNames;
+
+    @Field
+    private String displayName;
+
+    @Field
+    private List<String> emailAddresses;
+
+    @Field
+    private String organization;
+
+    @Field
+    private String organizationType;
+
+    @Field
+    private List<String> affiliations;
+
+    @Field
+    private List<String> entitlements;
+
+    @Field
+    private String principalName;
+
+    @Field
+    private List<String> memberships;
+
+    @Field
+    private List<String> uids;
+
+    @Field
+    private String preferredLanguage;
+
+    public LocalAccount() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getSurName() {
+        return surName;
+    }
+
+    public String getGivenName() {
+        return givenName;
+    }
+
+    public List<String> getCommonNames() {
+        return commonNames;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public List<String> getEmailAddresses() {
+        return emailAddresses;
+    }
+
+    public String getOrganization() {
+        return organization;
+    }
+
+    public String getOrganizationType() {
+        return organizationType;
+    }
+
+    public List<String> getAffiliations() {
+        return affiliations;
+    }
+
+    public List<String> getEntitlements() {
+        return entitlements;
+    }
+
+    public String getPrincipalName() {
+        return principalName;
+    }
+
+    public List<String> getMemberships() {
+        return memberships;
+    }
+
+    public List<String> getUids() {
+        return uids;
+    }
+
+    public String getPreferredLanguage() {
+        return preferredLanguage;
+    }
+}

@@ -82,7 +82,7 @@
 
     <!--Install the Spring configurations for the ValueListManager-->
     <instructionSet>
-        <file action="copy" source="xml/applicationContext.xml" target="{{siteRoot}}/src/main/webapp/WEB-INF/applicationContext.xml"/>
+        <file action="copy" source="xml/applicationContext.xml" target="{{siteOverrideFolder}}/applicationContext.xml"/>
         <file action="copy" source="xml/base.xml" target="{{siteOverrideFolder}}/base.xml"/>
         <file action="copy" source="xml/cacheManager.xml" target="{{siteOverrideFolder}}/cacheManager.xml"/>
         <file action="copy" source="xml/custom-ehcache.xml" target="{{siteRoot}}/src/main/resources/custom-ehcache.xml"/>
@@ -110,6 +110,29 @@
         <file action="copy" source="java/components/services/StudyProgramService.txt" target="{{componentsFolder}}/services/StudyProgramService.java"/>
         <file action="copy" source="java/components/services/TeacherService.txt" target="{{componentsFolder}}/services/TeacherService.java"/>
         <file action="copy" source="java/components/services/TimeTableService.txt" target="{{componentsFolder}}/services/TimeTableService.java"/>
+    </instructionSet>
+
+    <!--Install classes for local account-->
+    <instructionSet>
+        <file action="copy" source="java/components/security/converter/LocalAccountConverter.txt" target="{{componentsFolder}}/security/converter/LocalAccountConverter.java"/>
+        <file action="copy" source="java/components/security/dao/LocalAccountDAO.txt" target="{{componentsFolder}}/security/dao/LocalAccountDAO.java"/>
+        <file action="copy" source="java/components/security/dao/LocalAccountDOAImplDAO.txt" target="{{componentsFolder}}/security/dao/LocalAccountDOAImpl.java"/>
+        <file action="copy" source="java/components/security/model/LocalAccount.txt" target="{{componentsFolder}}/security/model/LocalAccount.java"/>
+        <file action="copy" source="java/components/security/service/LocalAccountService.txt" target="{{componentsFolder}}/security/service/LocalAccountService.java"/>
+        <file action="copy" source="java/components/security/service/LocalAccountServiceImpl.txt" target="{{componentsFolder}}/security/service/LocalAccountServiceImpl.java"/>
+    </instructionSet>
+
+    <!--Install empty implementations-->
+    <instructionSet>
+        <file action="copy" source="java/components/services/ClassesServiceImpl.txt" target="{{componentsFolder}}/services/ClassesServiceImpl.java"/>
+        <file action="copy" source="java/components/services/DepartmentsServiceImpl.txt" target="{{componentsFolder}}/services/DepartmentsServiceImpl.java"/>
+        <file action="copy" source="java/components/services/GradeService.txtImpl" target="{{componentsFolder}}/services/GradeServiceImpl.java"/>
+        <file action="copy" source="java/components/services/StudyProgramServiceImpl.txt" target="{{componentsFolder}}/services/StudyProgramServiceImpl.java"/>
+        <file action="copy" source="java/components/services/TeacherServiceImpl.txt" target="{{componentsFolder}}/services/TeacherServiceImpl.java"/>
+        <file action="copy" source="java/components/services/TimeTableServiceImpl.txt" target="{{componentsFolder}}/services/TimeTableServiceImpl.java"/>
+        <file action="copy" source="java/components/services/EmployeeSearchServiceImpl.txt" target="{{componentsFolder}}/services/EmployeeSearchServiceImpl.java"/>
+        <file action="copy" source="java/components/services/StudentInfoServiceImpl.txt" target="{{componentsFolder}}/services/StudentInfoServiceImpl.java"/>
+        <file action="copy" source="java/components/services/EmployeeInfoServiceImpl.txt" target="{{componentsFolder}}/services/EmployeeInfoServiceImpl.java"/>
     </instructionSet>
 
 </instructions>

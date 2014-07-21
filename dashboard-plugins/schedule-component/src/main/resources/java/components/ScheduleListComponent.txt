@@ -1,0 +1,95 @@
+package {{componentsPackage}};
+
+import java.util.*;
+
+import {{componentsPackage}}.exception.EsbException;
+import {{componentsPackage}}.exception.NotFoundException;
+import {{componentsPackage}}.model.Lesson;
+import {{componentsPackage}}.model.TimeTable;
+import {{componentsPackage}}.services.TimeTableService;
+import {{componentsPackage}}info.ListWidgetInfo;
+import {{componentsPackage}}.security.model.userdetails.UserDetails;
+
+import org.hippoecm.hst.core.component.HstComponentException;
+import org.hippoecm.hst.core.component.HstRequest;
+import org.hippoecm.hst.core.component.HstResponse;
+import org.hippoecm.hst.core.parameters.ParametersInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+@ParametersInfo(type = ListWidgetInfo.class)
+public class ScheduleListComponent extends AbstractUserComponent<ListWidgetInfo> {
+    private static final Logger LOG = LoggerFactory.getLogger(ScheduleListComponent.class);
+
+    @Override
+    public void doBeforeRender(HstRequest request, HstResponse response) throws HstComponentException {
+        super.doBeforeRender(request, response);
+
+        if (isVisible(request)) {
+            try {
+                request.setAttribute("lessons", getLessons(request));
+            } catch (NotFoundException e) {
+                LOG.info("No data found: " + e.getMessage());
+                request.setAttribute("error", false);
+            } catch (EsbException e) {
+                LOG.warn("Error before rendering component: " + e.getMessage());
+                request.setAttribute("error", true);
+            } catch (Exception e) {
+                LOG.warn("Error before rendering component: " + e.getMessage());
+                request.setAttribute("error", true);
+            }
+        }
+    }
+
+    @Override
+    public void doAction(HstRequest request, HstResponse response) throws HstComponentException {
+        super.doAction(request, response);
+    }
+
+    private List<Lesson> getLessons(HstRequest request) throws NotFoundException, EsbException {
+        List<Lesson> lessons = new ArrayList<Lesson>();
+
+        Calendar now = Calendar.getInstance(new Locale("nl"));
+        Long fromWeek = (long) now.get(Calendar.WEEK_OF_YEAR);
+        Long toWeek = fromWeek;
+
+        UserDetails userDetails = getUserDetails(request);
+        String uid = userDetails.getUid();
+
+        if (uid != null) {
+            TimeTableService timeTableService = getClientComponent(TimeTableService.class);
+            TimeTable<Lesson> timeTable = null;
+            LOG.debug("Get timetable for " + uid + " in week " + fromWeek);
+            if (isStudent(request)) {
+                timeTable = timeTableService.getStudentTimeTable(uid, fromWeek, toWeek);
+            } else if (isTeacher(request)) {
+                timeTable = timeTableService.getTeacherTimeTable(uid, fromWeek, toWeek);
+            }
+            if (timeTable != null) {
+                lessons = timeTable.getTimeTable();
+            }
+        }
+        if (!lessons.isEmpty()) {
+            // now filter for lessons of today
+            removeLessonsOnOtherDays(lessons, now);
+            ListWidgetInfo info = getComponentParametersInfo(request);
+            lessons = lessons.subList(0, Math.min(lessons.size(), info.getLimit()));
+            LOG.debug("length after limit: " + lessons.size());
+        }
+
+        return lessons;
+    }
+
+    protected void removeLessonsOnOtherDays(List<Lesson> lessons, Calendar now) {
+        Iterator<Lesson> iterator = lessons.iterator();
+        while (iterator.hasNext()) {
+            Date startTime = iterator.next().getStartTime();
+            Calendar calendar = Calendar.getInstance(new Locale("nl"));
+            calendar.setTime(startTime);
+            if (now.get(Calendar.DAY_OF_YEAR) != calendar.get(Calendar.DAY_OF_YEAR)) {
+                iterator.remove();
+            }
+
+        }
+    }
+}

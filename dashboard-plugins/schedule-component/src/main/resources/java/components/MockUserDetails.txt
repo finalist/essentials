@@ -1,7 +1,0 @@
-package {{componentsPackage}};
-
-public class MockUserDetails {
-    public String getUid() {
-        return "mockid";
-    }
-}

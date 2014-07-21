@@ -18,20 +18,14 @@
 <instructions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://www.onehippo.org/essentials/instructions /instructions.xsd" xmlns="http://www.onehippo.org/essentials/instructions">
   <instructionSet>
-    <file action="copy" source="java/components/MockGrade.txt" target="{{componentsFolder}}/MockGrade.java"/>
-    <file action="copy" source="java/components/MockGrades.txt" target="{{componentsFolder}}/MockGrades.java"/>
-    <file action="copy" source="java/components/MockGradeService.txt" target="{{componentsFolder}}/MockGradeService.java"/>
-    <file action="copy" source="java/components/MockUserDetails.txt" target="{{componentsFolder}}/MockUserDetails.java"/>
-    <file action="copy" source="java/components/StudentGradesComponent.txt" target="{{componentsFolder}}/StudentGradesComponent.java"/>
-    <file action="copy" source="java/componentsinfo/BaseWidgetInfo.txt" target="{{componentsFolder}}info/BaseWidgetInfo.java"/>
-    <file action="copy" source="java/componentsinfo/ListWidgetInfo.txt" target="{{componentsFolder}}info/ListWidgetInfo.java"/>
+    <file action="copy" source="java/components/ScheduleListComponent.txt" target="{{componentsFolder}}/ScheduleListComponent.java"/>
   </instructionSet>
 
   <instructionSet>
-    <file action="copy" source="jsp/grades/widget/content.jsp" target="{{jspRoot}}/grades/widget/content.jsp"/>
-    <file action="copy" binary="true" source="images/component-icon-list.png" target="{{siteWebRoot}}/images/component-icon-list.png"/>
-    <xml action="copy" source="xml/grades_widget.xml" target="/hst:hst/hst:configurations/hst:default/hst:catalog/essentials-catalog"/>
-    <xml action="copy" source="xml/grades_template.xml" target="/hst:hst/hst:configurations/hst:default/hst:templates"/>
+    <file action="copy" source="jsp/schedule/widget/content.jsp" target="{{jspRoot}}/schedule/widget/content.jsp"/>
+    <file action="copy" binary="true" source="images/catalog-list.png" target="{{siteWebRoot}}/images/catalog-list.png"/>
+    <xml action="copy" source="xml/schedule_widget.xml" target="/hst:hst/hst:configurations/hst:default/hst:catalog/essentials-catalog"/>
+    <xml action="copy" source="xml/schedule_template.xml" target="/hst:hst/hst:configurations/hst:default/hst:templates"/>
   </instructionSet>
 
 </instructions>

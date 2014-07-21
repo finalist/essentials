@@ -1,7 +1,0 @@
-package {{componentsPackage}};
-
-public class MockGradeService {
-    public MockGrades getStudentGrades(String uid) {
-        return new MockGrades();
-    }
-}

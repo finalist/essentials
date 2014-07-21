@@ -22,7 +22,7 @@
   </instructionSet>
 
   <instructionSet>
-    <file action="copy" source="jsp/schedule/widget/content.jsp" target="{{jspRoot}}/schedule/widget/content.jsp"/>
+    <file action="copy" binary="true" source="jsp/schedule/widget/content.jsp" target="{{jspRoot}}/schedule/widget/content.jsp"/>
     <file action="copy" binary="true" source="images/catalog-list.png" target="{{siteWebRoot}}/images/catalog-list.png"/>
     <xml action="copy" source="xml/schedule_widget.xml" target="/hst:hst/hst:configurations/hst:default/hst:catalog/essentials-catalog"/>
     <xml action="copy" source="xml/schedule_template.xml" target="/hst:hst/hst:configurations/hst:default/hst:templates"/>

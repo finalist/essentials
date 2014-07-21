@@ -185,6 +185,11 @@
       <artifactId>hippo-textblock-plugin</artifactId>
       <version>${project.version}</version>
     </dependency>
+    <dependency>
+      <groupId>com.finalist.essentials</groupId>
+      <artifactId>hippo-saml2-plugin</artifactId>
+      <version>${project.version}</version>
+    </dependency>
 
     <dependency>
       <groupId>org.onehippo.cms7.essentials</groupId>

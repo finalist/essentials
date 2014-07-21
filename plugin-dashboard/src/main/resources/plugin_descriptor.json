@@ -932,5 +932,27 @@
                 "scope": "compile"
             }
         ]
+    },
+    {
+        "enabled": true,
+        "@type": "plugin",
+        "name": "Saml2 plugin",
+        "introduction": "Add Saml2 dependencies and config",
+        "pluginId": "saml2Plugin",
+        "packageFile": "/META-INF/saml2Plugin_instructions.xml",
+        "restClasses": [],
+        "type": "plugins",
+        "vendor": {
+            "@type": "vendor",
+            "name": "Finalist",
+            "url": "http://www.finalist.com"
+        },
+        "libraries": [
+            {
+                "items": [
+
+                ]
+            }
+        ]
     }
 ]}

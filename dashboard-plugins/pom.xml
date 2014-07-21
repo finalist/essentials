@@ -70,6 +70,7 @@
     <module>schedule-component</module>
     <module>profile-component</module>
     <module>gallery-plugin</module>
+    <module>saml2-plugin</module>
   </modules>
   <dependencyManagement>
 

@@ -1,12 +1,17 @@
 package {{componentsPackage}};
 
-import java.util.Collections;
+mport java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import {{componentsPackage}}.exception.EsbException;
+import {{componentsPackage}}.exception.NotFoundException;
+import {{componentsPackage}}.model.Grade;
+import {{componentsPackage}}.model.Grades;
+import {{componentsPackage}}.services.GradeService;
 import {{componentsPackage}}info.ListWidgetInfo;
+import {{componentsPackage}}.security.model.userdetails.UserDetails;
 
-import org.hippoecm.hst.component.support.bean.BaseHstComponent;
 import org.hippoecm.hst.core.component.HstComponentException;
 import org.hippoecm.hst.core.component.HstRequest;
 import org.hippoecm.hst.core.component.HstResponse;
@@ -14,10 +19,8 @@ import org.hippoecm.hst.core.parameters.ParametersInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.http.HttpServletRequest;
-
 @ParametersInfo(type = ListWidgetInfo.class)
-public class StudentGradesComponent extends BaseHstComponent {
+public class StudentGradesComponent extends AbstractUserComponent<ListWidgetInfo> {
     private static final Logger LOG = LoggerFactory.getLogger(StudentGradesComponent.class);
 
     @Override
@@ -27,15 +30,20 @@ public class StudentGradesComponent extends BaseHstComponent {
         if (isVisible(request)) {
             try {
                 ListWidgetInfo info = getComponentParametersInfo(request);
-                MockUserDetails userDetails = new MockUserDetails();
-                String uid = userDetails.getUid();
-                MockGradeService gradeService = new MockGradeService();
-                // FIXME: The ESB should support  getting the grades with a limit parameter and sorted.
-                MockGrades grades = gradeService.getStudentGrades(uid);
-                List<MockGrade> studentGrades = grades == null ? Collections.<MockGrade>emptyList() : grades.getGrades();
-                request.setAttribute("grades", sortAndLimitGrades(studentGrades, info.getLimit()));
-                request.setAttribute("visible", isVisible(request));
-                setHttpRequestParameter(request, "locale", request.getLocale());
+                if (isStudent(request)) {
+                    UserDetails userDetails = getUserDetails(request);
+                    String uid = userDetails.getUid();
+                    GradeService gradeService = getClientComponent(GradeService.class);
+                    Grades grades = gradeService.getStudentGrades(uid);
+                    List<Grade> studentGrades = grades == null ? Collections.<Grade>emptyList() : grades.getGrades();
+                    request.setAttribute("grades", sortAndLimitGrades(studentGrades, info.getLimit()));
+                }
+            } catch (NotFoundException e) {
+                LOG.info("No data found: " + e.getMessage());
+                request.setAttribute("error", false);
+            } catch (EsbException e) {
+                LOG.warn("Error before rendering component: " + e.getMessage());
+                request.setAttribute("error", true);
             } catch (Exception e) {
                 LOG.warn("Error before rendering component: " + e.getMessage());
                 request.setAttribute("error", true);
@@ -43,10 +51,10 @@ public class StudentGradesComponent extends BaseHstComponent {
         }
     }
 
-    private List<MockGrade> sortAndLimitGrades(List<MockGrade> studentGrades, int limit) {
-        Collections.sort(studentGrades, new Comparator<MockGrade>() {
+    private List<Grade> sortAndLimitGrades(List<Grade> studentGrades, int limit) {
+        Collections.sort(studentGrades, new Comparator<Grade>() {
             @Override
-            public int compare(MockGrade o1, MockGrade o2) {
+            public int compare(Grade o1, Grade o2) {
                 // show newest first
                 return o2.getMutationDate().compareTo(o1.getMutationDate());
             }
@@ -55,14 +63,4 @@ public class StudentGradesComponent extends BaseHstComponent {
         return studentGrades.subList(0, Math.min(studentGrades.size(), limit));
     }
 
-    protected boolean isVisible(HstRequest request) {
-        return true;
-    }
-
-    public void setHttpRequestParameter(HstRequest request, String name, Object value) {
-        HttpServletRequest servletRequest = request.getRequestContext().getServletRequest();
-        if (servletRequest != null) {
-            servletRequest.setAttribute(name, value);
-        }
-    }
 }

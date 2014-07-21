@@ -19,7 +19,7 @@
             <div class="image"><img src="data:image/jpeg;base64,${userInfo.photoData}" /></div>
           </c:if>
           <div class="details">
-            <h2><c:out value="${userInfo.fullName}"/></h2>
+            <h2><c:out value="${userInfo.displayName}}"/></h2>
             <dl>
               <c:if test="${not empty userInfo.function}">
                 <dt><fmt:message key="account.profile.function"/>:</dt>
@@ -29,9 +29,14 @@
                 <dt><fmt:message key="account.profile.department"/>:</dt>
                 <dd><c:out value="${userInfo.faculty.facultyName}"/></dd>
               </c:if>
-              <c:if test="${not empty userInfo.phone}">
+              <c:if test="${not empty userInfo.phone or not empty userInfo.mobile}">
                 <dt><fmt:message key="account.profile.phone"/>:</dt>
-                <dd><c:out value="${userInfo.phone}"/></dd>
+                <c:if test="${not empty userInfo.mobile}">
+                  <dd><c:out value="${userInfo.mobile}"/></dd>
+                </c:if>
+                <c:if test="${not empty userInfo.phone}">
+                  <dd><c:out value="${userInfo.phone}"/></dd>
+                </c:if>
               </c:if>
               <c:if test="${not empty userInfo.email}">
                 <dt><fmt:message key="account.profile.email"/>:</dt>

@@ -5,15 +5,16 @@ Java code now standard has three entry points,beans, components, and rest. iet w
 There can be only one BaseComponent, however for some plugins you would like to add and use some methods in the
 BaseComponent, it would be nice if there was a standard empty BaseComponent, and you could add methods to these
  from your instructions.xml
-Which stuff in the Basecomponent in gogreen is mandatory?
+Which stuff in the BaseComponent in gogreen is mandatory?
 It would be nice to include some base templates with space for draggable components with essentials
-It would b nice if you could add pieces to the web.xml
+It would be nice if you could add pieces to the web.xml
 
 Finalist Plugins:
 
 Profile-component
 After including the profile component, add <type>pom</type> to
-the ehcash dependency in site before rebuilding.
+the ehcache dependency in pom.xml of the site before rebuilding:
+
 To really use the profile component the empty implementations need
-to be replaced with project specific esb/rest connectors in the sping
+to be replaced with project specific esb/rest connectors in the spring
 configuration.

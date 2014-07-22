@@ -19,6 +19,8 @@
               xsi:schemaLocation="http://www.onehippo.org/essentials/instructions /instructions.xsd" xmlns="http://www.onehippo.org/essentials/instructions">
   <!--first part is the base -->
   <instructionSet>
+      <file action="copy" source="xml/saml2-prod.xml" target="{{siteOverrideFolder}}/saml2-prod.xml"/>
+      <file action="copy" source="xml/web.xml" overwrite="true" target="{{siteWebInfRoot}}/web.xml"/>
   </instructionSet>
 
 </instructions>

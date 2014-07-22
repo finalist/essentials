@@ -953,6 +953,56 @@
 
                 ]
             }
+        ],
+        "dependencies": [
+            {
+                "@type": "dependency",
+                "groupId": "org.springframework.security.extensions",
+                "artifactId": "spring-security-saml2-core",
+                "scope": "compile",
+                "type": "site",
+                "version": "1.0.0.RC2"
+            },
+            {
+                "@type": "dependency",
+                "groupId": "org.springframework.security",
+                "artifactId": "spring-security-core",
+                "scope": "compile",
+                "version": "3.2.4.RELEASE",
+                "type": "site"
+            },
+            {
+                "@type": "dependency",
+                "groupId": "org.springframework.security",
+                "artifactId": "spring-security-web",
+                "scope": "compile",
+                "version": "3.2.4.RELEASE",
+                "type": "site"
+            },
+            {
+                "@type": "dependency",
+                "groupId": "org.springframework.security",
+                "artifactId": "spring-security-config",
+                "scope": "compile",
+                "version": "3.2.4.RELEASE",
+                "type": "site"
+            },
+            {
+                "@type": "dependency",
+                "groupId": "org.springframework.security",
+                "artifactId": "spring-security-taglibs",
+                "scope": "compile",
+                "version": "3.2.4.RELEASE",
+                "type": "site"
+            },
+            {
+                "@type": "dependency",
+                "groupId": "org.onehippo.forge.hst-springsec",
+                "artifactId": "hst-springsec",
+                "scope": "compile",
+                "version": "0.02.05",
+                "type": "site"
+            }
         ]
     }
 ]}

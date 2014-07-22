@@ -10,19 +10,19 @@ public class UserProfileDAOImpl implements UserProfileDAO{
     @Override
     public boolean exists(String s) {
         LOG.warn("using empty implementation of UserProfileDOA");
-        return false;
+        return true;
     }
 
     @Override
     public UserProfile save(UserProfile userProfile) {
         LOG.warn("using empty implementation of UserProfileDOA");
-        return null;
+        return userProfile;
     }
 
     @Override
     public UserProfile findOne(String s) {
         LOG.warn("using empty implementation of UserProfileDOA");
-        return null;
+        return new UserProfile();
     }
 
     @Override

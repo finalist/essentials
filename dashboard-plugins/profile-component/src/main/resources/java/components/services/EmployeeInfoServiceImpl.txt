@@ -3,10 +3,51 @@ package {{componentsPackage}}.services;
 import {{componentsPackage}}.exception.EsbException;
 import {{componentsPackage}}.exception.NotFoundException;
 import {{componentsPackage}}.model.EmployeeInfo;
+import {{componentsPackage}}.model.Faculty;
 
 public class EmployeeInfoServiceImpl implements EmployeeInfoService{
     @Override
     public EmployeeInfo getEmployeeInfo(String employeeCode) throws NotFoundException, EsbException {
-        return null;
+        EmployeeInfo info = new EmployeeInfo();
+        info.setAccount("testaccount");
+        info.setEmail("test@finalist.nl");
+        info.setFields("velden");
+        info.setFunction("tester1");
+        info.setHidePartnerName(false);
+        info.setLinks("http://www.finalist.nl");
+        info.setMobile("06-00000000");
+        info.setPhone("030-0000000");
+        info.setNetworks("test");
+        info.setNotPresentContactName("tester2");
+        info.setOrganisationalUnit("testlokaal");
+        info.setPhotoData("photolocatie?");
+        info.setOtherPositions("harde werker");
+        info.setShowInWhoIs(true);
+        info.setPrimaryTeam("finalist");
+        info.setDisplayName("Tester 1");
+        info.setPublications("Testblad");
+        info.setInitials("T.E.S.T.");
+        info.setLastName("last");
+        info.setLastNamePrefix("van");
+        Faculty faculty = new Faculty();
+        faculty.setFacultyCode("testcode");
+        faculty.setFacultyName("facultyname");
+        info.setFaculty(faculty);
+        info.setPresenceFRIAfternoon(true);
+        info.setPresenceFRIEvening(false);
+        info.setPresenceFRIMorning(true);
+        info.setPresenceTHUAfternoon(false);
+        info.setPresenceTHUEvening(false);
+        info.setPresenceTHUMorning(true);
+        info.setPresenceWEDAfternoon(true);
+        info.setPresenceWEDEvening(false);
+        info.setPresenceWEDMorning(true);
+        info.setPresenceTUEAfternoon(true);
+        info.setPresenceTUEEvening(false);
+        info.setPresenceTUEMorning(true);
+        info.setPresenceMONAfternoon(true);
+        info.setPresenceMONEvening(false);
+        info.setPresenceMONMorning(true);
+        return info;
     }
 }

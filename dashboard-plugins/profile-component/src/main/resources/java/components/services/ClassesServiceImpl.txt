@@ -2,11 +2,20 @@ package {{componentsPackage}}.services;
 
 import {{componentsPackage}}.exception.EsbException;
 import {{componentsPackage}}.exception.NotFoundException;
+import {{componentsPackage}}.model.Classe;
 import {{componentsPackage}}.model.Classes;
 
 public class ClassesServiceImpl implements ClassesService{
     @Override
     public Classes getClasses(String educationalProgram) throws NotFoundException, EsbException {
-        return null;
+        Classe class1 = new Classe();
+        class1.setClassName("mockles1");
+        Classe class2 = new Classe();
+        class2.setClassName("mockles2");
+        Classes classes = new Classes();
+        classes.getClasses().add(class1);
+        classes.getClasses().add(class2);
+        classes.getClasses().add(class1);
+        return classes;
     }
 }

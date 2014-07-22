@@ -2,11 +2,37 @@ package {{componentsPackage}}.services;
 
 import {{componentsPackage}}.exception.EsbException;
 import {{componentsPackage}}.exception.NotFoundException;
+import {{componentsPackage}}.model.StudyProgram;
 import {{componentsPackage}}.model.StudyPrograms;
 
 public class StudyProgramServiceImpl implements StudyProgramService{
     @Override
     public StudyPrograms getStudyPrograms() throws NotFoundException, EsbException {
-        return null;
+        StudyProgram studyProgram1 = new StudyProgram();
+        studyProgram1.setAbbreviation("tst1");
+        studyProgram1.setDescription("omschrijving");
+        studyProgram1.setFaculty("faculteit1");
+        studyProgram1.setSector("sector1");
+        StudyProgram studyProgram2 = new StudyProgram();
+        studyProgram2.setAbbreviation("tst2");
+        studyProgram2.setDescription("omschrijving");
+        studyProgram2.setFaculty("faculteit2");
+        studyProgram2.setSector("sector2");
+        StudyProgram studyProgram3 = new StudyProgram();
+        studyProgram3.setAbbreviation("tst3");
+        studyProgram3.setDescription("omschrijving");
+        studyProgram3.setFaculty("faculteit3");
+        studyProgram3.setSector("sector3");
+        StudyProgram studyProgram4 = new StudyProgram();
+        studyProgram4.setAbbreviation("tst4");
+        studyProgram4.setDescription("omschrijving");
+        studyProgram4.setFaculty("faculteit4");
+        studyProgram4.setSector("sector4");
+        StudyPrograms programs = new StudyPrograms();
+        programs.getStudyPrograms().add(studyProgram1);
+        programs.getStudyPrograms().add(studyProgram2);
+        programs.getStudyPrograms().add(studyProgram3);
+        programs.getStudyPrograms().add(studyProgram4);
+        return programs;
     }
 }

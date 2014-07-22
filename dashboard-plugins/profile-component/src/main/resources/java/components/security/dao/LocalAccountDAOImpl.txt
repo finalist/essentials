@@ -9,12 +9,12 @@ public class LocalAccountDAOImpl implements LocalAccountDAO{
     @Override
     public boolean exists(String s) {
         LOG.warn("using empty implementation of LocalAccountDOA");
-        return false;
+        return true;
     }
 
     @Override
     public LocalAccount findOne(String s) {
         LOG.warn("using empty implementation of LocalAccountDOA");
-        return null;
+        return new LocalAccount();
     }
 }

@@ -2,11 +2,66 @@ package {{componentsPackage}}.services;
 
 import {{componentsPackage}}.exception.EsbException;
 import {{componentsPackage}}.exception.NotFoundException;
+import {{componentsPackage}}.model.Grade;
 import {{componentsPackage}}.model.Grades;
+
+import java.util.Date;
 
 public class GradeServiceImpl implements GradeService{
     @Override
     public Grades getStudentGrades(String studentCode) throws NotFoundException, EsbException {
-        return null;
+        Grade grade1 = new Grade();
+        grade1.setMutationDate(new Date());
+        grade1.setGrade("1");
+        grade1.setLesson("testklas1");
+        grade1.setLessonId(1111L);
+        grade1.setPoints("punt1");
+        grade1.setStudentId("studentid1");
+        grade1.setResultType("resulttype1");
+        grade1.setStudyProgramEn("English test1");
+        grade1.setStudyProgramNl("Dutch test1");
+        grade1.setSatisfactoryResult(true);
+        grade1.setStatus("behaald?1");
+        grade1.setTeacherName("leraar1");
+        grade1.setStudyProgramShortEn("short1");
+        grade1.setStudyProgramShortNl("kort1");
+        grade1.setTestDate(new Date());
+        Grade grade2 = new Grade();
+        grade2.setMutationDate(new Date());
+        grade2.setGrade("2");
+        grade2.setLesson("testklas2");
+        grade2.setLessonId(2222L);
+        grade2.setPoints("punt2");
+        grade2.setStudentId("studentid2");
+        grade2.setResultType("resulttype2");
+        grade2.setStudyProgramEn("English test2");
+        grade2.setStudyProgramNl("Dutch test2");
+        grade2.setSatisfactoryResult(true);
+        grade2.setStatus("behaald?2");
+        grade2.setTeacherName("leraar2");
+        grade2.setStudyProgramShortEn("short2");
+        grade2.setStudyProgramShortNl("kort2");
+        grade2.setTestDate(new Date());
+        Grade grade3 = new Grade();
+        grade3.setMutationDate(new Date());
+        grade3.setGrade("3");
+        grade3.setLesson("testklas3");
+        grade3.setLessonId(3333L);
+        grade3.setPoints("punt3");
+        grade3.setStudentId("studentid3");
+        grade3.setResultType("resulttype3");
+        grade3.setStudyProgramEn("English test3");
+        grade3.setStudyProgramNl("Dutch test3");
+        grade3.setSatisfactoryResult(true);
+        grade3.setStatus("behaald?3");
+        grade3.setTeacherName("leraar3");
+        grade3.setStudyProgramShortEn("short3");
+        grade3.setStudyProgramShortNl("kort3");
+        grade3.setTestDate(new Date());
+        Grades grades = new Grades();
+        grades.getGrades().add(grade1);
+        grades.getGrades().add(grade2);
+        grades.getGrades().add(grade3);
+        return grades;
     }
 }

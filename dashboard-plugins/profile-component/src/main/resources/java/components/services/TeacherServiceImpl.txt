@@ -2,11 +2,28 @@ package {{componentsPackage}}.services;
 
 import {{componentsPackage}}.exception.EsbException;
 import {{componentsPackage}}.exception.NotFoundException;
+import {{componentsPackage}}.model.Teacher;
 import {{componentsPackage}}.model.Teachers;
 
 public class TeacherServiceImpl implements TeacherService{
     @Override
     public Teachers getTeachers(String studyProgramAbbreviation) throws NotFoundException, EsbException {
-        return null;
+        Teacher teacher1 = new Teacher();
+        teacher1.setFaculty("test1");
+        teacher1.setAbbreviation("tst1");
+        teacher1.setName("Testnaam1");
+        Teacher teacher2 = new Teacher();
+        teacher2.setFaculty("test2");
+        teacher2.setAbbreviation("tst2");
+        teacher2.setName("Testnaam2");
+        Teacher teacher3 = new Teacher();
+        teacher3.setFaculty("test3");
+        teacher3.setAbbreviation("tst3");
+        teacher3.setName("Testnaam3");
+        Teachers teachers = new Teachers();
+        teachers.getTeachers().add(teacher1);
+        teachers.getTeachers().add(teacher2);
+        teachers.getTeachers().add(teacher3);
+        return teachers;
     }
 }

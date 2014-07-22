@@ -2,21 +2,110 @@ package {{componentsPackage}}.services;
 
 import {{componentsPackage}}.exception.EsbException;
 import {{componentsPackage}}.exception.NotFoundException;
+import {{componentsPackage}}.model.EmployeeInfo;
 import {{componentsPackage}}.model.Employees;
+import {{componentsPackage}}.model.Faculty;
 
 public class EmployeeSearchServiceImpl implements EmployeeSearchService{
     @Override
     public Employees searchEmployees(String keyword) throws NotFoundException, EsbException {
-        return null;
+        return getEmployees();
     }
 
     @Override
     public Employees searchEmployee(String account, Boolean all) throws NotFoundException, EsbException {
-        return null;
+        return getEmployees();
     }
 
     @Override
     public Employees searchEmployees(String name, String facultyName) throws NotFoundException, EsbException {
-        return null;
+        return getEmployees();
+    }
+
+    private Employees getEmployees(){
+        EmployeeInfo info = new EmployeeInfo();
+        info.setAccount("testaccount");
+        info.setEmail("test@finalist.nl");
+        info.setFields("velden");
+        info.setFunction("tester1");
+        info.setHidePartnerName(false);
+        info.setLinks("http://www.finalist.nl");
+        info.setMobile("06-00000000");
+        info.setPhone("030-0000000");
+        info.setNetworks("test");
+        info.setNotPresentContactName("tester2");
+        info.setOrganisationalUnit("testlokaal");
+        info.setPhotoData("photolocatie?");
+        info.setOtherPositions("harde werker");
+        info.setShowInWhoIs(true);
+        info.setPrimaryTeam("finalist");
+        info.setDisplayName("Tester 1");
+        info.setPublications("Testblad");
+        info.setInitials("T.E.S.T.");
+        info.setLastName("last");
+        info.setLastNamePrefix("van");
+        Faculty faculty = new Faculty();
+        faculty.setFacultyCode("testcode");
+        faculty.setFacultyName("facultyname");
+        info.setFaculty(faculty);
+        info.setPresenceFRIAfternoon(true);
+        info.setPresenceFRIEvening(false);
+        info.setPresenceFRIMorning(true);
+        info.setPresenceTHUAfternoon(false);
+        info.setPresenceTHUEvening(false);
+        info.setPresenceTHUMorning(true);
+        info.setPresenceWEDAfternoon(true);
+        info.setPresenceWEDEvening(false);
+        info.setPresenceWEDMorning(true);
+        info.setPresenceTUEAfternoon(true);
+        info.setPresenceTUEEvening(false);
+        info.setPresenceTUEMorning(true);
+        info.setPresenceMONAfternoon(true);
+        info.setPresenceMONEvening(false);
+        info.setPresenceMONMorning(true);
+        EmployeeInfo info2 = new EmployeeInfo();
+        info2.setAccount("testaccount1");
+        info2.setEmail("test@finalist.nl");
+        info2.setFields("velden1");
+        info2.setFunction("tester2");
+        info2.setHidePartnerName(false);
+        info2.setLinks("http://www.finalist.nl");
+        info2.setMobile("06-00000001");
+        info2.setPhone("030-0000001");
+        info2.setNetworks("test");
+        info2.setNotPresentContactName("tester3");
+        info2.setOrganisationalUnit("testlokaal2");
+        info2.setPhotoData("photolocatie?");
+        info2.setOtherPositions("harde werker2");
+        info2.setShowInWhoIs(true);
+        info2.setPrimaryTeam("finalist");
+        info2.setDisplayName("Tester 1");
+        info2.setPublications("Testblad");
+        info2.setInitials("T.E.S.T.");
+        info2.setLastName("last");
+        info2.setLastNamePrefix("van");
+        Faculty faculty2 = new Faculty();
+        faculty2.setFacultyCode("testcode2");
+        faculty2.setFacultyName("facultyname2");
+        info2.setFaculty(faculty);
+        info2.setPresenceFRIAfternoon(true);
+        info2.setPresenceFRIEvening(false);
+        info2.setPresenceFRIMorning(true);
+        info2.setPresenceTHUAfternoon(true);
+        info2.setPresenceTHUEvening(false);
+        info2.setPresenceTHUMorning(true);
+        info2.setPresenceWEDAfternoon(true);
+        info2.setPresenceWEDEvening(false);
+        info2.setPresenceWEDMorning(true);
+        info2.setPresenceTUEAfternoon(true);
+        info2.setPresenceTUEEvening(true);
+        info2.setPresenceTUEMorning(true);
+        info2.setPresenceMONAfternoon(true);
+        info2.setPresenceMONEvening(false);
+        info2.setPresenceMONMorning(true);
+        Employees employees = new Employees();
+        employees.getEmployees().add(info);
+        employees.getEmployees().add(info2);
+        return employees;
     }
 }

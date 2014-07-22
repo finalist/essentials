@@ -2,11 +2,32 @@ package {{componentsPackage}}.services;
 
 import {{componentsPackage}}.exception.EsbException;
 import {{componentsPackage}}.exception.NotFoundException;
+import {{componentsPackage}}.model.Department;
 import {{componentsPackage}}.model.Departments;
 
 public class DepartmentsServiceImpl implements DepartmentsService{
     @Override
     public Departments getDepartments() throws NotFoundException, EsbException {
-        return null;
+        Department department1 = new Department();
+        department1.setType("test");
+        department1.setCode("code1");
+        department1.setId("id1");
+        department1.setNumber("number1");
+        department1.setParentDepartment("ouder1");
+        department1.setTitleEN("English Tiltle1");
+        department1.setTitleNL("Nederlandse titel1");
+        Department department2 = new Department();
+        department2.setType("test");
+        department2.setCode("code2");
+        department2.setId("id2");
+        department2.setNumber("number2");
+        department2.setParentDepartment("ouder2");
+        department2.setTitleEN("English Tiltle2");
+        department2.setTitleNL("Nederlandse titel2");
+        Departments departments = new Departments();
+        departments.getDepartments().add(department1);
+        departments.getDepartments().add(department2);
+        departments.getDepartments().add(department1);
+        return departments;
     }
 }

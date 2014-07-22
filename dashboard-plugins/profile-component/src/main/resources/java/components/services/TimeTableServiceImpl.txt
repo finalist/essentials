@@ -3,7 +3,13 @@ package {{componentsPackage}}.services;
 import {{componentsPackage}}.exception.EsbException;
 import {{componentsPackage}}.exception.NotFoundException;
 import {{componentsPackage}}.model.Lesson;
+import {{componentsPackage}}.model.Teacher;
+import {{componentsPackage}}.model.Teachers;
 import {{componentsPackage}}.model.TimeTable;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class TimeTableServiceImpl implements TimeTableService{
     @Override
@@ -24,5 +30,58 @@ public class TimeTableServiceImpl implements TimeTableService{
     @Override
     public TimeTable<Lesson> getClassTimeTable(String classCode, String educationalProgram, Long fromWeek, Long toWeek) throws NotFoundException, EsbException {
         return null;
+    }
+
+    private TimeTable<Lesson> getSampleTimeTables(){
+        Teacher teacher1 = new Teacher();
+        teacher1.setFaculty("test1");
+        teacher1.setAbbreviation("tst1");
+        teacher1.setName("Testnaam1");
+        Teacher teacher2 = new Teacher();
+        teacher2.setFaculty("test2");
+        teacher2.setAbbreviation("tst2");
+        teacher2.setName("Testnaam2");
+        Teacher teacher3 = new Teacher();
+        teacher3.setFaculty("test3");
+        teacher3.setAbbreviation("tst3");
+        teacher3.setName("Testnaam3");
+        List<Teacher> teachers = new ArrayList<>();
+        teachers.add(teacher1);
+        teachers.add(teacher2);
+        teachers.add(teacher3);
+        List<Lesson> lessons = new ArrayList<>();
+        Lesson lesson1 = new Lesson();
+        lesson1.setDescription("omschrijving1");
+        lesson1.setFaculty("faculty1");
+        lesson1.setClassCode("001");
+        lesson1.setDay("dag1");
+        lesson1.setDiscipline("dicipline1");
+        lesson1.setEndTime(new Date());
+        lesson1.setRoom("kamer1");
+        lesson1.setStatus("te doen");
+        lesson1.setTeachers(teachers);
+        Lesson lesson2 = new Lesson();
+        lesson2.setDescription("omschrijving2");
+        lesson2.setFaculty("faculty2");
+        lesson2.setClassCode("002");
+        lesson2.setDay("dag2");
+        lesson2.setDiscipline("dicipline2");
+        lesson2.setEndTime(new Date());
+        lesson2.setRoom("kamer2");
+        lesson2.setStatus("te doen");
+        lesson2.setTeachers(teachers);
+        Lesson lesson3 = new Lesson();
+        lesson3.setDescription("omschrijving3");
+        lesson3.setFaculty("faculty3");
+        lesson3.setClassCode("003");
+        lesson3.setDay("dag3");
+        lesson3.setDiscipline("dicipline3");
+        lesson3.setEndTime(new Date());
+        lesson3.setRoom("kamer3");
+        lesson3.setStatus("te doen");
+        lesson3.setTeachers(teachers);
+        TimeTable<Lesson> timeTable = new TimeTable<>();
+        timeTable.setTimeTable(lessons);
+        return timeTable;
     }
 }

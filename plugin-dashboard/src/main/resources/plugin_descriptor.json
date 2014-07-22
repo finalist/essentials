@@ -1013,6 +1013,14 @@
                 "scope": "compile",
                 "version": "0.02.05",
                 "type": "site"
+            },
+            {
+                "@type": "dependency",
+                "groupId": "xml-apis",
+                "artifactId": "xml-apis",
+                "scope": "compile",
+                "version": "1.4.01",
+                "type": "site"
             }
         ],
         "repositories": [

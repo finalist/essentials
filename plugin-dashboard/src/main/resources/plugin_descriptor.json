@@ -1006,6 +1006,15 @@
                 "version": "0.02.05",
                 "type": "site"
             }
+        ],
+        "repositories": [
+            {
+                "@type": "repository",
+                "id": "spring-milestones",
+                "name": "Spring Milestones",
+                "url": "http://repo.spring.io/milestone",
+                "type": "project"
+            }
         ]
     }
 ]}

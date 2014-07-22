@@ -12,10 +12,9 @@ It would be nice if you could add pieces to the web.xml
 Finalist Plugins:
 
 Profile-component
-Some java code of essentials was changed to do the following by setting the
-'depType' property in the json.
-After including the profile component, add <type>pom</type> to
-the ehcache dependency in pom.xml of the site before rebuilding:
+Some java code of essentials was changed in order to add <type>pom</type> to
+the ehcache dependency in pom.xml of the site. This is done when setting the
+'depType' property in the plugin_descriptor.json.
 
 To really use the profile component the empty implementations need
 to be replaced with project specific esb/rest connectors in the spring

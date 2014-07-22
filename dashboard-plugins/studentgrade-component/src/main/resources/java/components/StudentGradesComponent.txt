@@ -1,6 +1,6 @@
 package {{componentsPackage}};
 
-mport java.util.Collections;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 

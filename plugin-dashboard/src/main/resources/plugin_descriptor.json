@@ -931,6 +931,14 @@
                 "groupId": "org.onehippo.forge.selectionplugins",
                 "artifactId": "selectionplugins-addon-repository",
                 "scope": "compile"
+            },
+            {
+                "@type": "dependency",
+                "groupId": "xml-apis",
+                "artifactId": "xml-apis",
+                "scope": "compile",
+                "version": "1.4.01",
+                "type": "site"
             }
         ]
     },

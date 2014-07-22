@@ -844,7 +844,7 @@
         "enabled": true,
         "@type": "plugin",
         "name": "Profile plugin",
-        "introduction": "Add profile config and component.",
+        "introduction": "Add profile config and component. To make use of this plugin, add configuration of the esb to the applicationContext.xml, you most likely will want to put some of the needed properties in a properties file",
         "pluginId": "profileComponent",
         "packageFile": "/META-INF/profileComponent_instructions.xml",
         "restClasses": [],
@@ -892,7 +892,8 @@
                 "artifactId": "ehcache",
                 "scope": "compile",
                 "version": "2.4.8",
-                "type": "site"
+                "type": "site",
+                "depType": "pom"
             },
             {
                 "@type": "dependency",
@@ -961,7 +962,9 @@
                 "artifactId": "spring-security-saml2-core",
                 "scope": "compile",
                 "type": "site",
-                "version": "1.0.0.RC2"
+                "version": "1.0.0.RC2",
+                "repositoryId": "spring-milestones",
+                "repositoryUrl": "http://repo.spring.io/milestone"
             },
             {
                 "@type": "dependency",

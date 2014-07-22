@@ -51,6 +51,10 @@ public interface EssentialsDependency {
 
     void setScope(String scope);
 
+    String getDepType();
+
+    void setDepType(String type);
+
 
     DependencyType getDependencyType();
 

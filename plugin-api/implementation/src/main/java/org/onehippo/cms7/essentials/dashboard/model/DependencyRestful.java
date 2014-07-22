@@ -34,6 +34,7 @@ public class DependencyRestful implements EssentialsDependency, Restful {
     private String version;
     private String scope;
     private String type;
+    private String depType;
 
 
     @Override
@@ -107,6 +108,16 @@ public class DependencyRestful implements EssentialsDependency, Restful {
     }
 
     @Override
+    public String getDepType() {
+        return depType;
+    }
+
+    @Override
+    public void setDepType(final String depType) {
+        this.depType = depType;
+    }
+
+    @Override
     public DependencyType getDependencyType() {
         return DependencyType.typeForName(type);
 
@@ -119,6 +130,9 @@ public class DependencyRestful implements EssentialsDependency, Restful {
         mavenDependency.setGroupId(getGroupId());
         mavenDependency.setVersion(getVersion());
         mavenDependency.setScope(getScope());
+        if(getDepType() != null){
+            mavenDependency.setType(getDepType());
+        }
         return mavenDependency;
     }
 
@@ -131,6 +145,7 @@ public class DependencyRestful implements EssentialsDependency, Restful {
         sb.append(", repositoryUrl='").append(repositoryUrl).append('\'');
         sb.append(", version='").append(version).append('\'');
         sb.append(", scope='").append(scope).append('\'');
+        sb.append(", depType='").append(depType).append('\'');
         sb.append('}');
         return sb.toString();
     }

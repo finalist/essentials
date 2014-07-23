@@ -5,6 +5,8 @@ import {{componentsPackage}}.exception.NotFoundException;
 import {{componentsPackage}}.model.Department;
 import {{componentsPackage}}.model.Departments;
 
+import java.util.ArrayList;
+
 public class DepartmentsServiceImpl implements DepartmentsService{
     @Override
     public Departments getDepartments() throws NotFoundException, EsbException {
@@ -25,6 +27,7 @@ public class DepartmentsServiceImpl implements DepartmentsService{
         department2.setTitleEN("English Tiltle2");
         department2.setTitleNL("Nederlandse titel2");
         Departments departments = new Departments();
+        departments.setDepartments(new ArrayList<Department>());
         departments.getDepartments().add(department1);
         departments.getDepartments().add(department2);
         departments.getDepartments().add(department1);

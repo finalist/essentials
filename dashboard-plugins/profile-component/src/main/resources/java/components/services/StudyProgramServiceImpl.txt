@@ -5,6 +5,8 @@ import {{componentsPackage}}.exception.NotFoundException;
 import {{componentsPackage}}.model.StudyProgram;
 import {{componentsPackage}}.model.StudyPrograms;
 
+import java.util.ArrayList;
+
 public class StudyProgramServiceImpl implements StudyProgramService{
     @Override
     public StudyPrograms getStudyPrograms() throws NotFoundException, EsbException {
@@ -29,6 +31,7 @@ public class StudyProgramServiceImpl implements StudyProgramService{
         studyProgram4.setFaculty("faculteit4");
         studyProgram4.setSector("sector4");
         StudyPrograms programs = new StudyPrograms();
+                programs.setStudyPrograms(new ArrayList<StudyProgram>());
         programs.getStudyPrograms().add(studyProgram1);
         programs.getStudyPrograms().add(studyProgram2);
         programs.getStudyPrograms().add(studyProgram3);

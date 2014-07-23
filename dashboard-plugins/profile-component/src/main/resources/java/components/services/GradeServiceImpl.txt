@@ -5,6 +5,7 @@ import {{componentsPackage}}.exception.NotFoundException;
 import {{componentsPackage}}.model.Grade;
 import {{componentsPackage}}.model.Grades;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class GradeServiceImpl implements GradeService{
@@ -59,6 +60,7 @@ public class GradeServiceImpl implements GradeService{
         grade3.setStudyProgramShortNl("kort3");
         grade3.setTestDate(new Date());
         Grades grades = new Grades();
+        grades.setGrades(new ArrayList<Grade>());
         grades.getGrades().add(grade1);
         grades.getGrades().add(grade2);
         grades.getGrades().add(grade3);

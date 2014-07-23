@@ -6,6 +6,8 @@ import {{componentsPackage}}.model.EmployeeInfo;
 import {{componentsPackage}}.model.Employees;
 import {{componentsPackage}}.model.Faculty;
 
+import java.util.ArrayList;
+
 public class EmployeeSearchServiceImpl implements EmployeeSearchService{
     @Override
     public Employees searchEmployees(String keyword) throws NotFoundException, EsbException {
@@ -104,6 +106,7 @@ public class EmployeeSearchServiceImpl implements EmployeeSearchService{
         info2.setPresenceMONEvening(false);
         info2.setPresenceMONMorning(true);
         Employees employees = new Employees();
+        employees.setEmployees(new ArrayList<EmployeeInfo>());
         employees.getEmployees().add(info);
         employees.getEmployees().add(info2);
         return employees;

@@ -5,6 +5,8 @@ import {{componentsPackage}}.exception.NotFoundException;
 import {{componentsPackage}}.model.Teacher;
 import {{componentsPackage}}.model.Teachers;
 
+import java.util.ArrayList;
+
 public class TeacherServiceImpl implements TeacherService{
     @Override
     public Teachers getTeachers(String studyProgramAbbreviation) throws NotFoundException, EsbException {
@@ -21,6 +23,7 @@ public class TeacherServiceImpl implements TeacherService{
         teacher3.setAbbreviation("tst3");
         teacher3.setName("Testnaam3");
         Teachers teachers = new Teachers();
+        teachers.setTeachers(new ArrayList<Teacher>());
         teachers.getTeachers().add(teacher1);
         teachers.getTeachers().add(teacher2);
         teachers.getTeachers().add(teacher3);

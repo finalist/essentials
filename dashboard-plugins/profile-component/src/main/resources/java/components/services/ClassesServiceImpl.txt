@@ -5,6 +5,8 @@ import {{componentsPackage}}.exception.NotFoundException;
 import {{componentsPackage}}.model.Classe;
 import {{componentsPackage}}.model.Classes;
 
+import java.util.ArrayList;
+
 public class ClassesServiceImpl implements ClassesService{
     @Override
     public Classes getClasses(String educationalProgram) throws NotFoundException, EsbException {
@@ -13,6 +15,7 @@ public class ClassesServiceImpl implements ClassesService{
         Classe class2 = new Classe();
         class2.setClassName("mockles2");
         Classes classes = new Classes();
+        classes.setClasses(new ArrayList<Classe>());
         classes.getClasses().add(class1);
         classes.getClasses().add(class2);
         classes.getClasses().add(class1);

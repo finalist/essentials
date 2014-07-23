@@ -844,7 +844,7 @@
         "enabled": true,
         "@type": "plugin",
         "name": "Profile plugin",
-        "introduction": "Add profile config and component. To make use of this plugin, add configuration of the esb to the applicationContext.xml, you most likely will want to put some of the needed properties in a properties file",
+        "introduction": "Add profile config and component. To make use of this plugin, add configuration of the esb to the esb_rest_config.xml, you most likely will want to put some of the needed properties in a properties file",
         "pluginId": "profileComponent",
         "packageFile": "/META-INF/profileComponent_instructions.xml",
         "restClasses": [],
@@ -978,6 +978,14 @@
                 "@type": "dependency",
                 "groupId": "org.springframework",
                 "artifactId": "spring-beans",
+                "scope": "compile",
+                "version": "3.2.8.RELEASE",
+                "type": "site"
+            },
+            {
+                "@type": "dependency",
+                "groupId": "org.springframework",
+                "artifactId": "spring-web",
                 "scope": "compile",
                 "version": "3.2.8.RELEASE",
                 "type": "site"

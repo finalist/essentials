@@ -1,0 +1,73 @@
+package {{componentsPackage}}.security.util;
+
+import {{componentsPackage}}.model.UserInfo;
+import {{componentsPackage}}.security.exception.NoUserDetailsException;
+import {{componentsPackage}}.security.exception.NoUserInfoException;
+import {{componentsPackage}}.security.exception.NoUserProfileException;
+import {{componentsPackage}}.security.model.UserProfile;
+import {{componentsPackage}}.security.model.userdetails.UserDetails;
+import {{componentsPackage}}.security.model.userdetails.UserRole;
+import {{componentsPackage}}.services.StudentInfoServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.core.GrantedAuthority;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Collection;
+
+/**
+ * This class is needed for the profile plugin to work
+ * without a login configured.
+ * This makes it possible to quickly demo what can be done,
+ * please add a login and remove this class.
+ */
+public class FakeSecurityUtil extends SecurityUtil{
+    private static final Logger LOG = LoggerFactory.getLogger(SecurityUtilFake.class);
+
+    @Override
+    public boolean hasUserDetails(HttpServletRequest request) {
+        return true;
+    }
+
+    @Override
+    public UserDetails getUserDetails(HttpServletRequest request) throws NoUserDetailsException {
+        try{
+            UserProfile profile = new UserProfile("testid","testname");
+            StudentInfoServiceImpl studentInfoService = new StudentInfoServiceImpl();
+            UserInfo userinfo = studentInfoService.getStudentInfo("fakecode");
+            UserDetails userDetails = new UserDetails("testuuid",null,profile,userinfo,"userName","pasword","logoutpath");
+            return userDetails;
+        }catch (Exception e){
+            LOG.warn("fake implemantation has caused some error");
+            return null;
+        }
+    }
+
+    @Override
+    public UserProfile getUserProfile(HttpServletRequest request) throws NoUserProfileException {
+        return new UserProfile("testid","testname");
+    }
+
+    @Override
+    public UserInfo getUserInfo(HttpServletRequest request) throws NoUserInfoException {
+        try{
+            StudentInfoServiceImpl studentInfoService = new StudentInfoServiceImpl();
+            UserInfo userinfo = studentInfoService.getStudentInfo("fakecode");
+            return userinfo;
+        }catch (Exception e){
+            LOG.warn("fake implemantation has caused some error");
+            return null;
+        }
+
+    }
+
+    @Override
+    public boolean hasRole(UserDetails userDetails, UserRole role) {
+        return true;
+    }
+
+    @Override
+    public boolean hasRole(Collection<GrantedAuthority> authorities, UserRole role) {
+        return true;
+    }
+}

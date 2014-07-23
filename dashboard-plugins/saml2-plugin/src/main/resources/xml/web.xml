@@ -31,6 +31,12 @@
     </jsp-property-group>
   </jsp-config>
 
+  <!-- Mark the production userProfile as the default userProfile, in case 'spring.profiles.active' is not given -->
+  <context-param>
+    <param-name>spring.profiles.default</param-name>
+    <param-value>production</param-value>
+  </context-param>
+
   <!-- I18N  -->
   <context-param>
     <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
@@ -55,8 +61,11 @@
   -->
   <context-param>
     <param-name>hst-beans-annotated-classes</param-name>
-    <param-value>classpath*:org/example/beans/**/*.class
-      ,classpath*:org/onehippo/forge/**/*.class</param-value>
+    <param-value>
+      classpath*:org/example/beans/**/*.class,
+      classpath*:org/onehippo/forge/**/*.class,
+      classpath*:org/onehippo/cms7/hst/beans/**/*.class
+    </param-value>
   </context-param>
 
   <filter>
@@ -92,6 +101,17 @@
     </init-param>
   </filter>
 
+  <filter>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <url-pattern>/*</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+  </filter-mapping>
+
   <filter-mapping>
     <filter-name>CharacterEncodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
@@ -111,6 +131,12 @@
   <listener>
     <listener-class>org.hippoecm.hst.site.container.session.HttpSessionEventPublisher</listener-class>
   </listener>
+
+    <!-- Configure Spring Web Application Context Loader Listener -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
 
   <servlet>
     <servlet-name>HstSiteConfigServlet</servlet-name>
@@ -229,7 +255,7 @@
     <url-pattern>/ping/*</url-pattern>
   </servlet-mapping>
 
-  <security-constraint>
+<!--  <security-constraint>
     <web-resource-collection>
       <web-resource-name>Login</web-resource-name>
       <url-pattern>/login/resource</url-pattern>
@@ -251,7 +277,7 @@
   <security-role>
     <description>Default role of Hippo Repository</description>
     <role-name>everybody</role-name>
-  </security-role>
+  </security-role>-->
 
   <error-page>
     <error-code>400</error-code>

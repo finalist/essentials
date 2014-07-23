@@ -32,6 +32,7 @@
     <file action="copy" source="java/components/security/service/UserProfileServiceImpl.txt" target="{{componentsFolder}}/security/service/UserProfileServiceImpl.java"/>
     <file action="copy" source="java/components/security/dao/UserProfileDAO.txt" target="{{componentsFolder}}/security/dao/UserProfileDAO.java"/>
     <file action="copy" source="java/components/security/util/SecurityUtil.txt" target="{{componentsFolder}}/security/util/SecurityUtil.java"/>
+    <file action="copy" source="java/components/security/util/FakeSecurityUtil.txt" target="{{componentsFolder}}/security/util/FakeSecurityUtil.java"/>
     <file action="copy" source="java/components/security/exception/NoUserProfileException.txt" target="{{componentsFolder}}/security/exception/NoUserProfileException.java"/>
     <file action="copy" source="java/components/security/exception/NoUserDetailsException.txt" target="{{componentsFolder}}/security/exception/NoUserDetailsException.java"/>
     <file action="copy" source="java/components/security/exception/NoUserInfoException.txt" target="{{componentsFolder}}/security/exception/NoUserInfoException.java"/>
@@ -81,13 +82,13 @@
 
     <!--Install the Spring configurations for the ValueListManager-->
     <instructionSet>
-        <file action="copy" source="xml/applicationContext.xml" target="{{siteOverrideFolder}}/applicationContext.xml"/>
+        <file action="copy" source="xml/esb_rest_config.xml" target="{{siteOverrideFolder}}/esb_rest_config.xml"/>
         <file action="copy" source="xml/base.xml" target="{{siteOverrideFolder}}/base.xml"/>
         <file action="copy" source="xml/cacheManager.xml" target="{{siteOverrideFolder}}/cacheManager.xml"/>
         <file action="copy" source="xml/custom-ehcache.xml" target="{{siteRoot}}/src/main/resources/custom-ehcache.xml"/>
     </instructionSet>
 
-    <!--Install the rest needed for the applicationContext.xml to work-->
+    <!--Install the rest needed for the esb_rest_config.xml to work-->
     <instructionSet>
         <file action="copy" source="java/components/security/dao/UserProfileDAOImpl.txt" target="{{componentsFolder}}/security/dao/UserProfileDAOImpl.java"/>
         <file action="copy" source="java/components/model/Classes.txt" target="{{componentsFolder}}/model/Classes.java"/>

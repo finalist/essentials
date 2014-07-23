@@ -48,5 +48,8 @@
 
     <!-- Emty impl so it wil build, please add your own implemantation-->
     <bean id="scheduleService" class="{{componentsPackage}}.services.TimeTableServiceImpl" />
+
+    <!-- fake util so it wil show some info, please implement some kind of authentication -->
+    <bean id="securityUtil" class="{{componentsPackage}}.security.util.FakeSecurityUtil" />
 </beans>
 

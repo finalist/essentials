@@ -38,7 +38,6 @@
   </instructionSet>
   <!--stuff needed for the actual profile  -->
   <instructionSet>
-    <file action="copy" source="java/components/security/converter/AbstractAccountConverter.txt" target="{{componentsFolder}}/security/converter/AbstractAccountConverter.java"/>
     <file action="copy" source="java/components/security/exception/InvalidUserIdException.txt" target="{{componentsFolder}}/security/exception/InvalidUserIdException.java"/>
     <file action="copy" source="java/components/security/exception/NoAuthoritiesException.txt" target="{{componentsFolder}}/security/exception/NoAuthoritiesException.java"/>
     <file action="copy" source="java/components/exception/NotFoundException.txt" target="{{componentsFolder}}/exception/NotFoundException.java"/>
@@ -112,7 +111,6 @@
 
     <!--Install classes for local account-->
     <instructionSet>
-        <file action="copy" source="java/components/security/converter/LocalAccountConverter.txt" target="{{componentsFolder}}/security/converter/LocalAccountConverter.java"/>
         <file action="copy" source="java/components/security/dao/LocalAccountDAO.txt" target="{{componentsFolder}}/security/dao/LocalAccountDAO.java"/>
         <file action="copy" source="java/components/security/dao/LocalAccountDAOImpl.txt" target="{{componentsFolder}}/security/dao/LocalAccountDAOImpl.java"/>
         <file action="copy" source="java/components/security/model/LocalAccount.txt" target="{{componentsFolder}}/security/model/LocalAccount.java"/>

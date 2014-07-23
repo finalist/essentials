@@ -1,0 +1,115 @@
+package {{componentsPackage}}.security.converter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import {{componentsPackage}}.exception.EsbException;
+import {{componentsPackage}}.exception.NotFoundException;
+import {{componentsPackage}}.model.Employees;
+import {{componentsPackage}}.model.UserInfo;
+import {{componentsPackage}}.services.EmployeeSearchService;
+import {{componentsPackage}}.services.StudentInfoService;
+import {{componentsPackage}}.security.exception.InvalidUserIdException;
+import {{componentsPackage}}.security.exception.NoAuthoritiesException;
+import {{componentsPackage}}.security.model.UserProfile;
+import {{componentsPackage}}.security.model.userdetails.UserRole;
+import {{componentsPackage}}.security.service.UserProfileService;
+import {{componentsPackage}}.security.util.SecurityUtil;
+
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+public abstract class AbstractAccountConverter {
+    private static final String AUTHORITY_PREFIX = "ROLE_";
+
+    @Autowired
+    private UserProfileService userProfileService;
+
+    @Autowired
+    private SecurityUtil securityUtil;
+
+    @Resource
+    private StudentInfoService studentInfoService;
+
+    @Resource
+    private EmployeeSearchService employeeSearchService;
+
+    protected List<GrantedAuthority> getGrantedAuthorities(List<String> affiliations) throws NoAuthoritiesException {
+        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+
+        // Add the 'everybody' authority to the authority list, to map users to the 'everybody' domain in Hippo
+        authorities.add(new SimpleGrantedAuthority(AUTHORITY_PREFIX + "everybody"));
+
+        // Add additional authorities to the authority list, based on the affiliations provided in the user account.
+        // Before doing so, normalize the affiliation to LOWERCASE
+        if (affiliations.isEmpty()) {
+            throw new NoAuthoritiesException("No affiliations have been provided, unable to grant additional authorities");
+        } else {
+            for (String affiliation : affiliations) {
+                authorities.add(new SimpleGrantedAuthority(AUTHORITY_PREFIX + StringUtils.lowerCase(affiliation)));
+            }
+
+            return authorities;
+        }
+    }
+
+    protected String getUserId(List<String> uids) throws InvalidUserIdException {
+        if (uids.isEmpty()) {
+            throw new InvalidUserIdException("No user ids have been provided, unable to determine user id");
+        }
+        else if (uids.size() > 1) {
+            throw new InvalidUserIdException("Multiple user ids have been provided, unable to determine user id");
+        }
+        else {
+            return uids.get(0);
+        }
+   }
+
+    /**
+     * Returns the user profile from the profile store
+     *
+     * @param uid                the user id to get the user information for
+     * @param grantedAuthorities the list of granted authorities for the user having the given user id
+     * @return the profile belonging to the given username
+     */
+    protected UserProfile getProfile(String uid, List<GrantedAuthority> grantedAuthorities) {
+        UserProfile userProfile = null;
+
+        // Retrieve existing profile or create a new one if no profile is found
+        if (userProfileService.hasProfile(uid)) {
+            userProfile = userProfileService.getProfile(uid);
+        } else {
+            userProfile = userProfileService.createProfile(uid);
+        }
+
+        return userProfileService.updateProfile(userProfile);
+    }
+
+    /**
+     * Returns the user information from the service bus
+     *
+     * @param uid                the user id to get the user information for
+     * @param grantedAuthorities the list of granted authorities for the user having the given user id
+     * @return the user information belonging to the given user id in the given role, null otherwise
+     * @throws EsbException
+     * @throws NotFoundException
+     */
+    protected UserInfo getUserInfo(String uid, List<GrantedAuthority> grantedAuthorities) throws NotFoundException, EsbException {
+        if (securityUtil.hasRole(grantedAuthorities, UserRole.STUDENT)) {
+            return studentInfoService.getStudentInfo(uid);
+        }
+
+        if (securityUtil.hasRole(grantedAuthorities, UserRole.TEACHER)) {
+            Employees employees = employeeSearchService.searchEmployee(uid, true);
+            if (employees != null && employees.getEmployees().size() > 0) {
+                return employees.getEmployees().get(0);
+            }
+        }
+
+        return null;
+    }
+}

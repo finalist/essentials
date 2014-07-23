@@ -1,0 +1,98 @@
+package {{componentsPackage}}.security.converter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import {{componentsPackage}}.exception.EsbException;
+import {{componentsPackage}}.exception.NotFoundException;
+import {{componentsPackage}}.model.UserInfo;
+import {{componentsPackage}}.security.exception.InvalidUserIdException;
+import {{componentsPackage}}.security.exception.NoAuthoritiesException;
+import {{componentsPackage}}.security.model.UserProfile;
+import {{componentsPackage}}.security.model.userdetails.UserDetails;
+
+import org.opensaml.saml2.core.Attribute;
+import org.opensaml.xml.XMLObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.saml.SAMLCredential;
+import org.springframework.stereotype.Component;
+
+@Component
+public class SAMLAccountConverter extends AbstractAccountConverter implements Converter<SAMLCredential, UserDetails> {
+    private static final Logger LOG = LoggerFactory.getLogger(SAMLAccountConverter.class);
+
+    private static final String LOGOUT_PATH = "/account/logout-status";
+
+    @Override
+    public UserDetails convert(SAMLCredential samlCredential) {
+
+        try {
+            // Get granted authorities and user id from the local account
+            List<String> uids = getAttributeValues(samlCredential, "urn:mace:dir:attribute-def:uid");
+            String username = getAttributeValue(samlCredential, "urn:mace:dir:attribute-def:eduPersonTargetedID");
+            List<String> affiliations = getAttributeValues(samlCredential, "urn:mace:dir:attribute-def:eduPersonAffiliation");
+
+            String uid = getUserId(uids);
+            List<GrantedAuthority> authorities = getGrantedAuthorities(affiliations);
+
+            // Get the user profile, based on the uid and authorities
+            UserProfile userProfile = getProfile(uid, authorities);
+
+            // Get the user info, based on the uid and authorities
+            UserInfo userInfo = getUserInfo(uid, authorities);
+
+            // Return user details
+            return new UserDetails(
+                    uid,
+                    authorities,
+                    userProfile,
+                    userInfo,
+                    username,
+                    "",
+                    LOGOUT_PATH
+            );
+        } catch (NoAuthoritiesException e) {
+            LOG.error(e.getMessage());
+        } catch (InvalidUserIdException e) {
+            LOG.error(e.getMessage());
+        } catch (NotFoundException e) {
+            LOG.error("ESB returned NotFound while retrieving UserInfo: " + e.getMessage());
+        } catch (EsbException e) {
+            LOG.error("ESB returned Server Error while retrieving UserInfo: " + e.getMessage());
+        }
+        return null;
+    }
+
+    private String getAttributeValue(SAMLCredential samlCredential, String attributeName) {
+        String value = null;
+
+        Attribute attribute = samlCredential.getAttributeByName(attributeName);
+        if (attribute != null) {
+            for (XMLObject attributeValue : attribute.getAttributeValues()) {
+                value = attributeValue.getDOM().getTextContent();
+            }
+            LOG.trace("Obtained '{}' attribute from credential with value '{}'", attributeName, value);
+        } else {
+            LOG.trace("Did not obtain '{}' attribute from credential, since attribute is not present", attributeName);
+        }
+        return value;
+    }
+
+    private List<String> getAttributeValues(SAMLCredential samlCredential, String attributeName) {
+        List<String> values = new ArrayList<String>();
+
+        Attribute attribute = samlCredential.getAttributeByName(attributeName);
+        if (attribute != null) {
+            for (XMLObject attributeValue : attribute.getAttributeValues()) {
+                values.add(attributeValue.getDOM().getTextContent());
+            }
+            LOG.trace("Obtained '{}' attribute from credential with values '{}'", attributeName, values);
+        } else {
+            LOG.trace("Did not obtain '{}' attribute from credential, since attribute is not present", attributeName);
+        }
+        return values;
+    }
+}

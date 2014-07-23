@@ -1,0 +1,53 @@
+package nl.zuyd.intranet.security.service.userdetails;
+
+import nl.zuyd.intranet.security.converter.LocalAccountConverter;
+import nl.zuyd.intranet.security.converter.SAMLAccountConverter;
+import nl.zuyd.intranet.security.model.userdetails.UserDetails;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.saml.SAMLCredential;
+import org.springframework.security.saml.userdetails.SAMLUserDetailsService;
+import org.springframework.stereotype.Service;
+
+/**
+ * Created by brian on 4/14/14.
+ */
+@Service
+public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService, SAMLUserDetailsService {
+
+    private static final Logger LOG = LoggerFactory.getLogger(UserDetailsService.class);
+
+    @Autowired
+    private LocalAccountConverter localAccountConverter;
+
+    @Autowired
+    private SAMLAccountConverter samlAccountConverter;
+
+    @Override
+    public Object loadUserBySAML(SAMLCredential credential) throws UsernameNotFoundException {
+        LOG.debug("Converting SAML credential '{}' to user details", credential);
+        UserDetails userDetails = samlAccountConverter.convert(credential);
+
+        LOG.debug("Conversion to user details completed");
+        if(LOG.isTraceEnabled()) {
+            LOG.trace(userDetails.toString());
+        }
+
+        return userDetails;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        LOG.debug("Converting username '{}' to user details", username);
+        UserDetails userDetails = localAccountConverter.convert(username);
+
+        LOG.debug("Conversion to user details completed");
+        if(LOG.isTraceEnabled()) {
+            LOG.trace(userDetails.toString());
+        }
+
+        return userDetails;
+    }
+}

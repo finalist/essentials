@@ -976,6 +976,14 @@
             },
             {
                 "@type": "dependency",
+                "groupId": "org.springframework",
+                "artifactId": "spring-beans",
+                "scope": "compile",
+                "version": "3.2.8.RELEASE",
+                "type": "site"
+            },
+            {
+                "@type": "dependency",
                 "groupId": "org.springframework.security",
                 "artifactId": "spring-security-core",
                 "scope": "compile",

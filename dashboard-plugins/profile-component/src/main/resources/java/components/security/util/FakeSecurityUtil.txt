@@ -22,7 +22,7 @@ import java.util.Collection;
  * please add a login and remove this class.
  */
 public class FakeSecurityUtil extends SecurityUtil{
-    private static final Logger LOG = LoggerFactory.getLogger(SecurityUtilFake.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FakeSecurityUtil.class);
 
     @Override
     public boolean hasUserDetails(HttpServletRequest request) {

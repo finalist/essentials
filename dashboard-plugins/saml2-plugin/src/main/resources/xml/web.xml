@@ -31,10 +31,24 @@
     </jsp-property-group>
   </jsp-config>
 
+  <!-- Load additional Spring contexts -->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>
+      /WEB-INF/applicationContext.xml
+      /WEB-INF/applicationContext-development.xml
+      /WEB-INF/applicationContext-production.xml
+    </param-value>
+  </context-param>
+
   <!-- Mark the production userProfile as the default userProfile, in case 'spring.profiles.active' is not given -->
+  <!--  please add 	<spring.profiles.active>development</spring.profiles.active>
+  to the container/systemproproperties section of the cargo.run profile
+  in you projects main pom.xml, then change the value underneath from
+  development to production-->
   <context-param>
     <param-name>spring.profiles.default</param-name>
-    <param-value>production</param-value>
+    <param-value>development</param-value>
   </context-param>
 
   <!-- I18N  -->

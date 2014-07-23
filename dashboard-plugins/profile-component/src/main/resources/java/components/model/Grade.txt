@@ -4,10 +4,6 @@ import org.codehaus.jackson.annotate.JsonProperty;
 
 import java.util.Date;
 
-/**
- * Created by brian on 4/9/14.
- */
-
 public class Grade {
 
   @JsonProperty("studentId")

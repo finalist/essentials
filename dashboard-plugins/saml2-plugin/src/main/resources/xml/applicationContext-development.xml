@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+                            http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd http://www.springframework.org/schema/data/couchbase http://www.springframework.org/schema/data/couchbase/spring-couchbase.xsd http://www.springframework.org/schema/data/repository http://www.springframework.org/schema/data/repository/spring-repository.xsd"
+       profile="development">
+
+  <!-- Bypass CMS requests -->
+  <security:http pattern="/_rp/**" security="none"/>
+  <security:http pattern="/_cmsrest/**" security="none"/>
+  <security:http pattern="/_cmsinternal/**" security="none"/>
+
+  <!-- Bypass SITE requests targeting static resources -->
+  <security:http pattern="/static/**" security="none"/>
+  
+  <!-- /Ping is used by Hippo for monitoring -->
+  <security:http pattern="/ping/**" security="none"/>
+
+    <!-- Bypass SITE requests targeting the logout status page -->
+  <security:http pattern="/account/logout-status" security="none"/>
+
+    <!-- Secure other requests -->
+  <security:http auto-config="true">
+    <security:intercept-url pattern="/**" access="IS_AUTHENTICATED_FULLY, ROLE_everybody"/>
+    <security:form-login default-target-url="/"/>
+    <security:logout logout-url="/account/logout" logout-success-url="/account/logout-status" invalidate-session="true" delete-cookies="true"/>
+  </security:http>
+
+  <!-- Spring Security Authentication Manager -->
+  <security:authentication-manager>
+    <security:authentication-provider user-service-ref="userDetailsService"/>
+  </security:authentication-manager>
+</beans>

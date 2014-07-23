@@ -2,10 +2,6 @@ package {{componentsPackage}}.model;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
-/**
- * Created by brian on 4/9/14.
- */
-
 public class StudyProgram {
 
   @JsonProperty("sector")

@@ -7,9 +7,6 @@ import {{componentsPackage}}.exception.EsbException;
 import {{componentsPackage}}.exception.NotFoundException;
 import {{componentsPackage}}.model.EmployeeInfo;
 
-/**
- * Created by ivor on 05/19/14.
- */
 @Path("/")
 public interface EmployeeInfoService {
 

@@ -2,9 +2,6 @@ package {{componentsPackage}}.security.service;
 
 import {{componentsPackage}}.security.model.UserProfile;
 
-/**
- * Created by brian on 4/17/14.
- */
 public interface UserProfileService {
   boolean hasProfile(String username);
 

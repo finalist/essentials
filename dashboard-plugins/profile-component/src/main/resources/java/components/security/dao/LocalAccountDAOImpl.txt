@@ -4,17 +4,102 @@ import {{componentsPackage}}.security.model.LocalAccount;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LocalAccountDAOImpl implements LocalAccountDAO{
     private static final Logger LOG = LoggerFactory.getLogger(UserProfileDAO.class);
     @Override
     public boolean exists(String s) {
-        LOG.warn("using empty implementation of LocalAccountDOA");
+        LOG.warn("using empty implementation of LocalAccountDOA use id//passWord to log in");
         return true;
     }
 
     @Override
     public LocalAccount findOne(String s) {
-        LOG.warn("using empty implementation of LocalAccountDOA");
-        return new LocalAccount();
+        LOG.warn("using empty implementation of LocalAccountDOA use id//passWord to log in");
+        return new FakeLocalAccount();
     }
+
+      private class FakeLocalAccount extends LocalAccount{
+            public String getId() {
+                return "id";
+            }
+
+            public String getUsername() {
+                return "username";
+            }
+
+            public String getPassword() {
+                return "passWord";
+            }
+
+            public String getSurName() {
+                return "surName";
+            }
+
+            public String getGivenName() {
+                return "givenName";
+            }
+
+            public List<String> getCommonNames() {
+                List<String> common = new ArrayList<>();
+                common.add("commonname1");
+                return common;
+            }
+
+            public String getDisplayName() {
+                return "displayname";
+            }
+
+            public List<String> getEmailAddresses() {
+                List<String> common = new ArrayList<>();
+                common.add("test1@finalist.nl");
+                common.add("test2@finalist.nl");
+                return common;
+            }
+
+            public String getOrganization() {
+                return "finalist";
+            }
+
+            public String getOrganizationType() {
+                return "bedrijf";
+            }
+
+            public List<String> getAffiliations() {
+                List<String> common = new ArrayList<>();
+                common.add("test1@finalist.nl");
+                common.add("test2@finalist.nl");
+                return common;
+            }
+
+            public List<String> getEntitlements() {
+                List<String> common = new ArrayList<>();
+                common.add("test1@finalist.nl");
+                common.add("test2@finalist.nl");
+                return common;
+            }
+
+            public String getPrincipalName() {
+                return "principalName";
+            }
+
+            public List<String> getMemberships() {
+                List<String> common = new ArrayList<>();
+                common.add("lidmaatschap1");
+                common.add("lidmaarschap2");
+                return common;
+            }
+
+            public List<String> getUids() {
+                List<String> common = new ArrayList<>();
+                common.add("testuuid1");
+                return common;
+            }
+
+            public String getPreferredLanguage() {
+                return "nl";
+            }
+        }
 }

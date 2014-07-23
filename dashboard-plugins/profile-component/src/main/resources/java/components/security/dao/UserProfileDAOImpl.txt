@@ -22,7 +22,7 @@ public class UserProfileDAOImpl implements UserProfileDAO{
     @Override
     public UserProfile findOne(String s) {
         LOG.warn("using empty implementation of UserProfileDOA");
-        return new UserProfile();
+        return new UserProfile("name","id");
     }
 
     @Override

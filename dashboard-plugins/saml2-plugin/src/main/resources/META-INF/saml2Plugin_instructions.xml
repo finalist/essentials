@@ -20,10 +20,13 @@
   <!--first part is the base -->
   <instructionSet>
       <file action="copy" source="xml/applicationContext.xml" target="{{siteWebInfRoot}}/applicationContext.xml"/>
+      <file action="copy" source="xml/applicationContext-production.xml" target="{{siteWebInfRoot}}/applicationContext-production.xml"/>
+      <file action="copy" source="xml/applicationContext-development.xml" target="{{siteWebInfRoot}}/applicationContext-development.xml"/>
       <file action="copy" source="xml/web.xml" overwrite="true" target="{{siteWebInfRoot}}/web.xml"/>
       <file action="copy" source="java/components/security/converter/AbstractAccountConverter.txt" target="{{componentsFolder}}/security/converter/AbstractAccountConverter.java"/>
       <file action="copy" source="java/components/security/converter/LocalAccountConverter.txt" target="{{componentsFolder}}/security/converter/LocalAccountConverter.java"/>
       <file action="copy" source="java/components/security/converter/SAMLAccountConverter.txt" target="{{componentsFolder}}/security/converter/SAMLAccountConverter.java"/>
+      <file action="copy" source="java/components/security/service/userdetails/UserDetailsService.txt" target="{{componentsFolder}}/security/service/userdetails/UserDetailsService.java"/>
   </instructionSet>
 
 </instructions>

@@ -7,7 +7,7 @@ import {{componentsPackage}}.security.exception.NoUserProfileException;
 import {{componentsPackage}}.security.model.UserProfile;
 import {{componentsPackage}}.security.model.userdetails.UserDetails;
 import {{componentsPackage}}.security.model.userdetails.UserRole;
-import {{componentsPackage}}.services.StudentInfoServiceImpl;
+import {{componentsPackage}}.services.EmployeeInfoServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
@@ -33,10 +33,9 @@ public class FakeSecurityUtil extends SecurityUtil{
     public UserDetails getUserDetails(HttpServletRequest request) throws NoUserDetailsException {
         try{
             UserProfile profile = new UserProfile("testid","testname");
-            StudentInfoServiceImpl studentInfoService = new StudentInfoServiceImpl();
-            UserInfo userinfo = studentInfoService.getStudentInfo("fakecode");
-            UserDetails userDetails = new UserDetails("testuuid",null,profile,userinfo,"userName","pasword","logoutpath");
-            return userDetails;
+            EmployeeInfoServiceImpl infoService = new EmployeeInfoServiceImpl();
+            UserInfo userinfo = infoService.getEmployeeInfo("fakecode");
+            return new UserDetails("testuuid",null,profile,userinfo,"userName","pasword","logoutpath");
         }catch (Exception e){
             LOG.warn("fake implemantation has caused some error");
             return null;
@@ -51,9 +50,8 @@ public class FakeSecurityUtil extends SecurityUtil{
     @Override
     public UserInfo getUserInfo(HttpServletRequest request) throws NoUserInfoException {
         try{
-            StudentInfoServiceImpl studentInfoService = new StudentInfoServiceImpl();
-            UserInfo userinfo = studentInfoService.getStudentInfo("fakecode");
-            return userinfo;
+            EmployeeInfoServiceImpl infoService = new EmployeeInfoServiceImpl();
+            return infoService.getEmployeeInfo("fakecode");
         }catch (Exception e){
             LOG.warn("fake implemantation has caused some error");
             return null;

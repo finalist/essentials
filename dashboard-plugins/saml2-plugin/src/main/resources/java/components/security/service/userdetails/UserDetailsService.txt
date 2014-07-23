@@ -1,8 +1,8 @@
-package nl.zuyd.intranet.security.service.userdetails;
+package {{componentsPackage}}.security.service.userdetails;
 
-import nl.zuyd.intranet.security.converter.LocalAccountConverter;
-import nl.zuyd.intranet.security.converter.SAMLAccountConverter;
-import nl.zuyd.intranet.security.model.userdetails.UserDetails;
+import {{componentsPackage}}.security.converter.LocalAccountConverter;
+import {{componentsPackage}}.security.converter.SAMLAccountConverter;
+import {{componentsPackage}}.security.model.userdetails.UserDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +11,6 @@ import org.springframework.security.saml.SAMLCredential;
 import org.springframework.security.saml.userdetails.SAMLUserDetailsService;
 import org.springframework.stereotype.Service;
 
-/**
- * Created by brian on 4/14/14.
- */
 @Service
 public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService, SAMLUserDetailsService {
 

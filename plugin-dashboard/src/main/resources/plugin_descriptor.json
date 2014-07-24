@@ -844,7 +844,7 @@
         "enabled": true,
         "@type": "plugin",
         "name": "Profile plugin",
-        "introduction": "Add profile config and component. To make use of this plugin, add configuration of the esb to the esb_rest_config.xml, you most likely will want to put some of the needed properties in a properties file",
+        "introduction": "Add profile config and components. To make use of this plugin, add configuration of the esb to the esb_rest_config.xml, you most likely will want to put some of the needed properties in a properties file, of ter installing you can see a mocked profile at /profiel and selectable preferences at /voorkeuren",
         "pluginId": "profileComponent",
         "packageFile": "/META-INF/profileComponent_instructions.xml",
         "restClasses": [],

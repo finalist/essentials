@@ -7,13 +7,17 @@ import {{componentsPackage}}.security.exception.NoUserProfileException;
 import {{componentsPackage}}.security.model.UserProfile;
 import {{componentsPackage}}.security.model.userdetails.UserDetails;
 import {{componentsPackage}}.security.model.userdetails.UserRole;
+import {{componentsPackage}}.security.service.UserProfileService;
 import {{componentsPackage}}.services.EmployeeInfoServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * This class is needed for the profile plugin to work
@@ -24,6 +28,9 @@ import java.util.Collection;
 public class FakeSecurityUtil extends SecurityUtil{
     private static final Logger LOG = LoggerFactory.getLogger(FakeSecurityUtil.class);
 
+    @Autowired
+    private UserProfileService userProfileService;
+
     @Override
     public boolean hasUserDetails(HttpServletRequest request) {
         return true;
@@ -32,10 +39,18 @@ public class FakeSecurityUtil extends SecurityUtil{
     @Override
     public UserDetails getUserDetails(HttpServletRequest request) throws NoUserDetailsException {
         try{
-            UserProfile profile = new UserProfile("testid","testname");
+            UserProfile profile = userProfileService.getProfile("test");
             EmployeeInfoServiceImpl infoService = new EmployeeInfoServiceImpl();
             UserInfo userinfo = infoService.getEmployeeInfo("fakecode");
-            return new UserDetails("testuuid",null,profile,userinfo,"userName","pasword","logoutpath");
+            List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+            GrantedAuthority testAuthority = new GrantedAuthority() {
+                @Override
+                public String getAuthority() {
+                    return "test";
+                }
+            };
+            grantedAuthorities.add(testAuthority);
+            return new UserDetails("testuuid",grantedAuthorities,profile,userinfo,"id","passWord","logoutpath");
         }catch (Exception e){
             LOG.warn("fake implemantation has caused some error");
             return null;
@@ -43,8 +58,14 @@ public class FakeSecurityUtil extends SecurityUtil{
     }
 
     @Override
+    public void setUserProfile(HttpServletRequest request, UserProfile userProfile) {
+        LOG.trace("Storing user profile in the data store for session persistence");
+        userProfileService.updateProfile(userProfile);
+    }
+
+    @Override
     public UserProfile getUserProfile(HttpServletRequest request) throws NoUserProfileException {
-        return new UserProfile("testid","testname");
+        return userProfileService.getProfile("test");
     }
 
     @Override

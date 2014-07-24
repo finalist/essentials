@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 public class UserProfileDAOImpl implements UserProfileDAO{
     private static final Logger LOG = LoggerFactory.getLogger(UserProfileDAO.class);
 
+    private UserProfile userProfile;
+
     @Override
     public boolean exists(String s) {
         LOG.warn("using empty implementation of UserProfileDOA");
@@ -16,17 +18,22 @@ public class UserProfileDAOImpl implements UserProfileDAO{
     @Override
     public UserProfile save(UserProfile userProfile) {
         LOG.warn("using empty implementation of UserProfileDOA");
+        this.userProfile = userProfile;
         return userProfile;
     }
 
     @Override
     public UserProfile findOne(String s) {
         LOG.warn("using empty implementation of UserProfileDOA");
-        return new UserProfile("name","id");
+        if(userProfile == null){
+            userProfile = new UserProfile("name","id");
+        }
+        return userProfile;
     }
 
     @Override
     public void delete(UserProfile userProfile) {
+        userProfile = null;
         LOG.warn("using empty implementation of UserProfileDOA");
     }
 }

@@ -58,7 +58,7 @@ public class AccountPreferencesComponent extends ProfileBaseComponent {
     }
 
     private Collection<HstComponentConfiguration> getHomepageComponents(HstRequest request) {
-        HstComponentConfiguration homeMainContent = getHstSite(request).getComponentsConfiguration().getComponentConfiguration("hst:pages/home/main/content");
+        HstComponentConfiguration homeMainContent = getHstSite(request).getComponentsConfiguration().getComponentConfiguration("hst:pages/homepage/main");
         if (homeMainContent != null) {
             LOG.debug("COMPONENTCONFIGURATIONS of homepage has been found");
             return homeMainContent.getChildren().values();

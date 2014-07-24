@@ -132,4 +132,12 @@
         <file action="copy" source="java/components/services/EmployeeInfoServiceImpl.txt" target="{{componentsFolder}}/services/EmployeeInfoServiceImpl.java"/>
     </instructionSet>
 
+    <!--Show the changes to the components on the homepage-->
+    <instructionSet>
+        <file action="copy" source="jsp/container.jsp" target="{{jspRoot}}/home/widget/container.jsp"/>
+        <xml action="copy" source="xml/home_container_template.xml" target="/hst:hst/hst:configurations/hst:default/hst:templates"/>
+        <xml action="delete" target="/hst:hst/hst:configurations/myhippoproject/hst:workspace/hst:containers/homepage/main"/>
+        <xml action="copy" source="xml/homepage_main.xml" target="/hst:hst/hst:configurations/myhippoproject/hst:workspace/hst:containers/homepage"/>
+    </instructionSet>
+
 </instructions>

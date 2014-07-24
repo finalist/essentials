@@ -22,17 +22,8 @@
             <ul>
               <c:forEach var="areaOfInterest" items="${areaOfInterestStates}">
                 <li>
-                    <input type="checkbox" id="${componentState.key}" name="${componentState.key}" value="${componentState.key}" <c:if test="${componentState.enabled}">checked</c:if> />
-                    <label for="${componentState.key}">
-                        <c:choose>
-                            <c:when test="${empty componentState.title or componentState.title eq ''}">
-                                <c:out value="${componentState.key}"></c:out>
-                            </c:when>
-                            <c:otherwise>
-                                <c:out value="${componentState.title}"></c:out>
-                            </c:otherwise>
-                        </c:choose>
-                    </label>
+                  <input type="checkbox" id="${areaOfInterest.key}" name="${areaOfInterest.key}" value="${areaOfInterest.key}" <c:if test="${areaOfInterest.enabled}">checked</c:if> />
+                  <label for="${areaOfInterest.key}"><c:out value="${areaOfInterest.title}"/></label>
                 </li>
               </c:forEach>
             </ul>
@@ -45,10 +36,19 @@
             <legend><fmt:message key="account.preferences.widgets.mywidgets"/></legend>
             <ul>
               <c:forEach var="componentState" items="${componentStates}">
-                <li>
-                  <input type="checkbox" id="${componentState.key}" name="${componentState.key}" value="${componentState.key}" <c:if test="${componentState.enabled}">checked</c:if> />
-                  <label for="${componentState.key}"><c:out value="${componentState.title}"></c:out></label>
-                </li>
+                  <li>
+                      <input type="checkbox" id="${componentState.key}" name="${componentState.key}" value="${componentState.key}" <c:if test="${componentState.enabled}">checked</c:if> />
+                      <label for="${componentState.key}">
+                          <c:choose>
+                              <c:when test="${empty componentState.title or componentState.title eq ''}">
+                                  <c:out value="${componentState.key}"></c:out>
+                              </c:when>
+                              <c:otherwise>
+                                  <c:out value="${componentState.title}"></c:out>
+                              </c:otherwise>
+                          </c:choose>
+                      </label>
+                  </li>
               </c:forEach>
             </ul>
           </fieldset>

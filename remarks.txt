@@ -8,6 +8,8 @@ BaseComponent, it would be nice if there was a standard empty BaseComponent, and
 Which stuff in the BaseComponent in gogreen is mandatory?
 It would be nice to include some base templates with space for draggable components with essentials
 It would be nice if you could add pieces to the web.xml
+It would be nice if it would be possible to install plugins with dependencies in one go, when there are no dependencies
+ to essentails this should not be a problem.
 
 Finalist Plugins:
 
@@ -18,4 +20,4 @@ the ehcache dependency in pom.xml of the site. This is done when setting the
 
 To really use the profile component the empty implementations need
 to be replaced with project specific esb/rest connectors in the spring
-configuration.
+configuration located in the overrides folder.

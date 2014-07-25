@@ -110,15 +110,6 @@
         <file action="copy" source="java/components/services/TimeTableService.txt" target="{{componentsFolder}}/services/TimeTableService.java"/>
     </instructionSet>
 
-    <!--Install classes for local account-->
-    <instructionSet>
-        <file action="copy" source="java/components/security/dao/LocalAccountDAO.txt" target="{{componentsFolder}}/security/dao/LocalAccountDAO.java"/>
-        <file action="copy" source="java/components/security/dao/LocalAccountDAOImpl.txt" target="{{componentsFolder}}/security/dao/LocalAccountDAOImpl.java"/>
-        <file action="copy" source="java/components/security/model/LocalAccount.txt" target="{{componentsFolder}}/security/model/LocalAccount.java"/>
-        <file action="copy" source="java/components/security/service/LocalAccountService.txt" target="{{componentsFolder}}/security/service/LocalAccountService.java"/>
-        <file action="copy" source="java/components/security/service/LocalAccountServiceImpl.txt" target="{{componentsFolder}}/security/service/LocalAccountServiceImpl.java"/>
-    </instructionSet>
-
     <!--Install empty implementations-->
     <instructionSet>
         <file action="copy" source="java/components/services/ClassesServiceImpl.txt" target="{{componentsFolder}}/services/ClassesServiceImpl.java"/>

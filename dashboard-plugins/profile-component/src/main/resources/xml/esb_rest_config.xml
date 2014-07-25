@@ -19,10 +19,6 @@
     <bean id="userProfileDAO" class="{{componentsPackage}}.security.dao.UserProfileDAOImpl" />
 
     <!-- Emty impl so it wil build, please add your own implementation-->
-    <bean id="localAccountDAO" class="{{componentsPackage}}.security.dao.LocalAccountDAOImpl" />
-    <!-- Scan for Spring annotated classes-->
-
-    <!-- Emty impl so it wil build, please add your own implementation-->
     <bean id="classesService" class="{{componentsPackage}}.services.ClassesServiceImpl" />
 
     <!-- Emty impl so it wil build, please add your own implementation-->

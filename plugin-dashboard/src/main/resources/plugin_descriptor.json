@@ -947,6 +947,7 @@
         "@type": "plugin",
         "name": "Saml2 plugin",
         "introduction": "Add Saml2 dependencies and config",
+        "description": "This plugin makes it needed to login for the site using a saml-token, by default a development profile is used from the web.xml, with which you can login using id//passWord",
         "pluginId": "saml2Plugin",
         "packageFile": "/META-INF/saml2Plugin_instructions.xml",
         "restClasses": [],

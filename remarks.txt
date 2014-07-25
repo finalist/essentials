@@ -13,11 +13,52 @@ It would be nice if it would be possible to install plugins with dependencies in
 
 Finalist Plugins:
 
-Profile-component
-Some java code of essentials was changed in order to add <type>pom</type> to
-the ehcache dependency in pom.xml of the site. This is done when setting the
-'depType' property in the plugin_descriptor.json.
+--Profile-component
+ Some java code of essentials was changed in order to add <type>pom</type> to
+ the ehcache dependency in pom.xml of the site. This is done when setting the
+ 'depType' property in the plugin_descriptor.json.
 
-To really use the profile component the empty implementations need
-to be replaced with project specific esb/rest connectors in the spring
-configuration located in the overrides folder.
+ To really use the profile component the empty implementations need
+ to be replaced with project specific esb/rest connectors in the spring
+ configuration located in the overrides folder. The implementation classes provide some
+ test data and can be removed when an esb/rest implementation has been configured, or
+ kept and the config put in a separate (development) profile.
+
+ The are three plugins which need the profile plugin, otherwise the project
+ will not compile anymore, these are:
+
+--Studentgrade component
+ This can show the latest grades from a student
+--Schedule component
+ This can show the classes/appointments of the current day, if any
+ For both to show real data an esb is needed/a real implementation of the services
+ If added to the Homepage main section, they can be put on/off for each user on the
+ preferences page http://localhost:8080/site/voorkeuren, here can also values from a
+ value list being put off. These values can for example be subjects. By adding the same
+ value list to a document using the selection plugin (hippo), for example news. Its possible
+ to create a component extending the same class the gradecomponent and the schedule component
+ use, and make a filter to show only the items matching the preferences.
+--Saml2 plugin
+ This plugin creates config which makes it needed to log in on site. by default de development
+ profile is used in the web.xml, with which you can login to id//passWord. To use saml2
+ authentication you need to set the right properties in the applicationContext-production.xml,
+ and start using the production profile. It is then possible to use (profile) data from
+ external sources, using saml2 authentication.
+ There is now some overlap in both the applicationContext.xml and the esb_rest_config.xml in
+ the assembly overwrites. This is partly due to the profile plugin not 'messing' with the
+ web.xml.
+
+ --Addfield plugin
+ Adds a text field to a document. Currently the basedocument is not filtered out. The beans
+ need to be recreated to use the value, the plugin only adds the field like adding in in
+ the editor. If a document has a left and right section, you can choose where to put it.
+ It will show up at the undersite of the document. In functionallity is looks a lot like the
+ hippo selection plugin.
+
+--Employee plugin
+ Adds a document type and two example employees, with pictures of cats, these can be viewed
+ using http://localhost:8080/site/medewerkers
+
+--Simple Textblock plugin
+ Adds a document type with a title and content. This can be extended for example by using the
+ selection and/or addfield plugin.
